@@ -22,6 +22,9 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
+      gridTemplateRows: {
+        layout: 'auto 1fr auto',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -75,6 +78,8 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'pulse-slow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.5, 1) infinite',
       },
     },
   },

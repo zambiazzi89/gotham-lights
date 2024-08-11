@@ -15,19 +15,20 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  username  String
-  imagePath String
+  username String
 
-  Post    Post[]
+  Signal  Signal[]
   Comment Comment[]
 }
 
-model Post {
+model Signal {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  location        String
+  locationName    String
+  latitude        Float
+  longitude       Float
   dateOfEncounter DateTime
   title           String
   content         String
@@ -49,6 +50,6 @@ model Comment {
   createdByUserId String?
   user            User?   @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
 
-  postId String
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  SignalId String
+  Signal   Signal @relation(fields: [SignalId], references: [id], onDelete: Cascade)
 }

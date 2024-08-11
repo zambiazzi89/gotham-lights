@@ -3,20 +3,22 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "username" TEXT NOT NULL,
-    "imagePath" TEXT NOT NULL
+    "username" TEXT NOT NULL
 );
 
 -- CreateTable
-CREATE TABLE "Post" (
+CREATE TABLE "Signal" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "location" TEXT NOT NULL,
+    "locationName" TEXT NOT NULL,
+    "latitude" REAL NOT NULL,
+    "longitude" REAL NOT NULL,
+    "dateOfEncounter" DATETIME NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "createdByUserId" TEXT,
-    CONSTRAINT "Post_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT "Signal_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -27,7 +29,7 @@ CREATE TABLE "Comment" (
     "createdBy" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     "createdByUserId" TEXT,
-    "postId" TEXT NOT NULL,
+    "SignalId" TEXT NOT NULL,
     CONSTRAINT "Comment_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT "Comment_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "Comment_SignalId_fkey" FOREIGN KEY ("SignalId") REFERENCES "Signal" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
