@@ -14,7 +14,7 @@ export default function SignalCard({
   signalCardProps: SignalCardType
 }) {
   return (
-    <Card className="shadow">
+    <Card className="shadow max-w-[36rem] m-4">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>

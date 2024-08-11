@@ -13,7 +13,8 @@ async function getSignals() {
       longitude: 75,
       dateOfEncounter: new Date(),
       title: 'Test title',
-      content: 'I saw you standing blablablablabalbal.',
+      content:
+        'I saw you standing blablablablabalbal I saw you standing blablablablabalbal, I saw you standing blablablablabalbal,I saw you standing blablablablabalbal I saw you standing blablablablabalbal.',
       createdByUserId: '1',
     },
     {
@@ -52,6 +53,18 @@ async function getSignals() {
       content: 'I saw you standing blablablablabalbal.',
       createdByUserId: '1',
     },
+    {
+      id: '5',
+      createdAt: new Date(),
+      updatedAt: null,
+      locationName: 'Main Drag 5',
+      latitude: 70,
+      longitude: 75,
+      dateOfEncounter: new Date(),
+      title: 'Test title',
+      content: 'I saw you standing blablablablabalbal.',
+      createdByUserId: '1',
+    },
   ]
 
   const signals = await db.signal.findMany()
@@ -62,15 +75,18 @@ async function getSignals() {
 export default async function SignalCardGrid() {
   const signals = await getSignals()
   return (
-    <div className="grid gap-2 grid-cols-2">
-      {signals.map((signal) => {
-        return (
-          <SignalCard
-            key={signal.id}
-            signalCardProps={signal as SignalCardType}
-          />
-        )
-      })}
+    <div className="flex flex-col overflow-y-scroll">
+      <div className="text-lg font-bold text-center py-4">Latest Signals</div>
+      <div className="grid grid-cols-1 gap-2">
+        {signals.map((signal) => {
+          return (
+            <SignalCard
+              key={signal.id}
+              signalCardProps={signal as SignalCardType}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }
