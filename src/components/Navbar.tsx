@@ -3,18 +3,31 @@ import NavButton from './NavButton'
 import Link from 'next/link'
 import { Croissant_One } from 'next/font/google'
 import { ModeToggle } from './ui/modeToggle'
+import {
+  getKindeServerSession,
+  LoginLink,
+  RegisterLink,
+} from '@kinde-oss/kinde-auth-nextjs/server'
+
+const navButtonStyle = `pt-2 w-32 h-12 grid place-items-center backdrop-blur
+                        border border-solid border-t-0
+                        [border-image:radial-gradient(circle_at_bottom,rgb(120,113,108,1),55%,rgba(0,0,0,0))1]
+                        hover:cursor-pointer hover:bg-stone-500  hover:bg-opacity-20`
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
 type fontColor = 'text-white' | 'text-black' | ''
 
-export default function Navbar({
+export default async function Navbar({
   fontColor = '',
   withToggle = true,
 }: {
   fontColor?: fontColor
   withToggle?: boolean
 }) {
+  const { isAuthenticated } = getKindeServerSession()
+  const isAuth = await isAuthenticated()
+
   return (
     <div className="flex px-2 items-center justify-between">
       <Link
@@ -29,14 +42,21 @@ export default function Navbar({
             <ModeToggle />
           </div>
         )}
-        <MdMenu className="mr-2 self-center scale-150 md:hidden" />
+        <MdMenu className="text-white mr-2 self-center scale-150 md:hidden" />
         <div
           className={`hidden md:flex justify-end items-center  ${fontColor}`}
         >
           <NavButton title="About" href="/about" />
           <NavButton title="Signals" href="/signals" />
           <NavButton title="Messages" href="/messages" />
-          <NavButton title="Profile" href="/profile" />
+          {isAuth ? (
+            <NavButton title="Profile" href="/profile" />
+          ) : (
+            <>
+              <LoginLink className={navButtonStyle}>Sign in</LoginLink>
+              <RegisterLink className={navButtonStyle}>Sign up</RegisterLink>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -18,9 +18,9 @@ export default async function Signals() {
         </div>
         <SignalCardGrid />
       </div>
-      <Button className="h-8 m-4 place-self-end w-60 font-bold">
-        <Link href="/signals/create">Send a Signal</Link>
-      </Button>
+      <Link href="/signals/create" className="h-8 m-4 place-self-end">
+        <Button className="w-60 font-bold">Send a Signal</Button>
+      </Link>
       <Footer />
     </div>
   )

@@ -1,6 +1,7 @@
 import db from '@/db/db'
 import SignalCard from './SignalCard'
 import { SignalCardType } from '../_types/SignalCardType'
+import Link from 'next/link'
 
 async function getSignals() {
   const dummySignals = [
@@ -47,10 +48,12 @@ export default async function SignalCardGrid() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap">
         {signals.map((signal) => {
           return (
-            <SignalCard
-              key={signal.id}
-              signalCardProps={signal as SignalCardType}
-            />
+            <Link href={`/signals/${signal.id}`} key={signal.id}>
+              <SignalCard
+                key={signal.id}
+                signalCardProps={signal as SignalCardType}
+              />
+            </Link>
           )
         })}
       </div>

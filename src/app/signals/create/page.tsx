@@ -5,11 +5,9 @@ import Navbar from '@/components/Navbar'
 import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/DatePicker'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 
-export default function CreateSignal() {
+export default async function CreateSignal() {
   return (
     <div className="min-h-svh">
       <div className="grid grid-rows-layout min-h-svh">

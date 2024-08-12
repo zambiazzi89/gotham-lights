@@ -1,26 +1,9 @@
-'use client'
-
-import GoogleMap from '@/components/googleMap'
-import { LatLong } from '@/lib/types'
-import { useEffect, useState } from 'react'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { Input } from '@/components/ui/input'
 
 export default function Home() {
-  const defaultLatlong: LatLong = { coordinates: [40.73061, -73.935242] }
-
-  const [location, setLocation] = useState<LatLong>(defaultLatlong)
-
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
-      navigator.geolocation.getCurrentPosition(async ({ coords }) => {
-        const { latitude, longitude } = await coords
-        setLocation({ coordinates: [latitude, longitude] })
-      })
-    }
-  }, [])
   return (
     <div className="min-h-svh bg-[url(/bg-img4.jpeg)] bg-center bg-cover">
       <div className="grid grid-rows-layout bg-opacity-50 min-h-svh bg-black">
@@ -35,7 +18,6 @@ export default function Home() {
             </h2>
             <GoogleAutocompleteInput />
           </div>
-          {/* <GoogleMap isLoaded={isLoaded} latlong={location} /> */}
         </div>
         <Footer />
       </div>

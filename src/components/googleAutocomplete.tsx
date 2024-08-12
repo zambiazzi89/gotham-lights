@@ -3,8 +3,23 @@
 import { useEffect, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
+import { LatLong } from '@/lib/types'
 
 export default function GoogleAutocompleteInput() {
+  const defaultLatlong: LatLong = { coordinates: [40.73061, -73.935242] }
+
+  const [location, setLocation] = useState<LatLong>(defaultLatlong)
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+      navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+        const { latitude, longitude } = await coords
+        setLocation({ coordinates: [latitude, longitude] })
+      })
+    }
+  }, [])
+
   const isLoaded = useGoogleAPIContext()
 
   const [autocomplete, setAutocomplete] =
