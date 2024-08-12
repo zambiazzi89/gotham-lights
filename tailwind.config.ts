@@ -24,6 +24,7 @@ const config = {
       },
       gridTemplateRows: {
         layout: 'auto 1fr auto',
+        'layout-signals': 'auto 1fr auto auto',
       },
       colors: {
         border: 'hsl(var(--border))',

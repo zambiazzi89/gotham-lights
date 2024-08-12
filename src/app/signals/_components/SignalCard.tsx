@@ -14,7 +14,7 @@ export default function SignalCard({
   signalCardProps: SignalCardType
 }) {
   return (
-    <Card className="shadow max-w-[36rem] m-4">
+    <Card className="shadow-md m-2 flex flex-col justify-between">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>
@@ -23,10 +23,13 @@ export default function SignalCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{signalCardProps.content}</p>
+        <p className="overflow-hidden ">
+          {signalCardProps.content.substring(0, 100)}...
+        </p>
+        <p className="text-muted-foreground text-right">...see more</p>
       </CardContent>
-      <CardFooter>
-        <p>
+      <CardFooter className="self-end">
+        <p className=" text-muted-foreground mt-4">
           Signal sent on {signalCardProps.createdAt.toLocaleDateString('en-US')}
         </p>
       </CardFooter>

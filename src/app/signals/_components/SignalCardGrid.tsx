@@ -14,55 +14,22 @@ async function getSignals() {
       dateOfEncounter: new Date(),
       title: 'Test title',
       content:
-        'I saw you standing blablablablabalbal I saw you standing blablablablabalbal, I saw you standing blablablablabalbal,I saw you standing blablablablabalbal I saw you standing blablablablabalbal.',
+        'The quick quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog',
       createdByUserId: '1',
     },
     {
       id: '2',
       createdAt: new Date(),
       updatedAt: null,
-      locationName: 'Main Drag 2',
+      locationName:
+        'Really loooong loooong loooong loooong loooong loooong location',
       latitude: 70,
       longitude: 75,
       dateOfEncounter: new Date(),
-      title: 'Test title',
-      content: 'I saw you standing blablablablabalbal.',
-      createdByUserId: '1',
-    },
-    {
-      id: '3',
-      createdAt: new Date(),
-      updatedAt: null,
-      locationName: 'Main Drag 3',
-      latitude: 70,
-      longitude: 75,
-      dateOfEncounter: new Date(),
-      title: 'Test title',
-      content: 'I saw you standing blablablablabalbal.',
-      createdByUserId: '1',
-    },
-    {
-      id: '4',
-      createdAt: new Date(),
-      updatedAt: null,
-      locationName: 'Main Drag 4',
-      latitude: 70,
-      longitude: 75,
-      dateOfEncounter: new Date(),
-      title: 'Test title',
-      content: 'I saw you standing blablablablabalbal.',
-      createdByUserId: '1',
-    },
-    {
-      id: '5',
-      createdAt: new Date(),
-      updatedAt: null,
-      locationName: 'Main Drag 5',
-      latitude: 70,
-      longitude: 75,
-      dateOfEncounter: new Date(),
-      title: 'Test title',
-      content: 'I saw you standing blablablablabalbal.',
+      title:
+        'Really loooong loooong loooong loooong loooong loooong loooongloooong loooong loooong title',
+      content:
+        'The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog',
       createdByUserId: '1',
     },
   ]
@@ -75,9 +42,9 @@ async function getSignals() {
 export default async function SignalCardGrid() {
   const signals = await getSignals()
   return (
-    <div className="flex flex-col overflow-y-scroll">
+    <div className="flex flex-col md:overflow-y-scroll">
       <div className="text-lg font-bold text-center py-4">Latest Signals</div>
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap">
         {signals.map((signal) => {
           return (
             <SignalCard
