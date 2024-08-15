@@ -20,7 +20,9 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        aref: ['var(--font-arefRuqaaInk)', ...fontFamily.serif],
+        croissant: ['var(--font-croissantOne)', ...fontFamily.serif],
+        cormorant: ['var(--font-cormorant)', ...fontFamily.serif],
       },
       gridTemplateRows: {
         layout: 'auto 1fr auto',

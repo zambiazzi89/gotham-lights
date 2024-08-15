@@ -33,6 +33,19 @@ async function getSignals() {
         'The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog',
       createdByUserId: '1',
     },
+    {
+      id: '3',
+      createdAt: new Date(),
+      updatedAt: null,
+      locationName: 'Main Drag 3',
+      latitude: 70,
+      longitude: 75,
+      dateOfEncounter: new Date(),
+      title: 'Test title',
+      content:
+        'The quick quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog,The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog',
+      createdByUserId: '1',
+    },
   ]
 
   const signals = await db.signal.findMany()
@@ -43,12 +56,16 @@ async function getSignals() {
 export default async function SignalCardGrid() {
   const signals = await getSignals()
   return (
-    <div className="flex flex-col md:overflow-y-scroll">
+    <div className="flex flex-col md:overflow-y-auto">
       <div className="text-lg font-bold text-center py-4">Latest Signals</div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap ">
         {signals.map((signal) => {
           return (
-            <Link href={`/signals/${signal.id}`} key={signal.id}>
+            <Link
+              className="flex m-2"
+              href={`/signals/${signal.id}`}
+              key={signal.id}
+            >
               <SignalCard
                 key={signal.id}
                 signalCardProps={signal as SignalCardType}

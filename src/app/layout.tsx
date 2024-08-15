@@ -1,14 +1,9 @@
 import type { Metadata } from 'next'
-import { Aref_Ruqaa_Ink } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import GoogleAPIContextProvider from '@/context/GoogleAPIContext'
-
-const arefRuqaaInk = Aref_Ruqaa_Ink({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-})
+import { cormorant } from './fonts'
 
 export const metadata: Metadata = {
   title: 'gotham lights',
@@ -24,8 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'bg-background min-h-screen font-serif antialiased',
-          arefRuqaaInk.className
+          'bg-background min-h-screen font-cormorant antialiased',
+          cormorant.className
         )}
       >
         <ThemeProvider

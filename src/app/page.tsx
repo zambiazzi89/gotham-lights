@@ -1,7 +1,6 @@
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Input } from '@/components/ui/input'
 
 export default function Home() {
   return (

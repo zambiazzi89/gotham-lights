@@ -1,19 +1,14 @@
-import { CancelButtonWithDialog } from '@/components/AlertDialog'
 import Footer from '@/components/Footer'
-import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 import Navbar from '@/components/Navbar'
-import { Button } from '@/components/ui/button'
-import { DatePicker } from '@/components/ui/DatePicker'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import CreateSignalForm from './_components/CreateSignalForm'
 
-export default async function CreateSignal() {
+export default function CreateSignal() {
   return (
-    <div className="min-h-svh">
-      <div className="grid grid-rows-layout min-h-svh">
+    <div className="h-svh">
+      <div className="grid grid-rows-layout h-full">
         <Navbar />
         <div className="flex flex-col justify-center items-center">
-          <form>
+          {/* <form action={addSignal}>
             <div className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md">
               <Input
                 placeholder="Name your signal"
@@ -23,14 +18,19 @@ export default async function CreateSignal() {
                 required
               />
               <DatePicker />
-              {/* <GoogleAutocompleteInput /> */}
-              <Textarea placeholder="What do you want to share?" />
+              <GoogleAutocompleteInput />
+              <Textarea
+                id="content"
+                name="content"
+                placeholder="What do you want to share?"
+              />
               <div className="flex justify-between w-full mt-4">
                 <CancelButtonWithDialog href="/signals" />
                 <Button>Submit</Button>
               </div>
             </div>
-          </form>
+          </form> */}
+          <CreateSignalForm />
         </div>
         <Footer />
       </div>

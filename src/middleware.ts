@@ -6,5 +6,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/sinals/create', '/profile', '/messages'],
+  matcher: ['/signals/create', '/profile', '/messages'],
 }
