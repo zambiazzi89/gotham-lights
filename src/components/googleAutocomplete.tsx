@@ -1,11 +1,17 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong } from '@/lib/types'
 
-export default function GoogleAutocompleteInput() {
+export default function GoogleAutocompleteInput({
+  setSelectedLocation,
+}: {
+  setSelectedLocation: Dispatch<
+    SetStateAction<google.maps.places.PlaceResult | null>
+  >
+}) {
   const defaultLatlong: LatLong = { coordinates: [40.73061, -73.935242] }
 
   const [location, setLocation] = useState<LatLong>(defaultLatlong)
@@ -26,15 +32,11 @@ export default function GoogleAutocompleteInput() {
     useState<google.maps.places.Autocomplete | null>(null)
   const autocompleteRef = useRef<HTMLInputElement>(null)
 
-  const [selectedLocation, setSelectedLocation] = useState<String | null>(null)
-
   useEffect(() => {
     if (isLoaded) {
-      // bounds
+      // bounds [SW,NE]
       const NYCBounds = new google.maps.LatLngBounds(
-        // SW
         new google.maps.LatLng({ lat: 40.481145, lng: -74.263983 }),
-        // NE
         new google.maps.LatLng({ lat: 40.916347, lng: -73.673468 })
       )
 
@@ -54,16 +56,21 @@ export default function GoogleAutocompleteInput() {
   useEffect(() => {
     autocomplete?.addListener('place_changed', () => {
       const place = autocomplete.getPlace()
-      setSelectedLocation(place.formatted_address as String)
-      console.log(place)
-      const position = place.geometry?.location
-      console.log(position)
-      console.log(position?.lat())
+      setSelectedLocation(place)
+      // console.log(place)
+      // const position = place.geometry?.location
+      // console.log(position)
+      // console.log(position?.lat())
     })
   }, [autocomplete])
   return (
-    <div className="flex w-full items-center py-2">
-      <Input type="text" placeholder="Where?" ref={autocompleteRef} />
+    <div className="flex w-full items-center">
+      <Input
+        name="googleAutocomplete"
+        type="text"
+        placeholder="Where?"
+        ref={autocompleteRef}
+      />
     </div>
   )
 }

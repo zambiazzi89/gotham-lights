@@ -3,7 +3,11 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "username" TEXT NOT NULL
+    "kindeId" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
+    "emailAddress" TEXT NOT NULL,
+    "username" TEXT
 );
 
 -- CreateTable
@@ -33,3 +37,6 @@ CREATE TABLE "Comment" (
     CONSTRAINT "Comment_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "Comment_SignalId_fkey" FOREIGN KEY ("SignalId") REFERENCES "Signal" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_kindeId_key" ON "User"("kindeId");

@@ -1,109 +1,92 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { CancelButtonWithDialog } from '@/components/AlertDialog'
 import { DatePicker } from '@/components/ui/DatePicker'
 import { Textarea } from '@/components/ui/textarea'
 import { addSignal } from '../_actions/signalActions'
-
-const formSchema = z.object({
-  title: z
-    .string()
-    .min(5, {
-      message: 'Your signal title length must be between 5 and 70 characters.',
-    })
-    .max(70, {
-      message: 'Your signal title length must be between 5 and 70 characters.',
-    }),
-  date: z.date(),
-  content: z
-    .string()
-    .min(5, {
-      message:
-        'Your signal content length must be between 5 and 400 characters.',
-    })
-    .max(400, {
-      message:
-        'Your signal content length must be between 5 and 400 characters.',
-    }),
-})
+import { useEffect, useState } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
+import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 
 export default function CreateSignalForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: '',
-      content: '',
-    },
-  })
+  const [selectedLocation, setSelectedLocation] =
+    useState<google.maps.places.PlaceResult | null>(null)
+  const [error, action] = useFormState(addSignal, {})
+  const [date, setDate] = useState<Date | undefined>(undefined)
+
+  useEffect(() => {
+    console.log(selectedLocation)
+  }, [selectedLocation])
 
   return (
-    <Form {...form}>
-      <form
-        action={addSignal}
-        className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md"
-      >
-        <div className="font-semibold text-lg mb-3">Create a Signal</div>
-        <FormField
-          control={form.control}
+    <form
+      action={action}
+      className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md"
+    >
+      <div className="font-semibold text-lg mb-3">Create a Signal</div>
+
+      <div className="my-2">
+        <Input
+          placeholder="Name your signal"
+          type="text"
+          id="title"
           name="title"
-          render={({ field }) => (
-            <FormItem className="my-2">
-              <FormControl>
-                <Input
-                  placeholder="Name your signal"
-                  type="text"
-                  id="title"
-                  required
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          required
         />
-        <FormField
-          control={form.control}
-          name="date"
-          render={({ field }) => (
-            <FormItem className="my-2">
-              <input
-                type="hidden"
-                name={field.name}
-                value={field.value?.toISOString()}
-              />
-              <DatePicker field={field} />
-              <FormMessage />
-            </FormItem>
-          )}
+        {error?.title && (
+          <div className="text-destructive text-sm">{error.title}</div>
+        )}
+      </div>
+      <div className="my-2">
+        <Input
+          type="hidden"
+          name="location_name"
+          value={selectedLocation?.name}
         />
-        <FormField
-          control={form.control}
+        <Input
+          type="hidden"
+          name="location_lat"
+          value={selectedLocation?.geometry?.location?.lat()}
+        />
+        <Input
+          type="hidden"
+          name="location_lng"
+          value={selectedLocation?.geometry?.location?.lng()}
+        />
+        <GoogleAutocompleteInput setSelectedLocation={setSelectedLocation} />
+      </div>
+      <div className="my-2">
+        <Input type="hidden" name="date" value={date?.toISOString()} />
+        <DatePicker date={date} setDate={setDate} />
+        {error?.date && (
+          <div className="text-destructive text-sm">{error.date}</div>
+        )}
+      </div>
+      <div className="my-2">
+        <Textarea
           name="content"
-          render={({ field }) => (
-            <FormItem className="my-2">
-              <Textarea placeholder="What do you want to share?" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="What do you want to share?"
+          required
         />
-        <div className="flex justify-between w-full mt-8">
-          <CancelButtonWithDialog href="/signals" />
-          <Button>Submit</Button>
-        </div>
-      </form>
-    </Form>
+        {error?.content && (
+          <div className="text-destructive text-sm">{error.content}</div>
+        )}
+      </div>
+      <div className="flex justify-between w-full mt-8">
+        <CancelButtonWithDialog href="/signals" />
+        <SubmitButton />
+      </div>
+    </form>
+  )
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus()
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? 'Saving' : 'Submit'}
+    </Button>
   )
 }

@@ -6,6 +6,7 @@ import { ModeToggle } from './ui/modeToggle'
 import {
   getKindeServerSession,
   LoginLink,
+  LogoutLink,
   RegisterLink,
 } from '@kinde-oss/kinde-auth-nextjs/server'
 
@@ -50,11 +51,14 @@ export default async function Navbar({
           <NavButton title="Signals" href="/signals" />
           <NavButton title="Messages" href="/messages" />
           {isAuth ? (
-            <NavButton title="Profile" href="/profile" />
+            <>
+              <NavButton title="Profile" href="/profile" />
+              <LogoutLink className={navButtonStyle}>Logout</LogoutLink>
+            </>
           ) : (
             <>
-              <LoginLink className={navButtonStyle}>Sign in</LoginLink>
-              <RegisterLink className={navButtonStyle}>Sign up</RegisterLink>
+              <LoginLink className={navButtonStyle}>Login</LoginLink>
+              <RegisterLink className={navButtonStyle}>Register</RegisterLink>
             </>
           )}
         </div>

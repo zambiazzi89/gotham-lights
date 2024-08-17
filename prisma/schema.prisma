@@ -14,8 +14,13 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  kindeId   String   @unique
 
-  username String
+  firstName String?
+  lastName  String?
+
+  emailAddress String?
+  username     String?
 
   Signal  Signal[]
   Comment Comment[]
