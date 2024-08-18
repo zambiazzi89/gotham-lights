@@ -14,7 +14,7 @@ export default function SignalCard({
   signalCardProps: SignalCardType
 }) {
   return (
-    <Card className="shadow-md flex flex-col justify-between">
+    <Card className="shadow-md flex flex-col justify-between grow">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>
