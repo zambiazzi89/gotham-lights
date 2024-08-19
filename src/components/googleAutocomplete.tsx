@@ -42,10 +42,6 @@ export default function GoogleAutocompleteInput({
     autocomplete?.addListener('place_changed', () => {
       const place = autocomplete.getPlace()
       setSelectedLocation(place)
-      // console.log(place)
-      // const position = place.geometry?.location
-      // console.log(position)
-      // console.log(position?.lat())
     })
   }, [autocomplete])
   return (

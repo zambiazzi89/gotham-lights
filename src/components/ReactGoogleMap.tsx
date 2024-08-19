@@ -4,10 +4,14 @@ import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
 
 function ReactGoogleMap({
+  useSearchParams,
+  center,
   signals,
   setBoundsNE,
   setBoundsSW,
 }: {
+  useSearchParams: boolean
+  center: LatLong
   signals: Signal[]
   setBoundsNE: Dispatch<SetStateAction<LatLong | undefined>>
   setBoundsSW: Dispatch<SetStateAction<LatLong | undefined>>
@@ -15,16 +19,26 @@ function ReactGoogleMap({
   const isLoaded = useGoogleAPIContext()
 
   const containerStyle = {
-    width: '100%',
-    height: '100%',
+    width: '80%',
+    height: '80%',
   }
-  const center: LatLong = { lat: 40.73061, lng: -73.935242 }
 
   const [map, setMap] = React.useState<google.maps.Map | null>(null)
 
   const onLoad = React.useCallback(function callback(map: google.maps.Map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center)
+    let bounds: google.maps.LatLngBounds | null = null
+    if (useSearchParams) {
+      bounds = new window.google.maps.LatLngBounds(center)
+    } else {
+      bounds = new window.google.maps.LatLngBounds()
+      signals.map((signal) => {
+        bounds?.extend({
+          lat: signal.latitude,
+          lng: signal.longitude,
+        })
+      })
+    }
+
     map.fitBounds(bounds)
 
     setMap(map)
@@ -44,36 +58,39 @@ function ReactGoogleMap({
     }
   }
 
-  useEffect(() => {
-    if (map) {
-      const bounds = new window.google.maps.LatLngBounds()
-      signals.map((signal) => {
-        bounds.extend({
-          lat: signal.latitude,
-          lng: signal.longitude,
-        })
-      })
-      map.fitBounds(bounds)
-    }
-  }, [map, signals])
+  // useEffect(() => {
+  //   if (map) {
+  //     const bounds = new window.google.maps.LatLngBounds()
+  //     signals.map((signal) => {
+  //       bounds.extend({
+  //         lat: signal.latitude,
+  //         lng: signal.longitude,
+  //       })
+  //     })
+  //     map.fitBounds(bounds)
+  //   }
+  // }, [map, signals])
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={10}
-      onLoad={onLoad}
-      onBoundsChanged={setBounds}
-    >
-      {signals &&
-        signals.map((signal) => {
-          return (
-            <Marker
-              position={{ lat: signal.latitude, lng: signal.longitude }}
-            />
-          )
-        })}
-    </GoogleMap>
+    <div className="grid place-items-center h-full">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={15}
+        onLoad={onLoad}
+        onBoundsChanged={setBounds}
+      >
+        {signals &&
+          signals.map((signal) => {
+            return (
+              <Marker
+                key={signal.id}
+                position={{ lat: signal.latitude, lng: signal.longitude }}
+              />
+            )
+          })}
+      </GoogleMap>
+    </div>
   ) : (
     <div>Loading...</div>
   )
