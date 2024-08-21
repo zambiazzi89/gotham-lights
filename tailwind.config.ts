@@ -24,6 +24,9 @@ const config = {
         croissant: ['var(--font-croissantOne)', ...fontFamily.serif],
         cormorant: ['var(--font-cormorant)', ...fontFamily.serif],
       },
+      gridTemplateColumns: {
+        '1fr-2fr': '1fr 2fr',
+      },
       gridTemplateRows: {
         layout: 'auto 1fr auto',
         'layout-signals': 'auto 1fr auto auto',
