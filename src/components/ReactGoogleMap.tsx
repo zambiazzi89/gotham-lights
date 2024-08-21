@@ -19,8 +19,8 @@ function ReactGoogleMap({
   const isLoaded = useGoogleAPIContext()
 
   const containerStyle = {
-    width: '80%',
-    height: '80%',
+    width: '100%',
+    height: '100%',
   }
 
   const [map, setMap] = React.useState<google.maps.Map | null>(null)
@@ -37,9 +37,8 @@ function ReactGoogleMap({
           lng: signal.longitude,
         })
       })
+      map.fitBounds(bounds)
     }
-
-    map.fitBounds(bounds)
 
     setMap(map)
   }, [])
@@ -58,21 +57,8 @@ function ReactGoogleMap({
     }
   }
 
-  // useEffect(() => {
-  //   if (map) {
-  //     const bounds = new window.google.maps.LatLngBounds()
-  //     signals.map((signal) => {
-  //       bounds.extend({
-  //         lat: signal.latitude,
-  //         lng: signal.longitude,
-  //       })
-  //     })
-  //     map.fitBounds(bounds)
-  //   }
-  // }, [map, signals])
-
   return isLoaded ? (
-    <div className="grid place-items-center h-full">
+    <>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -90,7 +76,7 @@ function ReactGoogleMap({
             )
           })}
       </GoogleMap>
-    </div>
+    </>
   ) : (
     <div>Loading...</div>
   )

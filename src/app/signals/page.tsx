@@ -30,18 +30,17 @@ export default async function Signals() {
     <div className="h-svh grid grid-rows-layout-signals">
       <Navbar />
       <MapAndGrid signals={signalsWithUsername} />
-      {isAuth ? (
-        <Link href="/signals/create" className="h-8 m-4 place-self-end">
-          <Button className="w-60 font-bold">Send a Signal</Button>
-        </Link>
-      ) : (
-        <LoginLink
-          postLoginRedirectURL="/signals/create"
-          className="h-8 m-4 place-self-end"
-        >
-          <Button className="w-60 font-bold">Send a Signal</Button>
-        </LoginLink>
-      )}
+      <div className="h-14 flex justify-end items-center">
+        {isAuth ? (
+          <Link href="/signals/create" className="h-8 m-4">
+            <Button className="w-60 font-bold">Send a Signal</Button>
+          </Link>
+        ) : (
+          <LoginLink postLoginRedirectURL="/signals/create" className="h-8 m-4">
+            <Button className="w-60 font-bold">Send a Signal</Button>
+          </LoginLink>
+        )}
+      </div>
       <Footer />
     </div>
   )

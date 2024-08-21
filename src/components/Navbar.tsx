@@ -43,9 +43,9 @@ export default async function Navbar({
             <ModeToggle />
           </div>
         )}
-        <MdMenu className="text-white mr-2 self-center scale-150 md:hidden" />
+        <MdMenu className="text-white mr-2 self-center scale-150 lg:hidden" />
         <div
-          className={`hidden md:flex justify-end items-center  ${fontColor}`}
+          className={`hidden lg:flex justify-end items-center  ${fontColor}`}
         >
           <NavButton title="About" href="/about" />
           <NavButton title="Signals" href="/signals" />
