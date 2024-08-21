@@ -1,4 +1,4 @@
-export type SignalCardType = {
+export type SignalCardType_no = {
   id: string
   createdAt: Date
   updatedAt: Date
@@ -8,5 +8,5 @@ export type SignalCardType = {
   dateOfEncounter: Date
   title: string
   content: string
-  createdByUserId: string | null
+  createdByUsername: string
 }

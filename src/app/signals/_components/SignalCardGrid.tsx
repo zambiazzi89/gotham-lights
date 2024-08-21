@@ -1,5 +1,5 @@
 import SignalCard from './SignalCard'
-import { SignalCardType } from '../_types/SignalCardType'
+// import { SignalCardType } from '../_types/SignalCardType'
 import Link from 'next/link'
 import { Signal } from '@/lib/types'
 import { Dispatch, SetStateAction } from 'react'
@@ -14,7 +14,7 @@ export default function SignalCardGrid({
   return (
     <div className="flex flex-col md:overflow-y-auto">
       <div className="text-lg font-bold text-center py-4">Latest Signals</div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 ">
         {/* To do: if SelectedSignal, render only the signal and a button to go back
         (the button would just set the selectedSignal to null) */}
 
@@ -25,11 +25,8 @@ export default function SignalCardGrid({
             //   href={`/signals/${signal.id}`}
             //   key={signal.id}
             // >
-            <div onClick={() => setSelectedSignal(signal)}>
-              <SignalCard
-                key={signal.id}
-                signalCardProps={signal as SignalCardType}
-              />
+            <div key={signal.id} onClick={() => setSelectedSignal(signal)}>
+              <SignalCard signalCardProps={signal} />
             </div>
             // </Link>
           )

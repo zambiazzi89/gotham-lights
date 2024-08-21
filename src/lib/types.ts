@@ -14,6 +14,7 @@ export type Signal = {
   title: string
   content: string
   createdByUserId: string | null
+  createdByUsername: string
 }
 
 export type User = {

@@ -6,12 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { SignalCardType } from '../_types/SignalCardType'
+import { Signal } from '@/lib/types'
 
 export default function SignalCard({
   signalCardProps,
 }: {
-  signalCardProps: SignalCardType
+  signalCardProps: Signal
 }) {
   return (
     <Card className="shadow-md flex flex-col justify-between grow">
@@ -30,7 +30,8 @@ export default function SignalCard({
       </CardContent>
       <CardFooter className="self-end">
         <p className=" text-muted-foreground mt-4">
-          Signal sent on {signalCardProps.createdAt.toLocaleDateString('en-US')}
+          Signal sent on {signalCardProps.createdAt.toLocaleDateString('en-US')}{' '}
+          by {signalCardProps.createdByUsername}
         </p>
       </CardFooter>
     </Card>
