@@ -21,7 +21,7 @@ model User {
   lastName  String?
 
   emailAddress String?
-  username     String?
+  username     String? @unique
 
   Signal  Signal[]
   Comment Comment[]

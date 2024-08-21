@@ -6,7 +6,7 @@ import { CancelButtonWithDialog } from '@/components/AlertDialog'
 import { DatePicker } from '@/components/ui/DatePicker'
 import { Textarea } from '@/components/ui/textarea'
 import { addSignal } from '../_actions/signalActions'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 
@@ -15,10 +15,6 @@ export default function CreateSignalForm() {
     useState<google.maps.places.PlaceResult | null>(null)
   const [error, action] = useFormState(addSignal, {})
   const [date, setDate] = useState<Date | undefined>(undefined)
-
-  useEffect(() => {
-    console.log(selectedLocation)
-  }, [selectedLocation])
 
   return (
     <form
