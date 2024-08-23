@@ -1,14 +1,14 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CancelButtonWithDialog } from '@/components/AlertDialog'
 import { DatePicker } from '@/components/ui/DatePicker'
 import { Textarea } from '@/components/ui/textarea'
 import { addSignal } from '../_actions/signalActions'
 import { useState } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
+import SubmitButton from '@/components/SubmitButton'
 
 export default function CreateSignalForm() {
   const [selectedLocation, setSelectedLocation] =
@@ -77,14 +77,5 @@ export default function CreateSignalForm() {
         <SubmitButton />
       </div>
     </form>
-  )
-}
-
-function SubmitButton() {
-  const { pending } = useFormStatus()
-  return (
-    <Button type="submit" disabled={pending}>
-      {pending ? 'Saving' : 'Submit'}
-    </Button>
   )
 }
