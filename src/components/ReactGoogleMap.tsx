@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 function ReactGoogleMap({
   signals,
@@ -13,6 +13,8 @@ function ReactGoogleMap({
   setBoundsNE: Dispatch<SetStateAction<LatLong | undefined>>
   setBoundsSW: Dispatch<SetStateAction<LatLong | undefined>>
 }) {
+  const router = useRouter()
+
   const isLoaded = useGoogleAPIContext()
 
   const containerStyle = {
@@ -63,6 +65,15 @@ function ReactGoogleMap({
     }
   }
 
+  function handleDragEnd() {
+    const selectedLocation = map?.getCenter()
+    if (selectedLocation) {
+      router.push(
+        `/signals?lat=${selectedLocation.lat()}&lng=${selectedLocation.lng()}`
+      )
+    }
+  }
+
   return isLoaded ? (
     <>
       <GoogleMap
@@ -71,6 +82,7 @@ function ReactGoogleMap({
         zoom={15}
         onLoad={onLoad}
         onBoundsChanged={setBounds}
+        onDragEnd={handleDragEnd}
       >
         {signals &&
           signals.map((signal) => {

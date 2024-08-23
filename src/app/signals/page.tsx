@@ -15,7 +15,7 @@ export default async function Signals() {
   const { isAuthenticated } = getKindeServerSession()
   const isAuth = await isAuthenticated()
 
-  const signals = await db.signal.findMany()
+  const signals = await db.signal.findMany({})
   const signalsWithUsername: Signal[] = await Promise.all(
     signals.map(
       async (signal) =>

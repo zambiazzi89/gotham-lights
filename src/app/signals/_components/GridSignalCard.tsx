@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/card'
 import { Signal } from '@/lib/types'
 
-export default function SignalCard({
+export default function GridSignalCard({
   signalCardProps,
 }: {
   signalCardProps: Signal
