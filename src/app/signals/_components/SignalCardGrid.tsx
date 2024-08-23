@@ -13,7 +13,11 @@ export default function SignalCardGrid({
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3 ">
         {signalsInBound.map((signal) => {
           return (
-            <Link className="" key={signal.id} href={`/signals/${signal.id}`}>
+            <Link
+              className="flex"
+              key={signal.id}
+              href={`/signals/${signal.id}`}
+            >
               <GridSignalCard signalCardProps={signal} />
             </Link>
           )

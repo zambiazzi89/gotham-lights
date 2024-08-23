@@ -51,7 +51,9 @@ export default function CreateSignalForm() {
           name="location_lng"
           value={selectedLocation?.geometry?.location?.lng()}
         />
-        <GoogleAutocompleteInput setSelectedLocation={setSelectedLocation} />
+        <GoogleAutocompleteInput
+          setSelectedLocationFromProps={setSelectedLocation}
+        />
       </div>
       <div className="my-2">
         <Input type="hidden" name="date" value={date?.toISOString()} />

@@ -5,7 +5,18 @@ import { Input } from './ui/input'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { useRouter } from 'next/navigation'
 
-export default function GoogleAutocompleteInput() {
+/*
+  If setSelectedLocationFromProps is passed, it will just update the state
+  If nothing is passed, selecting a location will push the coordinates to the signals URL
+*/
+
+export default function GoogleAutocompleteInput({
+  setSelectedLocationFromProps,
+}: {
+  setSelectedLocationFromProps?: React.Dispatch<
+    React.SetStateAction<google.maps.places.PlaceResult | null>
+  >
+}) {
   const router = useRouter()
 
   const [selectedLocation, setSelectedLocation] =
@@ -49,7 +60,9 @@ export default function GoogleAutocompleteInput() {
   useEffect(() => {
     autocomplete?.addListener('place_changed', () => {
       const place = autocomplete.getPlace()
-      setSelectedLocation(place)
+      setSelectedLocationFromProps
+        ? setSelectedLocationFromProps(place)
+        : setSelectedLocation(place)
     })
   }, [autocomplete])
   return (

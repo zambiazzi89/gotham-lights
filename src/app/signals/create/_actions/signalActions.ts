@@ -24,9 +24,9 @@ const formSchema = z.object({
       message:
         'Your signal content length must be between 5 and 400 characters.',
     })
-    .max(400, {
+    .max(1000, {
       message:
-        'Your signal content length must be between 5 and 400 characters.',
+        'Your signal content length must be between 5 and 1000 characters.',
     }),
 })
 
