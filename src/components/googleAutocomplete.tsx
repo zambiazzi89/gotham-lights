@@ -1,16 +1,24 @@
 'use client'
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
+import { useRouter } from 'next/navigation'
 
-export default function GoogleAutocompleteInput({
-  setSelectedLocation,
-}: {
-  setSelectedLocation: Dispatch<
-    SetStateAction<google.maps.places.PlaceResult | null>
-  >
-}) {
+export default function GoogleAutocompleteInput() {
+  const router = useRouter()
+
+  const [selectedLocation, setSelectedLocation] =
+    useState<google.maps.places.PlaceResult | null>(null)
+
+  useEffect(() => {
+    if (selectedLocation) {
+      router.push(
+        `/signals?lat=${selectedLocation.geometry?.location?.lat()}&lng=${selectedLocation.geometry?.location?.lng()}`
+      )
+    }
+  }, [selectedLocation])
+
   const isLoaded = useGoogleAPIContext()
 
   const [autocomplete, setAutocomplete] =

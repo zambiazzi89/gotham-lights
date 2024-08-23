@@ -2,16 +2,13 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
+import { useSearchParams } from 'next/navigation'
 
 function ReactGoogleMap({
-  useSearchParams,
-  center,
   signals,
   setBoundsNE,
   setBoundsSW,
 }: {
-  useSearchParams: boolean
-  center: LatLong
   signals: Signal[]
   setBoundsNE: Dispatch<SetStateAction<LatLong | undefined>>
   setBoundsSW: Dispatch<SetStateAction<LatLong | undefined>>
@@ -25,9 +22,18 @@ function ReactGoogleMap({
 
   const [map, setMap] = React.useState<google.maps.Map | null>(null)
 
+  const searchParams = useSearchParams()
+
+  const paramsExist = searchParams.has('lat') && searchParams.has('lng')
+
+  const center: LatLong = {
+    lat: Number(searchParams.get('lat')) || 40.73061,
+    lng: Number(searchParams.get('lng')) || -73.935242,
+  }
+
   const onLoad = React.useCallback(function callback(map: google.maps.Map) {
     let bounds: google.maps.LatLngBounds | null = null
-    if (useSearchParams) {
+    if (paramsExist) {
       bounds = new window.google.maps.LatLngBounds(center)
     } else {
       bounds = new window.google.maps.LatLngBounds()
