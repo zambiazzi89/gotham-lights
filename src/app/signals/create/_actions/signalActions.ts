@@ -59,4 +59,6 @@ export async function addSignal(prevState: unknown, formData: FormData) {
       createdByUserId: dbUser?.id,
     },
   })
+
+  redirect('/signals')
 }

@@ -39,24 +39,24 @@ export default function CreateSignalForm() {
         <Input
           type="hidden"
           name="location_name"
-          value={selectedLocation?.name}
+          value={`${selectedLocation?.name}`}
         />
         <Input
           type="hidden"
           name="location_lat"
-          value={selectedLocation?.geometry?.location?.lat()}
+          value={`${selectedLocation?.geometry?.location?.lat()}`}
         />
         <Input
           type="hidden"
           name="location_lng"
-          value={selectedLocation?.geometry?.location?.lng()}
+          value={`${selectedLocation?.geometry?.location?.lng()}`}
         />
         <GoogleAutocompleteInput
           setSelectedLocationFromProps={setSelectedLocation}
         />
       </div>
       <div className="my-2">
-        <Input type="hidden" name="date" value={date?.toISOString()} />
+        <Input type="hidden" name="date" value={`${date?.toISOString()}`} />
         <DatePicker date={date} setDate={setDate} />
         {error?.date && (
           <div className="text-destructive text-sm">{error.date}</div>
