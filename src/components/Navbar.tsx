@@ -48,9 +48,11 @@ export default async function Navbar({
           {isAuth ? (
             <>
               <NavButton title="Profile" href="/profile" />
-              <Button className={navButtonStyle} onClick={logout}>
-                Logout
-              </Button>
+              <form action={logout}>
+                <Button className={navButtonStyle} type="submit">
+                  Logout
+                </Button>
+              </form>
             </>
           ) : (
             <>
