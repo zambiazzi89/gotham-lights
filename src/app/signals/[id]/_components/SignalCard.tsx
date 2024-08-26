@@ -6,12 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { SignalWithUsername } from '@/lib/types'
+import { Signal } from '@/lib/types'
 
 export default function GridSignalCard({
   signalCardProps,
 }: {
-  signalCardProps: SignalWithUsername
+  signalCardProps: Signal
 }) {
   return (
     <Card className="shadow-md flex flex-col justify-between">
@@ -28,7 +28,7 @@ export default function GridSignalCard({
       <CardFooter className="self-end">
         <p className=" text-muted-foreground mt-4">
           Signal sent on {signalCardProps.createdAt.toLocaleString('en-US')} by{' '}
-          {signalCardProps.user?.username}
+          {signalCardProps.createdByUsername}
         </p>
       </CardFooter>
     </Card>

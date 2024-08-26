@@ -1,14 +1,16 @@
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 import { croissantOne } from '../fonts'
+import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
 
-export default function About() {
+export default async function About() {
   const pStyle = 'my-4'
+  const session = await getServerSession()
 
   return (
     <div className="h-svh">
       <div className="grid grid-rows-layout h-svh">
-        <Navbar />
+        <Navbar isAuth={!!session} />
         <div className="grid place-items-center my-6 overflow-hidden">
           <div className="h-full max-w-[90svw] sm:max-w-[80svw] lg:max-w-[60svw] 2xl:max-w-[50svw] overflow-y-auto flex flex-col md:justify-center">
             <div className="mt-2 mb-4">

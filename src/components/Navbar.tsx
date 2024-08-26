@@ -3,12 +3,8 @@ import NavButton from './NavButton'
 import Link from 'next/link'
 import { Croissant_One } from 'next/font/google'
 import { ModeToggle } from './ui/modeToggle'
-import {
-  getKindeServerSession,
-  LoginLink,
-  LogoutLink,
-  RegisterLink,
-} from '@kinde-oss/kinde-auth-nextjs/server'
+import { Button } from './ui/button'
+import { logout } from '@/app/logout/actions'
 
 const navButtonStyle = `pt-2 w-32 h-12 grid place-items-center backdrop-blur
                         border border-solid border-t-0
@@ -20,15 +16,14 @@ const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 type fontColor = 'text-white' | 'text-black' | ''
 
 export default async function Navbar({
+  isAuth,
   fontColor = '',
   withToggle = true,
 }: {
+  isAuth: boolean
   fontColor?: fontColor
   withToggle?: boolean
 }) {
-  const { isAuthenticated } = getKindeServerSession()
-  const isAuth = await isAuthenticated()
-
   return (
     <div className="flex px-2 items-center justify-between">
       <Link
@@ -53,12 +48,15 @@ export default async function Navbar({
           {isAuth ? (
             <>
               <NavButton title="Profile" href="/profile" />
-              <LogoutLink className={navButtonStyle}>Logout</LogoutLink>
+              <Button className={navButtonStyle} onClick={logout}>
+                Logout
+              </Button>
             </>
           ) : (
             <>
-              <LoginLink className={navButtonStyle}>Login</LoginLink>
-              <RegisterLink className={navButtonStyle}>Register</RegisterLink>
+              <Link href="/login" className={navButtonStyle}>
+                Login/Register
+              </Link>
             </>
           )}
         </div>

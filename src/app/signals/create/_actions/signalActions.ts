@@ -1,7 +1,7 @@
 'use server'
 
-import getAuthUser from '@/app/api/authServerFunctions'
 import db from '@/db/db'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
@@ -32,11 +32,7 @@ const formSchema = z.object({
 
 export async function addSignal(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
-  const { isLoggedIn, dbUser } = await getAuthUser()
-
-  if (!isLoggedIn) {
-    redirect('/')
-  }
+  const profile = await getDbProfileFromServer()
 
   // Continue if logged in
 
@@ -56,7 +52,7 @@ export async function addSignal(prevState: unknown, formData: FormData) {
       longitude: data.location_lng,
       dateOfEncounter: data.date,
       content: data.content,
-      createdByUserId: dbUser?.id,
+      createdByUsername: profile.username,
     },
   })
 

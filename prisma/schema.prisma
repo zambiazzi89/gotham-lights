@@ -11,50 +11,49 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-  kindeId   String    @unique
+model profile {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 
-  firstName String?
-  lastName  String?
+  first_name String?
+  last_name  String?
 
-  emailAddress String?
-  username     String? @unique
+  email_address String?
+  username      String? @unique
 
-  Signal  Signal[]
-  Comment Comment[]
+  signals  signal[]
+  comments comment[]
 }
 
-model Signal {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+model signal {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 
-  locationName    String
-  latitude        Float
-  longitude       Float
-  dateOfEncounter DateTime
-  title           String
-  content         String
+  location_name  String
+  latitude       Float
+  longitude      Float
+  date_encounter DateTime
+  title          String
+  content        String
 
-  createdByUserId String?
-  user            User?   @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+  created_by_username String?
+  profile             profile? @relation(fields: [created_by_username], references: [username], onDelete: SetNull)
 
-  Comment Comment[]
+  comments comment[]
 }
 
-model Comment {
-  id        String    @id @default(uuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+model comment {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 
   content String
 
-  createdByUserId String?
-  user            User?   @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+  created_by_username String?
+  profile             profile? @relation(fields: [created_by_username], references: [username], onDelete: SetNull)
 
-  SignalId String
-  Signal   Signal @relation(fields: [SignalId], references: [id], onDelete: Cascade)
+  signal_id String
+  signal    signal @relation(fields: [signal_id], references: [id], onDelete: Cascade)
 }

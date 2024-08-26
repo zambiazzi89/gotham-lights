@@ -1,8 +1,7 @@
 'use server'
 
-import getAuthUser from '@/app/api/authServerFunctions'
 import db from '@/db/db'
-import { redirect } from 'next/navigation'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import { z } from 'zod'
 
 const formSchema = z.object({
@@ -19,13 +18,7 @@ const formSchema = z.object({
 
 export async function addComment(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
-  const { isLoggedIn, dbUser } = await getAuthUser()
-
-  if (!isLoggedIn) {
-    redirect('/')
-  }
-
-  // Continue if logged in
+  const profile = await getDbProfileFromServer()
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
 
@@ -33,13 +26,13 @@ export async function addComment(prevState: unknown, formData: FormData) {
     return result.error.formErrors.fieldErrors
   }
 
-  const data = result.data
+  const resultData = result.data
 
   await db.comment.create({
     data: {
-      content: data.content,
-      createdByUserId: dbUser?.id,
-      SignalId: data.signalId,
+      content: resultData.content,
+      createdByUsername: profile.username,
+      SignalId: resultData.signalId,
     },
   })
 }

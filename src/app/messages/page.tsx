@@ -1,19 +1,19 @@
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import getAuthUser from '../api/authServerFunctions'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 
 export default async function Messages() {
-  const { dbUser } = await getAuthUser()
+  const profile = await getDbProfileFromServer()
 
   return (
     <div className="min-h-svh">
       <div className="grid grid-rows-layout min-h-svh">
-        <Navbar />
+        <Navbar isAuth={!!profile} />
         <div className="flex flex-col justify-center items-center">
-          {dbUser?.username ? (
-            <div>Hi {dbUser.username}!</div>
+          {profile.username ? (
+            <div>Hi {profile.username}!</div>
           ) : (
             <div className="flex flex-col items-center">
               <p>

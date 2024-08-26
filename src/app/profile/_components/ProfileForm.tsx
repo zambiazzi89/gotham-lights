@@ -2,29 +2,29 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { User } from '@/lib/types'
+import { Profile } from '@/lib/types'
 import { useFormState, useFormStatus } from 'react-dom'
 import { GrUpdate } from 'react-icons/gr'
 import { updateUsername } from '../_actions/profileActions'
 
-export default function ProfileForm({ dbUser }: { dbUser: User }) {
+export default function ProfileForm({ profile }: { profile: Profile }) {
   const [error, action] = useFormState(updateUsername, {})
   return (
     <div className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md font-medium">
-      <div className="font-semibold text-lg my-3">Hi {dbUser.firstName}!</div>
+      <div className="font-semibold text-lg my-3">Hi {profile.firstName}!</div>
       <div className="text-md mb-4">Here's your profile information:</div>
       <div className="grid grid-cols-1fr-2fr">
         <div className="my-2">Email</div>
-        <div>{dbUser.emailAddress}</div>
+        <div>{profile.emailAddress}</div>
         <div className="my-2">First name</div>
-        <div>{dbUser.firstName}</div>
+        <div>{profile.firstName}</div>
         <div className="my-2">Last name</div>
-        <div>{dbUser.lastName}</div>
+        <div>{profile.lastName}</div>
         <div className="my-2">Username</div>
         <form className="flex gap-2" action={action}>
-          {dbUser.username ? (
+          {profile.username ? (
             <Input
-              defaultValue={`${dbUser.username}`}
+              defaultValue={`${profile.username}`}
               type="text"
               id="username"
               name="username"

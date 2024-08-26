@@ -13,18 +13,7 @@ export type Signal = {
   dateOfEncounter: Date
   title: string
   content: string
-}
-export type SignalWithUsername = {
-  id: string
-  createdAt: Date
-  updatedAt: Date | null
-  locationName: string
-  latitude: number
-  longitude: number
-  dateOfEncounter: Date
-  title: string
-  content: string
-  user: { username: string | null } | null
+  createdByUsername: string | null
 }
 
 export type SignalComment = {
@@ -32,12 +21,12 @@ export type SignalComment = {
   createdAt: Date
   updatedAt: Date | null
   content: string
-  createdByUserId: string | null
+  createdByUsername: string | null
   SignalId: string
-  user: { username: string | null } | null
+  profile: { username: string | null } | null
 }
 
-export type SignalWithCommentAndUsername = {
+export type SignalWithComment = {
   id: string
   createdAt: Date
   updatedAt: Date | null
@@ -47,15 +36,14 @@ export type SignalWithCommentAndUsername = {
   dateOfEncounter: Date
   title: string
   content: string
-  Comment: SignalComment[]
-  user: { username: string | null } | null
+  createdByUsername: string | null
+  comments: SignalComment[]
 }
 
-export type User = {
+export type Profile = {
   id: string
   createdAt: Date
   updatedAt: Date | null
-  kindeId: string
   firstName: string | null
   lastName: string | null
   emailAddress: string | null

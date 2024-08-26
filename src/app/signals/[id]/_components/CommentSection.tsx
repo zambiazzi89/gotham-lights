@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { SignalComment } from '@/lib/types'
 import { useFormState } from 'react-dom'
 import { addComment } from '../_actions/addComment'
+import { createClient } from '@/utils/supabase/client'
 
 export default function CommentSection({
   comments,
@@ -14,7 +15,22 @@ export default function CommentSection({
   comments: SignalComment[]
   signalId: string
 }) {
-  console.log(comments)
+  // const supabase = createClient()
+
+  // const channels = supabase
+  //   .channel('custom-all-channel')
+  //   .on(
+  //     'postgres_changes',
+  //     {
+  //       event: '*',
+  //       schema: 'public',
+  //       table: 'Comment',
+  //     },
+  //     (payload) => {
+  //       console.log('Change received!', payload)
+  //     }
+  //   )
+  //   .subscribe()
 
   const [error, action] = useFormState(addComment, {})
   return (
@@ -27,7 +43,7 @@ export default function CommentSection({
               <div key={comment.id} className="flex gap-4">
                 <div className="flex flex-col items-end font-semibold text-muted-foreground">
                   <p>{comment.createdAt.toLocaleString()}</p>
-                  <p>{comment.user?.username}</p>
+                  <p>{comment.createdByUsername}</p>
                 </div>
                 <h1>{comment.content}</h1>
               </div>

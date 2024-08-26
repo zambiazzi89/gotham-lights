@@ -1,7 +1,7 @@
 'use server'
 
-import getAuthUser from '@/app/api/authServerFunctions'
 import db from '@/db/db'
+import getServerUser from '@/utils/supabase/customFunctions/getServerUser'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
@@ -18,9 +18,9 @@ const formSchema = z.object({
 
 export async function updateUsername(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
-  const { isLoggedIn, dbUser } = await getAuthUser()
+  const user = await getServerUser()
 
-  if (!isLoggedIn || !dbUser) {
+  if (!user) {
     redirect('/')
   }
 
@@ -35,7 +35,7 @@ export async function updateUsername(prevState: unknown, formData: FormData) {
   const data = result.data
 
   // Check if username exists
-  const usernameExists = await db.user.findUnique({
+  const usernameExists = await db.profile.findUnique({
     where: {
       username: data.username,
     },
@@ -49,13 +49,13 @@ export async function updateUsername(prevState: unknown, formData: FormData) {
   }
 
   // Update user if previous validations passed
-  await db.user.update({
+  await db.profile.update({
     data: {
       username: data.username,
       updatedAt: new Date(),
     },
     where: {
-      id: dbUser.id,
+      id: user.id,
     },
   })
 }
