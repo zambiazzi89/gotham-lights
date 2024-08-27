@@ -11,15 +11,15 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   const [error, action] = useFormState(updateUsername, {})
   return (
     <div className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md font-medium">
-      <div className="font-semibold text-lg my-3">Hi {profile.firstName}!</div>
+      <div className="font-semibold text-lg my-3">Hi {profile.first_name}!</div>
       <div className="text-md mb-4">Here's your profile information:</div>
       <div className="grid grid-cols-1fr-2fr">
         <div className="my-2">Email</div>
-        <div>{profile.emailAddress}</div>
+        <div>{profile.email_address}</div>
         <div className="my-2">First name</div>
-        <div>{profile.firstName}</div>
+        <div>{profile.first_name}</div>
         <div className="my-2">Last name</div>
-        <div>{profile.lastName}</div>
+        <div>{profile.last_name}</div>
         <div className="my-2">Username</div>
         <form className="flex gap-2" action={action}>
           {profile.username ? (

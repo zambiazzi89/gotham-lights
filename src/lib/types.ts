@@ -42,10 +42,10 @@ export type SignalWithComment = {
 
 export type Profile = {
   id: string
-  createdAt: Date
-  updatedAt: Date | null
-  firstName: string | null
-  lastName: string | null
-  emailAddress: string | null
+  created_at: Date
+  updated_at: Date | null
+  first_name: string | null
+  last_name: string | null
+  email_address: string | null
   username: string | null
 }

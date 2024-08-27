@@ -9,7 +9,8 @@ export default async function getDbProfileFromServer() {
     where: { id: user.id },
   })
 
-  if (!profile?.username) {
+  if (!profile) {
+    console.error('No profile found in getDbProfileFromServer()')
     redirect('/login')
   }
   return profile
