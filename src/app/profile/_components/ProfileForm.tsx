@@ -4,34 +4,49 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Profile } from '@/lib/types'
 import { useFormState, useFormStatus } from 'react-dom'
-import { GrUpdate } from 'react-icons/gr'
-import { updateUsername } from '../_actions/profileActions'
+import { updateUserProfile } from '../_actions/profileActions'
+import { Label } from '@/components/ui/label'
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
-  const [error, action] = useFormState(updateUsername, {})
+  const [error, action] = useFormState(updateUserProfile, {})
   return (
     <div className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md font-medium">
       <div className="font-semibold text-lg my-3">Hi {profile.first_name}!</div>
       <div className="text-md mb-4">Here's your profile information:</div>
-      <div className="grid grid-cols-1fr-2fr">
-        <div className="my-2">Email</div>
-        <div>{profile.email_address}</div>
-        <div className="my-2">First name</div>
-        <div>{profile.first_name}</div>
-        <div className="my-2">Last name</div>
-        <div>{profile.last_name}</div>
-        <div className="my-2">Username</div>
-        <form className="flex gap-2" action={action}>
-          {profile.username ? (
+      <div>
+        <div className="grid grid-cols-1fr-2fr">
+          <Label className="leading-8">Email</Label>
+          <div className="ml-2 self-center">{profile.email_address}</div>
+        </div>
+        <form action={action}>
+          <div className="grid grid-cols-1fr-2fr gap-2">
+            <Label className="leading-8">First name</Label>
             <Input
-              defaultValue={`${profile.username}`}
+              defaultValue={`${profile.first_name || ''}`}
+              placeholder="Enter your first name"
               type="text"
-              id="username"
-              name="username"
+              id="first_name"
+              name="first_name"
+              minLength={1}
+              maxLength={20}
+              pattern="[a-zA-Z]+"
               required
+              className={`${!profile.first_name && 'border-red-500'}`}
             />
-          ) : (
+
+            <Label className="leading-8">Last name</Label>
             <Input
+              defaultValue={`${profile.last_name || ''}`}
+              placeholder="Enter your last name"
+              type="text"
+              id="last_name"
+              name="last_name"
+              pattern="[a-zA-Z]+"
+            />
+
+            <Label className="leading-8">Username</Label>
+            <Input
+              defaultValue={`${profile.username || ''}`}
               placeholder="Pick a username"
               type="text"
               id="username"
@@ -40,17 +55,26 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               maxLength={12}
               pattern="[a-zA-Z0-9]+"
               required
+              className={`${!profile.first_name && 'border-red-500'}`}
             />
-          )}
-          <SubmitButton />
+          </div>
+          <p className="font-light text-sm my-2">
+            Username must be alphanumeric and 4 to 12 characters long
+          </p>
+          <div className="pt-5 p-4">
+            <SubmitButton />
+          </div>
         </form>
       </div>
+      {error?.first_name && (
+        <div className="text-destructive text-sm">{error.first_name}</div>
+      )}
+      {error?.last_name && (
+        <div className="text-destructive text-sm">{error.last_name}</div>
+      )}
       {error?.username && (
         <div className="text-destructive text-sm">{error.username}</div>
       )}
-      <p className="font-light text-sm">
-        Username must be alphanumeric and 4 to 12 characters long
-      </p>
     </div>
   )
 }
@@ -58,13 +82,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
-    <Button
-      className="text-sm"
-      type="submit"
-      variant="outline"
-      disabled={pending}
-    >
-      {pending ? 'Saving' : <GrUpdate />}
+    <Button className="text-sm w-full" type="submit" disabled={pending}>
+      {pending ? 'Saving' : 'Update'}
     </Button>
   )
 }

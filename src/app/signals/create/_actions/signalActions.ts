@@ -47,12 +47,12 @@ export async function addSignal(prevState: unknown, formData: FormData) {
   await db.signal.create({
     data: {
       title: data.title,
-      locationName: data.location_name,
+      location_name: data.location_name,
       latitude: data.location_lat,
       longitude: data.location_lng,
-      dateOfEncounter: data.date,
+      date_encounter: data.date,
       content: data.content,
-      createdByUsername: profile.username,
+      created_by_username: profile.username,
     },
   })
 

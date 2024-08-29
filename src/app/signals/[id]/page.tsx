@@ -16,7 +16,7 @@ export default async function UniqueSignal({
 
   const signal = await db.signal.findUnique({
     include: {
-      Comment: { include: { profile: { select: { username: true } } } },
+      comments: { include: { profile: { select: { username: true } } } },
       profile: {
         select: { username: true },
       },
@@ -28,11 +28,11 @@ export default async function UniqueSignal({
 
   return (
     <div className="h-svh grid grid-rows-layout-signals">
-      <Navbar isAuth={!!session} />
+      <Navbar />
       {signal ? (
         <div className="pt-12 px-3 overflow-y-auto xl:w-[50%] justify-self-center">
           <SignalCard signalCardProps={signal} />
-          <CommentSection comments={signal.Comment} signalId={signal.id} />
+          <CommentSection comments={signal.comments} signalId={signal.id} />
         </div>
       ) : (
         <div className="grid place-items-center">

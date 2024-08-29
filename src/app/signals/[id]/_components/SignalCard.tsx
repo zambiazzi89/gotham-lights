@@ -18,17 +18,17 @@ export default function GridSignalCard({
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>
-          {signalCardProps.locationName} @{' '}
-          {signalCardProps.dateOfEncounter.toLocaleDateString('en-US')}
+          {signalCardProps.location_name} @{' '}
+          {signalCardProps.date_encounter.toLocaleDateString('en-US')}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <p>{signalCardProps.content}</p>
       </CardContent>
       <CardFooter className="self-end">
-        <p className=" text-muted-foreground mt-4">
-          Signal sent on {signalCardProps.createdAt.toLocaleString('en-US')} by{' '}
-          {signalCardProps.createdByUsername}
+        <p className="text-right text-muted-foreground mt-4">
+          Signal sent on {signalCardProps.created_at.toLocaleString('en-US')} by{' '}
+          {signalCardProps.created_by_username || 'Anonymous'}
         </p>
       </CardFooter>
     </Card>

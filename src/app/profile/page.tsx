@@ -9,7 +9,7 @@ export default async function Profile() {
   return (
     <div className="min-h-svh">
       <div className="grid grid-rows-layout min-h-svh">
-        <Navbar isAuth={!!profile} />
+        <Navbar />
         <div className="flex flex-col justify-center items-center">
           <ProfileForm profile={profile} />
         </div>

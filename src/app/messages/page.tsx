@@ -10,7 +10,7 @@ export default async function Messages() {
   return (
     <div className="min-h-svh">
       <div className="grid grid-rows-layout min-h-svh">
-        <Navbar isAuth={!!profile} />
+        <Navbar />
         <div className="flex flex-col justify-center items-center">
           {profile.username ? (
             <div>Hi {profile.username}!</div>

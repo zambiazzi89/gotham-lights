@@ -5,6 +5,7 @@ import { Croissant_One } from 'next/font/google'
 import { ModeToggle } from './ui/modeToggle'
 import { Button } from './ui/button'
 import { logout } from '@/app/logout/actions'
+import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
 
 const navButtonStyle = `pt-2 w-32 h-12 grid place-items-center backdrop-blur
                         border border-solid border-t-0
@@ -16,14 +17,14 @@ const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 type fontColor = 'text-white' | 'text-black' | ''
 
 export default async function Navbar({
-  isAuth,
   fontColor = '',
   withToggle = true,
 }: {
-  isAuth: boolean
   fontColor?: fontColor
   withToggle?: boolean
 }) {
+  const session = await getServerSession()
+
   return (
     <div className="flex px-2 items-center justify-between">
       <Link
@@ -45,7 +46,7 @@ export default async function Navbar({
           <NavButton title="About" href="/about" />
           <NavButton title="Signals" href="/signals" />
           <NavButton title="Messages" href="/messages" />
-          {isAuth ? (
+          {session ? (
             <>
               <NavButton title="Profile" href="/profile" />
               <form action={logout}>

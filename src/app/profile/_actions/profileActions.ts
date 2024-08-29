@@ -6,6 +6,24 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const formSchema = z.object({
+  first_name: z
+    .string()
+    .min(1, {
+      message: 'Your first name length must be between 1 and 20 characters.',
+    })
+    .max(20, {
+      message: 'Your first name length must be between 1 and 20 characters.',
+    }),
+  last_name: z
+    .string()
+    .min(1, {
+      message: 'Your last name length must be between 1 and 20 characters.',
+    })
+    .max(20, {
+      message: 'Your last name length must be between 1 and 20 characters.',
+    })
+    .optional()
+    .or(z.literal('')),
   username: z
     .string()
     .min(4, {
@@ -16,7 +34,10 @@ const formSchema = z.object({
     }),
 })
 
-export async function updateUsername(prevState: unknown, formData: FormData) {
+export async function updateUserProfile(
+  prevState: unknown,
+  formData: FormData
+) {
   // Only perform the action if user is logged in
   const user = await getServerUser()
 
@@ -38,6 +59,9 @@ export async function updateUsername(prevState: unknown, formData: FormData) {
   const usernameExists = await db.profile.findUnique({
     where: {
       username: data.username,
+      NOT: {
+        id: user.id,
+      },
     },
   })
 
@@ -51,11 +75,15 @@ export async function updateUsername(prevState: unknown, formData: FormData) {
   // Update user if previous validations passed
   await db.profile.update({
     data: {
+      first_name: data.first_name,
+      last_name: data.last_name,
       username: data.username,
-      updatedAt: new Date(),
+      updated_at: new Date(),
     },
     where: {
       id: user.id,
     },
   })
+
+  redirect('/profile')
 }

@@ -2,6 +2,7 @@
 
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const formSchema = z.object({
@@ -31,8 +32,10 @@ export async function addComment(prevState: unknown, formData: FormData) {
   await db.comment.create({
     data: {
       content: resultData.content,
-      createdByUsername: profile.username,
-      SignalId: resultData.signalId,
+      created_by_username: profile.username,
+      signal_id: resultData.signalId,
     },
   })
+
+  redirect(`/signals/${resultData.signalId}`)
 }

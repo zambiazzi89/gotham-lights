@@ -42,8 +42,8 @@ export default function CommentSection({
             return (
               <div key={comment.id} className="flex gap-4">
                 <div className="flex flex-col items-end font-semibold text-muted-foreground">
-                  <p>{comment.createdAt.toLocaleString()}</p>
-                  <p>{comment.createdByUsername}</p>
+                  <p>{comment.created_at.toLocaleString()}</p>
+                  <p>{comment.created_by_username || 'Anonymous'}</p>
                 </div>
                 <h1>{comment.content}</h1>
               </div>

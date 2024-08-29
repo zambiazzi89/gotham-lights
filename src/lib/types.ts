@@ -5,38 +5,38 @@ export type LatLong = {
 
 export type Signal = {
   id: string
-  createdAt: Date
-  updatedAt: Date | null
-  locationName: string
+  created_at: Date
+  updated_at: Date | null
+  location_name: string
   latitude: number
   longitude: number
-  dateOfEncounter: Date
+  date_encounter: Date
   title: string
   content: string
-  createdByUsername: string | null
+  created_by_username: string | null
 }
 
 export type SignalComment = {
   id: string
-  createdAt: Date
-  updatedAt: Date | null
+  created_at: Date
+  updated_at: Date | null
   content: string
-  createdByUsername: string | null
-  SignalId: string
+  created_by_username: string | null
+  signal_id: string
   profile: { username: string | null } | null
 }
 
 export type SignalWithComment = {
   id: string
-  createdAt: Date
-  updatedAt: Date | null
-  locationName: string
+  created_at: Date
+  updated_at: Date | null
+  location_name: string
   latitude: number
   longitude: number
-  dateOfEncounter: Date
+  date_encounter: Date
   title: string
   content: string
-  createdByUsername: string | null
+  created_by_username: string | null
   comments: SignalComment[]
 }
 

@@ -6,6 +6,7 @@ export default async function getServerUser() {
   const { data, error } = await supabase.auth.getUser()
 
   if (error) {
+    console.error(error)
     redirect('/error')
   }
   return data.user
