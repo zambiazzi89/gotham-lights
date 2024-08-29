@@ -4,14 +4,14 @@ import Navbar from '@/components/Navbar'
 import SignalCard from './_components/SignalCard'
 import GoBackButton from './_components/GoBackButton'
 import CommentSection from './_components/CommentSection'
-import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 
 export default async function UniqueSignal({
   params: id,
 }: {
   params: { id: string }
 }) {
-  const session = await getServerSession()
+  const profile = await getDbProfileFromServer()
   const { id: signalId } = id
 
   const signal = await db.signal.findUnique({
@@ -32,7 +32,11 @@ export default async function UniqueSignal({
       {signal ? (
         <div className="pt-12 px-3 overflow-y-auto xl:w-[50%] justify-self-center">
           <SignalCard signalCardProps={signal} />
-          <CommentSection comments={signal.comments} signalId={signal.id} />
+          <CommentSection
+            comments={signal.comments}
+            signalId={signal.id}
+            hasUsername={!!profile.username}
+          />
         </div>
       ) : (
         <div className="grid place-items-center">

@@ -50,9 +50,9 @@ export default async function Navbar({
             <>
               <NavButton title="Profile" href="/profile" />
               <form action={logout}>
-                <Button className={navButtonStyle} type="submit">
+                <button className={navButtonStyle} type="submit">
                   Logout
-                </Button>
+                </button>
               </form>
             </>
           ) : (

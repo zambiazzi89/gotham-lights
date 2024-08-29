@@ -28,7 +28,7 @@ export default function GridSignalCard({
       <CardFooter className="self-end">
         <p className="text-right text-muted-foreground mt-4">
           Signal sent on {signalCardProps.created_at.toLocaleString('en-US')} by{' '}
-          {signalCardProps.created_by_username || 'Anonymous'}
+          {signalCardProps.created_by_username || '[deleted]'}
         </p>
       </CardFooter>
     </Card>
