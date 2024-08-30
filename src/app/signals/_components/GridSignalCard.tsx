@@ -18,7 +18,8 @@ export default function GridSignalCard({
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>
-          {signalCardProps.location_name} @{' '}
+          {signalCardProps.location_name}
+          {' on '}
           {signalCardProps.date_encounter.toLocaleDateString('en-US')}
         </CardDescription>
       </CardHeader>
