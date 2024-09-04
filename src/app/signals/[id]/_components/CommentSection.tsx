@@ -8,15 +8,24 @@ import { useFormState } from 'react-dom'
 import { addComment } from '../_actions/addComment'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { MdMoreVert } from 'react-icons/md'
 
 export default function CommentSection({
   comments,
   signalId,
-  hasUsername,
+  username,
 }: {
   comments: SignalComment[]
   signalId: string
-  hasUsername: boolean
+  username: string | null
 }) {
   const [error, action] = useFormState(addComment, {})
   return (
@@ -31,7 +40,22 @@ export default function CommentSection({
                   <p>{comment.created_at.toLocaleString()}</p>
                   <p>{comment.created_by_username || '[deleted]'}</p>
                 </div>
-                <h1>{comment.content}</h1>
+                <div className="flex-grow">{comment.content}</div>
+                {comment.created_by_username === username && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <MdMoreVert className="text-xl" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Comment</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive">
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
             )
           })
@@ -39,7 +63,7 @@ export default function CommentSection({
           <div>There are no comments yet.</div>
         )}
       </div>
-      {!hasUsername ? (
+      {!username ? (
         <div className="py-8 flex flex-col items-center">
           <p>You must create a username before commenting</p>
           <Link className="my-3" href="/profile">

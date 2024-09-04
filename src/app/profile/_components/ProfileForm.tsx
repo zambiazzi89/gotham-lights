@@ -14,9 +14,9 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
       <div className="font-semibold text-lg my-3">Hi {profile.first_name}!</div>
       <div className="text-md mb-4">Here's your profile information:</div>
       <div>
-        <div className="grid grid-cols-1fr-2fr">
+        <div className="grid grid-cols-1fr-2fr pb-2">
           <Label className="leading-8">Email</Label>
-          <div className="ml-2 self-center">{profile.email_address}</div>
+          <div className="ml-4 self-center">{profile.email_address}</div>
         </div>
         <form action={action}>
           <div className="grid grid-cols-1fr-2fr gap-2">

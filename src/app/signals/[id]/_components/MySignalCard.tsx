@@ -6,7 +6,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Signal } from '@/lib/types'
+import { MdMoreVert } from 'react-icons/md'
 
 export default function SignalCard({
   signalCardProps,
@@ -16,7 +25,24 @@ export default function SignalCard({
   return (
     <Card className="shadow-md flex flex-col justify-between">
       <CardHeader>
-        <CardTitle>{signalCardProps.title}</CardTitle>
+        <div className="flex gap-2">
+          <CardTitle className="flex-grow w-[90%] break-words">
+            {signalCardProps.title}
+          </CardTitle>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <MdMoreVert className="text-xl" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Signal</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem className="text-destructive">
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <CardDescription>
           {signalCardProps.location_name} @{' '}
           {signalCardProps.date_encounter.toLocaleDateString('en-US')}

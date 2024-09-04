@@ -5,6 +5,7 @@ import SignalCard from './_components/SignalCard'
 import GoBackButton from './_components/GoBackButton'
 import CommentSection from './_components/CommentSection'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import MySignalCard from './_components/MySignalCard'
 
 export default async function UniqueSignal({
   params: id,
@@ -30,12 +31,16 @@ export default async function UniqueSignal({
     <div className="h-svh grid grid-rows-layout-signals">
       <Navbar />
       {signal ? (
-        <div className="pt-12 px-3 overflow-y-auto xl:w-[50%] justify-self-center">
-          <SignalCard signalCardProps={signal} />
+        <div className="w-[95%] pt-12 px-3 overflow-y-auto sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] justify-self-center">
+          {profile.username === signal.created_by_username ? (
+            <MySignalCard signalCardProps={signal} />
+          ) : (
+            <SignalCard signalCardProps={signal} />
+          )}
           <CommentSection
             comments={signal.comments}
             signalId={signal.id}
-            hasUsername={!!profile.username}
+            username={profile.username}
           />
         </div>
       ) : (
