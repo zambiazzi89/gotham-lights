@@ -9,8 +9,9 @@ Map component:
 
 /signals/[id]
 - Signal author should be able to edit/delete signal
-- Comment author should be able to edit/delete comment
+- Improve Comment layout
 - Users should be able to Report Signal and/or Comment
+- Only users with username should be able to post comments
 
 /messages
 - Create DB schemas for contacts and messages

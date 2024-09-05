@@ -31,17 +31,19 @@ export default async function UniqueSignal({
     <div className="h-svh grid grid-rows-layout-signals">
       <Navbar />
       {signal ? (
-        <div className="w-[95%] pt-12 px-3 overflow-y-auto sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] justify-self-center">
-          {profile.username === signal.created_by_username ? (
-            <MySignalCard signalCardProps={signal} />
-          ) : (
-            <SignalCard signalCardProps={signal} />
-          )}
-          <CommentSection
-            comments={signal.comments}
-            signalId={signal.id}
-            username={profile.username}
-          />
+        <div className="w-full pt-12 px-3 overflow-y-auto grid place-items-center">
+          <div className="w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+            {profile.username === signal.created_by_username ? (
+              <MySignalCard signalCardProps={signal} />
+            ) : (
+              <SignalCard signalCardProps={signal} />
+            )}
+            <CommentSection
+              comments={signal.comments}
+              signalId={signal.id}
+              username={profile.username}
+            />
+          </div>
         </div>
       ) : (
         <div className="grid place-items-center">
