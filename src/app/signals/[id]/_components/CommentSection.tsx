@@ -1,11 +1,4 @@
-'use client'
-
-import SubmitButton from '@/components/SubmitButton'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { SignalComment } from '@/lib/types'
-import { useFormState } from 'react-dom'
-import { addComment } from '../_actions/addComment'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,6 +10,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { MdMoreVert } from 'react-icons/md'
+import DeleteCommentWithDialog from '@/components/DeleteCommentWithDialog'
+import CommentForm from './CommentForm'
+import { deleteComment } from '@/app/profile/my-activity/_actions/deleteActions'
 
 export default function CommentSection({
   comments,
@@ -27,7 +23,6 @@ export default function CommentSection({
   signalId: string
   username: string | null
 }) {
-  const [error, action] = useFormState(addComment, {})
   return (
     <div className="p-4 flex flex-col items-center">
       <h1 className="font-bold text-lg ">Comment Section</h1>
@@ -50,9 +45,7 @@ export default function CommentSection({
                       <DropdownMenuLabel>My Comment</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className="text-destructive">
-                        Delete
-                      </DropdownMenuItem>
+                      <DeleteCommentWithDialog id={comment.id} />
                     </DropdownMenuContent>
                   </DropdownMenu>
                 )}
@@ -71,21 +64,7 @@ export default function CommentSection({
           </Link>
         </div>
       ) : (
-        <form action={action} className="grid w-full">
-          <Input type="hidden" name="signalId" value={`${signalId}`} />
-          <Textarea
-            name="content"
-            className="min-h-28"
-            placeholder="Enter a comment"
-            maxLength={100}
-          />
-          {error?.content && (
-            <div className="text-destructive text-sm">{error.content}</div>
-          )}
-          <div className="grid place-items-end">
-            <SubmitButton />
-          </div>
-        </form>
+        <CommentForm signalId={signalId} />
       )}
     </div>
   )
