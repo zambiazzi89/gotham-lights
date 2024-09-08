@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.pac-container{
+  pointer-events: visible;
+}
 
 @layer base {
+
   :root {
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;

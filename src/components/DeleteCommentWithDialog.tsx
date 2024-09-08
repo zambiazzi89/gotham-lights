@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from './ui/button'
 import { useTransition } from 'react'
-import { DropdownMenuItem } from './ui/dropdown-menu'
 import { useRouter } from 'next/navigation'
 
 export default function DeleteCommentWithDialog({ id }: { id: string }) {

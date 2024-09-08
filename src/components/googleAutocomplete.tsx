@@ -12,10 +12,12 @@ import { useRouter } from 'next/navigation'
 
 export default function GoogleAutocompleteInput({
   setSelectedLocationFromProps,
+  defaultValue,
 }: {
   setSelectedLocationFromProps?: React.Dispatch<
     React.SetStateAction<google.maps.places.PlaceResult | null>
   >
+  defaultValue?: string
 }) {
   const router = useRouter()
 
@@ -72,6 +74,7 @@ export default function GoogleAutocompleteInput({
         type="text"
         placeholder="Where?"
         ref={autocompleteRef}
+        defaultValue={defaultValue}
       />
     </div>
   )

@@ -1,3 +1,7 @@
+'use client'
+
+import { editSignal } from '@/app/profile/my-activity/_actions/editSignal'
+import EditSignalForm from '@/components/EditSignalForm'
 import {
   Card,
   CardContent,
@@ -15,6 +19,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Signal } from '@/lib/types'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { useFormState } from 'react-dom'
 import { MdMoreVert } from 'react-icons/md'
 
 export default function SignalCard({
@@ -22,7 +29,13 @@ export default function SignalCard({
 }: {
   signalCardProps: Signal
 }) {
-  return (
+  const [edit, setEdit] = useState(false)
+
+  return edit ? (
+    <Card className="shadow-md p-4">
+      <EditSignalForm signal={signalCardProps} setEdit={setEdit} />
+    </Card>
+  ) : (
     <Card className="shadow-md flex flex-col justify-between">
       <CardHeader>
         <div className="flex gap-2">
@@ -36,7 +49,9 @@ export default function SignalCard({
             <DropdownMenuContent>
               <DropdownMenuLabel>My Signal</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setEdit(!edit)}>
+                Edit
+              </DropdownMenuItem>
               <DropdownMenuItem className="text-destructive">
                 Delete
               </DropdownMenuItem>
@@ -44,7 +59,8 @@ export default function SignalCard({
           </DropdownMenu>
         </div>
         <CardDescription>
-          {signalCardProps.location_name} @{' '}
+          {signalCardProps.location_name}
+          {' on '}
           {signalCardProps.date_encounter.toLocaleDateString('en-US')}
         </CardDescription>
       </CardHeader>

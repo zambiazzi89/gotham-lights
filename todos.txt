@@ -9,6 +9,10 @@ Map component:
 
 /signals/[id]
 - Signal author should be able to edit/delete signal
+-- Edit location
+-- Close Dropdown after dialog close
+
+
 - Users should be able to Report Signal and/or Comment
 - Only users with username should be able to post comments
 
