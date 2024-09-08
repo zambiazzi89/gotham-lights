@@ -19,6 +19,7 @@ import SubmitButton from '@/components/SubmitButton'
 import { editComment } from '@/app/profile/my-activity/_actions/editComment'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { deleteComment } from '@/app/profile/my-activity/_actions/deleteActions'
 
 export default function MyComment({ comment }: { comment: SignalComment }) {
   const [edit, setEdit] = useState(false)
@@ -78,7 +79,11 @@ export default function MyComment({ comment }: { comment: SignalComment }) {
               >
                 Edit
               </DropdownMenuItem>
-              <DeleteCommentWithDialog id={comment.id} />
+              <DeleteCommentWithDialog
+                id={comment.id}
+                deleteAction={deleteComment}
+                objectToDelete="comment"
+              />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

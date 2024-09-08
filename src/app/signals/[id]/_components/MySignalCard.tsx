@@ -1,6 +1,6 @@
 'use client'
 
-import { editSignal } from '@/app/profile/my-activity/_actions/editSignal'
+import DeleteCommentWithDialog from '@/components/DeleteCommentWithDialog'
 import EditSignalForm from '@/components/EditSignalForm'
 import {
   Card,
@@ -19,10 +19,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Signal } from '@/lib/types'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useFormState } from 'react-dom'
 import { MdMoreVert } from 'react-icons/md'
+import { deleteSignal } from '@/app/profile/my-activity/_actions/deleteActions'
 
 export default function SignalCard({
   signalCardProps,
@@ -52,9 +51,11 @@ export default function SignalCard({
               <DropdownMenuItem onClick={() => setEdit(!edit)}>
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-destructive">
-                Delete
-              </DropdownMenuItem>
+              <DeleteCommentWithDialog
+                id={signalCardProps.id}
+                deleteAction={deleteSignal}
+                objectToDelete="signal"
+              />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

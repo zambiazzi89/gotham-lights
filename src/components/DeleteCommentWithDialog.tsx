@@ -1,6 +1,5 @@
 'use client'
 
-import { deleteComment } from '@/app/profile/my-activity/_actions/deleteActions'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,9 +13,18 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from './ui/button'
 import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu'
 
-export default function DeleteCommentWithDialog({ id }: { id: string }) {
+export default function DeleteCommentWithDialog({
+  id,
+  deleteAction,
+  objectToDelete,
+}: {
+  id: string
+  deleteAction: Function
+  objectToDelete: string
+}) {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   return (
@@ -33,20 +41,26 @@ export default function DeleteCommentWithDialog({ id }: { id: string }) {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure you want to delete this comment?
+            Are you sure you want to delete this {objectToDelete}?
           </AlertDialogTitle>
           <AlertDialogDescription>
             All information will be permanently lost.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <DropdownMenuItem>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          </DropdownMenuItem>
           <AlertDialogAction
             variant={'destructive'}
             onClick={() =>
               startTransition(async () => {
-                await deleteComment(id)
-                router.refresh()
+                await deleteAction(id)
+                {
+                  objectToDelete == 'comment'
+                    ? router.refresh()
+                    : redirect('/signals')
+                }
               })
             }
           >

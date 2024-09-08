@@ -7,7 +7,8 @@ export default async function getServerUser() {
 
   if (error) {
     console.error(error)
-    redirect('/error')
+    console.error('Error in getServerUser()')
+    redirect('/login')
   }
   return data.user
 }
