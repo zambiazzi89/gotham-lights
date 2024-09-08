@@ -7,17 +7,21 @@ import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfil
 
 export default async function MyActivity() {
   const profile = await getDbProfileFromServer()
-  const mySignals = await db.signal.findMany({
-    where: {
-      created_by_username: profile.username,
-    },
-  })
+  const mySignals = profile.username
+    ? await db.signal.findMany({
+        where: {
+          created_by_username: profile.username,
+        },
+      })
+    : []
 
-  const myComments = await db.comment.findMany({
-    where: {
-      created_by_username: profile.username,
-    },
-  })
+  const myComments = profile.username
+    ? await db.comment.findMany({
+        where: {
+          created_by_username: profile.username,
+        },
+      })
+    : []
 
   return (
     <div className="min-h-svh">

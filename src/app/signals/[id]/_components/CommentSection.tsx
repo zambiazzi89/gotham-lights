@@ -30,7 +30,7 @@ export default function CommentSection({
                   </div>
                   <div className="w-full flex gap-4 items-end text-muted-foreground">
                     <div className="flex flex-col flex-grow">
-                      <p>{comment.created_by_username || '[deleted]'}</p>
+                      <p>{comment.created_by_username}</p>
                       <p>{comment.created_at.toLocaleString()}</p>
                     </div>
                     {comment.updated_at &&

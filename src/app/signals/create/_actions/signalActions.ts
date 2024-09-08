@@ -34,7 +34,12 @@ export async function addSignal(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
   const profile = await getDbProfileFromServer()
 
-  // Continue if logged in
+  if (!profile.username) {
+    console.error('No username found for profile')
+    redirect('/profile')
+  }
+
+  // Continue if logged in and has username
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
 

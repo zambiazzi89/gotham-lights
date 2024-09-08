@@ -18,8 +18,13 @@ const formSchema = z.object({
 })
 
 export async function addComment(prevState: unknown, formData: FormData) {
-  // Only perform the action if user is logged in
+  // Only perform the action if user is logged in and has username
   const profile = await getDbProfileFromServer()
+
+  if (!profile.username) {
+    console.error('No username found for profile')
+    redirect('/profile')
+  }
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
 

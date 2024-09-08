@@ -28,7 +28,7 @@ export default function SignalCard({
       <CardFooter className="self-end">
         <p className="text-right text-muted-foreground mt-4">
           Signal sent on {signalCardProps.created_at.toLocaleString('en-US')} by{' '}
-          {signalCardProps.created_by_username || '[deleted]'}
+          {signalCardProps.created_by_username}
         </p>
       </CardFooter>
     </Card>

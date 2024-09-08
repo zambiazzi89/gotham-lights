@@ -33,7 +33,7 @@ export default function GridSignalCard({
         <p className="text-right text-muted-foreground mt-4">
           Signal sent on{' '}
           {signalCardProps.created_at.toLocaleDateString('en-US')} by{' '}
-          {signalCardProps.created_by_username || '[deleted]'}
+          {signalCardProps.created_by_username}
         </p>
       </CardFooter>
     </Card>

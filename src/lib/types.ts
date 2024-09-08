@@ -13,7 +13,7 @@ export type Signal = {
   date_encounter: Date
   title: string
   content: string
-  created_by_username: string | null
+  created_by_username: string
 }
 
 export type SignalComment = {
@@ -21,9 +21,8 @@ export type SignalComment = {
   created_at: Date
   updated_at: Date | null
   content: string
-  created_by_username: string | null
+  created_by_username: string
   signal_id: string
-  profile: { username: string | null } | null
 }
 
 export type SignalWithComment = {
@@ -36,7 +35,7 @@ export type SignalWithComment = {
   date_encounter: Date
   title: string
   content: string
-  created_by_username: string | null
+  created_by_username: string
   comments: SignalComment[]
 }
 

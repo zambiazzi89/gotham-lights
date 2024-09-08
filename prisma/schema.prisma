@@ -38,8 +38,8 @@ model signal {
   title          String
   content        String
 
-  created_by_username String?
-  profile             profile? @relation(fields: [created_by_username], references: [username], onDelete: SetNull)
+  created_by_username String
+  profile             profile @relation(fields: [created_by_username], references: [username], onDelete: Cascade)
 
   comments comment[]
 }
@@ -51,8 +51,8 @@ model comment {
 
   content String
 
-  created_by_username String?
-  profile             profile? @relation(fields: [created_by_username], references: [username], onDelete: SetNull)
+  created_by_username String
+  profile             profile @relation(fields: [created_by_username], references: [username], onDelete: Cascade)
 
   signal_id String
   signal    signal @relation(fields: [signal_id], references: [id], onDelete: Cascade)
