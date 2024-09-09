@@ -16,7 +16,7 @@ export default async function CreateSignal() {
             <CreateSignalForm />
           ) : (
             <div className="flex flex-col items-center">
-              <p>You must create a username before using this functionality.</p>
+              <p>You must create a username before creating a Signal.</p>
               <Link className="my-3" href="/profile">
                 <Button>Update Profile</Button>
               </Link>

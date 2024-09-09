@@ -42,7 +42,6 @@ export async function editSignal(prevState: unknown, formData: FormData) {
 
   const resultData = result.data
 
-  console.log('editing signal', resultData)
   await db.signal.update({
     where: { id: resultData.signalId },
     data: {

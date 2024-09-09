@@ -2,18 +2,11 @@ TO-DOs
 
 Map component:
 - Make sure Map gets centered/zoomed appropriately in each of the scenarios below:
-  - /signal with no pins
-  - /signal coming from /
-  - /signal center from user's location
   - Create a button "View all" "My location"?
 
-/signals/[id]
-- Signal author should be able to edit/delete signal
--- Edit location
--- Close Dropdown after dialog close
-
-
+Report:
 - Users should be able to Report Signal and/or Comment
+
 - Only users with username should be able to post comments
 
 /messages
