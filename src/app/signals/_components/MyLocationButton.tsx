@@ -12,7 +12,9 @@ export default function MyLocationButton() {
 
   function handleUserLocation() {
     if (userLocation) {
-      router.push(`/signals?lat=${userLocation.lat}&lng=${userLocation.lng}`)
+      router.push(
+        `/signals?lat=${userLocation.lat}&lng=${userLocation.lng}&zoom=15`
+      )
     }
   }
 

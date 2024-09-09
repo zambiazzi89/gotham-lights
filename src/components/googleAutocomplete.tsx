@@ -27,7 +27,7 @@ export default function GoogleAutocompleteInput({
   useEffect(() => {
     if (selectedLocation) {
       router.push(
-        `/signals?lat=${selectedLocation.geometry?.location?.lat()}&lng=${selectedLocation.geometry?.location?.lng()}`
+        `/signals?lat=${selectedLocation.geometry?.location?.lat()}&lng=${selectedLocation.geometry?.location?.lng()}&zoom=15`
       )
     }
   }, [selectedLocation])

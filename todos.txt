@@ -1,13 +1,7 @@
 TO-DOs
 
-Map component:
-- Make sure Map gets centered/zoomed appropriately in each of the scenarios below:
-  - Create a button "View all" "My location"?
-
 Report:
 - Users should be able to Report Signal and/or Comment
-
-- Only users with username should be able to post comments
 
 /messages
 - Create DB schemas for contacts and messages
