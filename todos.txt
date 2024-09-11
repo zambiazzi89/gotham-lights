@@ -1,7 +1,29 @@
 TO-DOs
 
+Notification when someone comments on the user's Signal
+
+Navbar:
+Different style to current page button
+
 Report:
 - Users should be able to Report Signal and/or Comment
+
+Prisma schemas:
+Message:
+id
+created_at
+conversation_id
+from_user_id
+to_user_id
+content
+
+Conversation:
+id
+created_at
+updated_at
+user_ids
+status (pending, accepted, blocked)
+
 
 /messages
 - Create DB schemas for contacts and messages

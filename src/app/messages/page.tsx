@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import MessageBox from './_components/MessageBox'
 
 export default async function Messages() {
   const profile = await getDbProfileFromServer()
@@ -11,10 +12,10 @@ export default async function Messages() {
     <div className="min-h-svh">
       <div className="grid grid-rows-layout min-h-svh">
         <Navbar />
-        <div className="flex flex-col justify-center items-center">
-          {profile.username ? (
-            <div>Hi {profile.username}!</div>
-          ) : (
+        {profile.username ? (
+          <MessageBox />
+        ) : (
+          <div className="grid place-items-center">
             <div className="flex flex-col items-center">
               <p>
                 You must create a username before using the Message
@@ -24,8 +25,8 @@ export default async function Messages() {
                 <Button>Update Profile</Button>
               </Link>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         <Footer />
       </div>
     </div>
