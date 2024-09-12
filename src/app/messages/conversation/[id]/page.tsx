@@ -1,7 +1,5 @@
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import ChatContent from '../../_components/ChatContent'
 
 export default async function Conversation() {

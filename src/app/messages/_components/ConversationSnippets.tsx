@@ -51,9 +51,9 @@ const dummySnippets = [
   },
 ]
 
-export default function ConversationCarousel() {
+export default function ConversationSnippets() {
   return (
-    <Card className="h-[85svh] overflow-y-auto w-80 py-4">
+    <Card className="h-[75svh] overflow-y-auto w-80 py-4 self-center">
       <ScrollArea className="h-full">
         <div className="p-4">
           {dummySnippets.map((snippet) => (

@@ -6,7 +6,7 @@ type ConversationSnippet = {
   timestamp: string
 }
 
-export default function ConversationSnippet({
+export default function ConversationSnippetCard({
   selected,
   newMessage,
   username,
