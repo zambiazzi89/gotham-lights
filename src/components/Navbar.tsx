@@ -1,11 +1,10 @@
-import { MdMenu } from 'react-icons/md'
 import NavButton from './NavButton'
 import Link from 'next/link'
 import { Croissant_One } from 'next/font/google'
 import { ModeToggle } from './ui/modeToggle'
-import { Button } from './ui/button'
 import { logout } from '@/app/logout/actions'
 import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
+import NavbarMenuDropdown from './NavbarMenuDropdown'
 
 const navButtonStyle = `pt-2 w-32 h-12 grid place-items-center backdrop-blur
                         border border-solid border-t-0
@@ -39,7 +38,7 @@ export default async function Navbar({
             <ModeToggle />
           </div>
         )}
-        <MdMenu className="text-white mr-2 self-center scale-150 lg:hidden" />
+        <NavbarMenuDropdown session={session} />
         <div
           className={`hidden lg:flex justify-end items-center  ${fontColor}`}
         >
