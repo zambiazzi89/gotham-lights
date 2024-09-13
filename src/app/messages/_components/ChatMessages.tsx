@@ -1,6 +1,8 @@
+'use client'
+
 import { Card } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { useEffect, useRef } from 'react'
 
 type Message = {
   id: string
@@ -55,22 +57,33 @@ const messages: Message[] = [
   },
   {
     id: '7',
-    createdAt: new Date(),
+    createdAt: new Date(2024, 8, 13),
     fromUser: 'johndoe',
     toUser: 'diegobz',
     content: 'Hello, how are you?',
   },
 ]
 
-export default async function ChatMessages() {
-  const profile = await getDbProfileFromServer()
+export default function ChatMessages({
+  username,
+}: {
+  username: string | null
+}) {
+  const cardRef = useRef<null | HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth' }) //Use scrollIntoView to automatically scroll to my ref
+    }
+  }, [messages.length])
 
   return (
     <div className="bg-background flex-grow mb-4 border-2 h-[60svh] overflow-y-auto">
       <ScrollArea className="h-full  px-2">
-        {messages.map((message) => {
-          return profile.username === message.fromUser ? (
+        {messages.map((message, i) => {
+          return username === message.fromUser ? (
             <Card
+              ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
               className="w-fit p-4 my-2 bg-primary-20 ml-auto"
             >
@@ -78,7 +91,11 @@ export default async function ChatMessages() {
               <div>{message.createdAt.toLocaleString()}</div>
             </Card>
           ) : (
-            <Card key={message.id} className="w-fit p-4 my-2">
+            <Card
+              ref={i + 1 === messages.length ? cardRef : null}
+              key={message.id}
+              className="w-fit p-4 my-2"
+            >
               <div>{message.content}</div>
               <div>{message.createdAt.toLocaleString()}</div>
             </Card>
