@@ -58,7 +58,7 @@ const messages: Message[] = [
   {
     id: '7',
     createdAt: new Date(2024, 8, 13),
-    fromUser: 'johndoe',
+    fromUser: 'gsamsa',
     toUser: 'diegobz',
     content: 'Hello, how are you?',
   },

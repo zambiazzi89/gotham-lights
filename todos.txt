@@ -8,27 +8,7 @@ Different style to current page button
 Report:
 - Users should be able to Report Signal and/or Comment
 
-Prisma schemas:
-Message:
-id pk
-created_at
-conversation_id fk
-created_by_user_id fk
-content
-
-Conversation:
-id
-created_at
-updated_at
-requested_by_user_id fk
-to_user_id fk
-status (pending, accepted, blocked)
-
-
 /messages
-- Create DB schemas for contacts and messages
-- Create contact list
-- Create Chat box
 - Block other User
 - Report other user
 

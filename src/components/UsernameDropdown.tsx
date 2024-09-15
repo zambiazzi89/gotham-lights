@@ -18,7 +18,7 @@ export default function UsernameDropdown({ username }: { username: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
         <DropdownMenuItem>
-          <Link href={`/message/draft/${username}`}>Message</Link>
+          <Link href={`/messages/draft/${username}`}>Message</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
