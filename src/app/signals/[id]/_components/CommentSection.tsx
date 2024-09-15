@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import CommentForm from './CommentForm'
 import MyComment from './MyComment'
+import UsernameDropdown from '@/components/UsernameDropdown'
 
 export default function CommentSection({
   comments,
@@ -30,7 +31,11 @@ export default function CommentSection({
                   </div>
                   <div className="w-full flex gap-4 items-end text-muted-foreground">
                     <div className="flex flex-col flex-grow">
-                      <p>{comment.created_by_username}</p>
+                      <div>
+                        <UsernameDropdown
+                          username={comment.created_by_username}
+                        ></UsernameDropdown>
+                      </div>
                       <p>{comment.created_at.toLocaleString()}</p>
                     </div>
                     {comment.updated_at &&

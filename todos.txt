@@ -10,18 +10,18 @@ Report:
 
 Prisma schemas:
 Message:
-id
+id pk
 created_at
-conversation_id
-from_user_id
-to_user_id
+conversation_id fk
+created_by_user_id fk
 content
 
 Conversation:
 id
 created_at
 updated_at
-user_ids
+requested_by_user_id fk
+to_user_id fk
 status (pending, accepted, blocked)
 
 

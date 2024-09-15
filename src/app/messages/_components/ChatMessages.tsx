@@ -94,7 +94,7 @@ export default function ChatMessages({
             <Card
               ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
-              className="w-fit p-4 my-2"
+              className="w-fit p-4 my-2 bg-secondary"
             >
               <div>{message.content}</div>
               <div>{message.createdAt.toLocaleString()}</div>

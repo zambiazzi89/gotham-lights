@@ -22,8 +22,14 @@ model profile {
   email_address String?
   username      String? @unique
 
-  signals  signal[]
-  comments comment[]
+  signals          signal[]
+  comments         comment[]
+  conversations    conversation_participant[]
+  messages_sent    message[]
+  reports_created  reported_profile[]         @relation("reports_created")
+  reports_received reported_profile[]         @relation("reports_received")
+  blocks_created   blocked_profile[]          @relation("blocks_created")
+  blocks_received  blocked_profile[]          @relation("blocks_received")
 }
 
 model signal {
@@ -56,4 +62,63 @@ model comment {
 
   signal_id String
   signal    signal @relation(fields: [signal_id], references: [id], onDelete: Cascade)
+}
+
+model conversation {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  status String @default("Pending")
+
+  messages                  message[]
+  conversation_participants conversation_participant[]
+}
+
+model conversation_participant {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  conversation_id           String
+  conversation_participants conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+
+  participant_username String
+  profile              profile @relation(fields: [participant_username], references: [username], onDelete: Cascade)
+}
+
+model message {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  conversation_id       String
+  conversation_messages conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+
+  from_username String
+  profile       profile @relation(fields: [from_username], references: [username], onDelete: Cascade)
+}
+
+model reported_profile {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  created_by_username String
+  created_by          profile @relation("reports_created", fields: [created_by_username], references: [username], onDelete: Cascade)
+
+  reported_username String
+  reports_received  profile @relation("reports_received", fields: [reported_username], references: [username], onDelete: Cascade)
+}
+
+model blocked_profile {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  blocked_by_username String
+  blocks_created      profile @relation("blocks_created", fields: [blocked_by_username], references: [username], onDelete: Cascade)
+
+  blocked_username String
+  blocks_received  profile @relation("blocks_received", fields: [blocked_username], references: [username], onDelete: Cascade)
 }
