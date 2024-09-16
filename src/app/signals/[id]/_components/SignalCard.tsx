@@ -37,9 +37,8 @@ export default function SignalCard({
         </div>
         <div>
           <div className="flex text-right text-muted-foreground">
-            <div className="self-center pr-2">
-              Signal sent on{' '}
-              {signalCardProps.created_at.toLocaleString('en-US')} by
+            <div className="self-center p-2">
+              {signalCardProps.created_at.toLocaleString('en-US')}
             </div>
             <UsernameDropdown username={signalCardProps.created_by_username} />
           </div>

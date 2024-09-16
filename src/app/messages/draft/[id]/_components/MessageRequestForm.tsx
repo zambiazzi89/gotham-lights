@@ -1,4 +1,6 @@
-import { Card } from '@/components/ui/card'
+import { CancelButtonWithDialog } from '@/components/AlertDialog'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
 
 export default function MessageRequestForm({
@@ -8,11 +10,20 @@ export default function MessageRequestForm({
 }) {
   return (
     <div className="grid place-items-center">
-      <Card className="w-80 p-4">
-        <div>To: {toUsername}</div>
-        <form>
-          <Textarea />
-        </form>
+      <Card className="w-[80svw] p-4">
+        <CardHeader>
+          <div>To {toUsername}</div>
+        </CardHeader>
+        <CardContent>
+          <div>Message</div>
+          <form>
+            <Textarea className="h-60" />
+            <div className="py-4 flex justify-end">
+              <CancelButtonWithDialog />
+              <Button>Send</Button>
+            </div>
+          </form>
+        </CardContent>
       </Card>
     </div>
   )

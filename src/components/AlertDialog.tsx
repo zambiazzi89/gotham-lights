@@ -1,3 +1,5 @@
+'use client'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,9 +12,15 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-export function CancelButtonWithDialog({ href }: { href: string }) {
+export function CancelButtonWithDialog() {
+  const router = useRouter()
+
+  function handleGoBack() {
+    router.back()
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -27,9 +35,9 @@ export function CancelButtonWithDialog({ href }: { href: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Link href={`${href}`}>
+          <Button onClick={handleGoBack}>
             <AlertDialogAction>Continue</AlertDialogAction>
-          </Link>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

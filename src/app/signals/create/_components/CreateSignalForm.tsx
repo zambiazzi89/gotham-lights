@@ -73,7 +73,7 @@ export default function CreateSignalForm() {
         )}
       </div>
       <div className="flex justify-between w-full mt-8">
-        <CancelButtonWithDialog href="/signals" />
+        <CancelButtonWithDialog />
         <SubmitButton />
       </div>
     </form>
