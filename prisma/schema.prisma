@@ -92,6 +92,8 @@ model message {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
+  content String
+
   conversation_id       String
   conversation_messages conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
