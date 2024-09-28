@@ -38,7 +38,13 @@ export default function SignalCard({
         <div>
           <div className="flex text-right text-muted-foreground">
             <div className="self-center p-2">
-              {signalCardProps.created_at.toLocaleString('en-US')}
+              {signalCardProps.created_at.toLocaleString([], {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             </div>
             <UsernameDropdown username={signalCardProps.created_by_username} />
           </div>

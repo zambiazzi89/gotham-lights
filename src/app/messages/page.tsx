@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MessageBox from './_components/MessageBox'
+import db from '@/db/db'
 
 export default async function Messages() {
   const profile = await getDbProfileFromServer()
@@ -13,7 +14,7 @@ export default async function Messages() {
       <div className="grid grid-rows-layout min-h-svh">
         <Navbar />
         {profile.username ? (
-          <MessageBox />
+          <MessageBox username={profile.username} />
         ) : (
           <div className="grid place-items-center">
             <div className="flex flex-col items-center">

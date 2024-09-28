@@ -88,8 +88,14 @@ export default function ChatMessages({
               className="w-fit p-4 my-2 bg-primary-20 ml-auto grid"
             >
               <div>{message.content}</div>
-              <div className="font-sans text-sm text-muted-foreground place-self-end">
-                {message.createdAt.toLocaleString()}
+              <div className="font-sans text-xs text-muted-foreground place-self-end">
+                {message.createdAt.toLocaleString([], {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
               </div>
             </Card>
           ) : (
@@ -99,8 +105,14 @@ export default function ChatMessages({
               className="w-fit p-4 my-2 bg-secondary"
             >
               <div>{message.content}</div>
-              <div className="font-sans text-sm text-muted-foreground">
-                {message.createdAt.toLocaleString()}
+              <div className="font-sans text-xs text-muted-foreground">
+                {message.createdAt.toLocaleString([], {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
               </div>
             </Card>
           )

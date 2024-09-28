@@ -48,3 +48,20 @@ export type Profile = {
   email_address: string | null
   username: string | null
 }
+
+export type Conversation = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  status: string
+  messages: Message[]
+}
+
+export type Message = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  content: string
+  conversation_id: string
+  from_username: string
+}

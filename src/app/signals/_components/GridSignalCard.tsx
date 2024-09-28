@@ -27,14 +27,14 @@ export default function GridSignalCard({
         <p className="overflow-hidden ">
           {signalCardProps.content.substring(0, 100)}...
         </p>
-        <p className="text-muted-foreground text-right">...see more</p>
       </CardContent>
       <CardFooter className="self-end">
-        <p className="text-right text-muted-foreground mt-4">
-          Signal sent on{' '}
-          {signalCardProps.created_at.toLocaleDateString('en-US')} by{' '}
-          {signalCardProps.created_by_username}
-        </p>
+        <div className="flex text-sm text-right text-muted-foreground mt-4">
+          <div className="font-sans">
+            {signalCardProps.created_at.toLocaleDateString('en-US')}
+          </div>
+          <div className="pl-2">{signalCardProps.created_by_username}</div>
+        </div>
       </CardFooter>
     </Card>
   )

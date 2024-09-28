@@ -36,13 +36,31 @@ export default function CommentSection({
                           username={comment.created_by_username}
                         ></UsernameDropdown>
                       </div>
-                      <p>{comment.created_at.toLocaleString()}</p>
+                      <p>
+                        {comment.created_at.toLocaleString([], {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </p>
                     </div>
                     {comment.updated_at &&
-                      comment.updated_at.toLocaleString() >
-                        comment.created_at.toLocaleString() && (
-                        <p>{'[Edited]'}</p>
-                      )}
+                      comment.updated_at.toLocaleString([], {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      }) >
+                        comment.created_at.toLocaleString([], {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        }) && <p>{'[Edited]'}</p>}
                   </div>
                 </div>
               )}

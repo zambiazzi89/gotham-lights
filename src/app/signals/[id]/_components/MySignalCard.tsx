@@ -66,8 +66,15 @@ export default function SignalCard({
       </CardContent>
       <CardFooter className="self-end">
         <p className="text-right text-muted-foreground mt-4">
-          Signal sent on {signalCardProps.created_at.toLocaleString('en-US')} by{' '}
-          {signalCardProps.created_by_username}
+          Signal sent on{' '}
+          {signalCardProps.created_at.toLocaleString([], {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+          })}{' '}
+          by {signalCardProps.created_by_username}
         </p>
       </CardFooter>
     </Card>
