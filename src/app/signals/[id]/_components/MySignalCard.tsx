@@ -14,8 +14,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Signal } from '@/lib/types'
@@ -46,8 +44,6 @@ export default function SignalCard({
               <MdMoreVert className="text-xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Signal</DropdownMenuLabel>
-              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => setEdit(!edit)}>
                 Edit
               </DropdownMenuItem>

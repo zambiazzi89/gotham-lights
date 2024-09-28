@@ -5,8 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { MdMoreVert } from 'react-icons/md'
@@ -70,8 +68,6 @@ export default function MyComment({ comment }: { comment: SignalComment }) {
               <MdMoreVert className="text-xl" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Comment</DropdownMenuLabel>
-              <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => {
                   setEdit(!edit)

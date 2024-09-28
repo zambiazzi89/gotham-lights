@@ -14,7 +14,7 @@ export default function GridSignalCard({
   signalCardProps: Signal
 }) {
   return (
-    <Card className="shadow-md flex flex-col justify-between grow">
+    <Card className="shadow-md flex flex-col justify-between grow bg-secondary hover:bg-primary-20">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
         <CardDescription>

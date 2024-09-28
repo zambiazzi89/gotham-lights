@@ -5,13 +5,11 @@ import { LatLong, Signal } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import ReactGoogleMap from '@/components/ReactGoogleMap'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
-import { useRouter } from 'next/navigation'
 
 export default function MapAndGrid({ signals }: { signals: Signal[] }) {
   const [boundsNE, setBoundsNE] = useState<LatLong>()
   const [boundsSW, setBoundsSW] = useState<LatLong>()
   const [signalsInBound, setSignalsInBound] = useState<Signal[]>([])
-  const router = useRouter()
 
   useEffect(() => {
     if (boundsNE && boundsSW) {

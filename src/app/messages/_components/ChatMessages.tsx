@@ -85,10 +85,12 @@ export default function ChatMessages({
             <Card
               ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
-              className="w-fit p-4 my-2 bg-primary-20 ml-auto"
+              className="w-fit p-4 my-2 bg-primary-20 ml-auto grid"
             >
               <div>{message.content}</div>
-              <div>{message.createdAt.toLocaleString()}</div>
+              <div className="font-sans text-sm text-muted-foreground place-self-end">
+                {message.createdAt.toLocaleString()}
+              </div>
             </Card>
           ) : (
             <Card
@@ -97,7 +99,9 @@ export default function ChatMessages({
               className="w-fit p-4 my-2 bg-secondary"
             >
               <div>{message.content}</div>
-              <div>{message.createdAt.toLocaleString()}</div>
+              <div className="font-sans text-sm text-muted-foreground">
+                {message.createdAt.toLocaleString()}
+              </div>
             </Card>
           )
         })}

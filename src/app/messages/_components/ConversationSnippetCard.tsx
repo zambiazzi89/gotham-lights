@@ -22,7 +22,9 @@ export default function ConversationSnippetCard({
       <div className="p-4 ">
         <div className="font-bold">{username}</div>
         <div>{lastMessage}</div>
-        <div className="text-muted-foreground">{timestamp}</div>
+        <div className="font-sans text-sm text-muted-foreground">
+          {timestamp}
+        </div>
       </div>
       {newMessage && <div className="w-1 bg-primary"></div>}
     </div>

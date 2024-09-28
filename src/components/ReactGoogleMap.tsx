@@ -3,6 +3,7 @@ import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTheme } from 'next-themes'
 
 function ReactGoogleMap({
   signals,
@@ -13,6 +14,8 @@ function ReactGoogleMap({
   setBoundsNE: Dispatch<SetStateAction<LatLong | undefined>>
   setBoundsSW: Dispatch<SetStateAction<LatLong | undefined>>
 }) {
+  const { theme } = useTheme()
+
   const router = useRouter()
 
   const isLoaded = useGoogleAPIContext()
@@ -21,6 +24,87 @@ function ReactGoogleMap({
     width: '100%',
     height: '100%',
   }
+
+  const darkMapStyles = [
+    { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
+    { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
+    { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+    {
+      featureType: 'administrative.locality',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#d59563' }],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#d59563' }],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'geometry',
+      stylers: [{ color: '#263c3f' }],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#6b9a76' }],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [{ color: '#38414e' }],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry.stroke',
+      stylers: [{ color: '#212a37' }],
+    },
+    {
+      featureType: 'road',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#9ca5b3' }],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'geometry',
+      stylers: [{ color: '#746855' }],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'geometry.stroke',
+      stylers: [{ color: '#1f2835' }],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#f3d19c' }],
+    },
+    {
+      featureType: 'transit',
+      elementType: 'geometry',
+      stylers: [{ color: '#2f3948' }],
+    },
+    {
+      featureType: 'transit.station',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#d59563' }],
+    },
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [{ color: '#17263c' }],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [{ color: '#515c6d' }],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.stroke',
+      stylers: [{ color: '#17263c' }],
+    },
+  ]
 
   const [map, setMap] = React.useState<google.maps.Map | null>(null)
 
@@ -79,7 +163,6 @@ function ReactGoogleMap({
     : defaultCenter
 
   const onLoad = React.useCallback(function callback(map: google.maps.Map) {
-    console.log('reload')
     const bounds = new window.google.maps.LatLngBounds(center)
     if (!paramsExist && signals.length > 1) {
       signals.map((signal) => {
@@ -140,6 +223,7 @@ function ReactGoogleMap({
       onBoundsChanged={setBounds}
       onDragEnd={handleDragEnd}
       onZoomChanged={handleZoomChange}
+      options={theme === 'dark' ? { styles: darkMapStyles } : { styles: [] }}
     >
       {signals &&
         signals.map((signal) => {
