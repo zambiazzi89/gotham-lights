@@ -13,7 +13,7 @@ export default async function ChatContent({
   const profile = await getDbProfileFromServer()
 
   return (
-    <Card className="bg-secondary flex flex-col w-full p-4">
+    <Card className="bg-primary-20 flex flex-col flex-grow p-4">
       <ChatMessages
         username={profile.username}
         messages={firstConversationMessages}

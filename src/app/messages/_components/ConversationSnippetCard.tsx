@@ -15,7 +15,7 @@ export default function ConversationSnippetCard({
 }: ConversationSnippet) {
   return (
     <div
-      className={`my-1 flex justify-between ${
+      className={`w-60 my-1 flex justify-between ${
         selected ? 'bg-primary-20' : 'bg-muted'
       }`}
     >

@@ -15,6 +15,12 @@ export default async function MessageBox({ username }: { username: string }) {
             created_at: 'desc', // Order messages by creation date in descending order
           },
         },
+        conversation_participants: {
+          select: {
+            participant_username: true,
+          },
+          where: { participant_username: { not: username } },
+        },
       },
     })
     .then((conversations) =>
@@ -24,7 +30,6 @@ export default async function MessageBox({ username }: { username: string }) {
           a.messages[0].created_at.getTime()
       )
     )
-
   return (
     <div className="h-full flex p-4 gap-4">
       {conversations.length > 0 ? (

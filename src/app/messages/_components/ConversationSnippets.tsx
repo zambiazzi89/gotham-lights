@@ -57,16 +57,16 @@ export default function ConversationSnippets({
 }: {
   conversations: Conversation[]
 }) {
-  console.log(conversations)
-  conversations.map((conversation) => console.log(conversation.messages))
   return (
-    <Card className="h-[75svh] overflow-y-auto w-80 py-4 self-center">
+    <Card className="h-[75svh] overflow-y-auto py-4 self-center">
       <ScrollArea className="h-full">
         <div className="p-4">
           {conversations.map((conversation) => (
             <ConversationSnippetCard
               key={conversation.id}
-              username={conversation.messages[0].from_username}
+              username={
+                conversation.conversation_participants[0].participant_username
+              }
               lastMessage={conversation.messages[0].content}
               timestamp={conversation.messages[0].created_at}
               selected={false}

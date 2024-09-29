@@ -55,6 +55,11 @@ export type Conversation = {
   updated_at: Date | null
   status: string
   messages: Message[]
+  conversation_participants: ConversationParticipant[]
+}
+
+export type ConversationParticipant = {
+  participant_username: string
 }
 
 export type Message = {
