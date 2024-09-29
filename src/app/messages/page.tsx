@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MessageBox from './_components/MessageBox'
-import db from '@/db/db'
 
 export default async function Messages() {
   const profile = await getDbProfileFromServer()

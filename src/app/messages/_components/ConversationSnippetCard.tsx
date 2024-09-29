@@ -21,7 +21,11 @@ export default function ConversationSnippetCard({
     >
       <div className="p-4 ">
         <div className="font-bold">{username}</div>
-        <div>{lastMessage}</div>
+        {lastMessage.length > 27 ? (
+          <div>{lastMessage.substring(0, 27)}...</div>
+        ) : (
+          <div>{lastMessage}</div>
+        )}
         <div className="font-sans text-xs text-muted-foreground">
           {timestamp.toLocaleString([], {
             day: '2-digit',
