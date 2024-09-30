@@ -30,6 +30,7 @@ export default async function MessageBox({ username }: { username: string }) {
           a.messages[0].created_at.getTime()
       )
     )
+
   return (
     <div className="h-full flex p-4 gap-4">
       {conversations.length > 0 ? (

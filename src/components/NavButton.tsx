@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ModeToggle } from './ui/modeToggle'
+import { MdMenu } from 'react-icons/md'
 
 function NavButtonStyle(pathname: string, href?: string) {
   return `pt-2 w-32 h-12 grid place-items-center
@@ -16,8 +18,8 @@ function NavButtonStyle(pathname: string, href?: string) {
     }
     ${
       pathname === '/'
-        ? 'hover:bg-secondary/15'
-        : href && !pathname.startsWith(`${href}`)
+        ? 'text-white hover:bg-secondary/15'
+        : !pathname.startsWith(`${href}`)
         ? 'hover:bg-secondary'
         : ''
     }
@@ -39,5 +41,31 @@ export function NavLogoutButton({ title }: { title: String }) {
     <button type="submit" className={NavButtonStyle(pathname)}>
       {title}
     </button>
+  )
+}
+
+export function NavThemeButton() {
+  const pathname = usePathname()
+  return (
+    <div
+      className={
+        pathname === '/'
+          ? `hidden`
+          : `justify-self-end h-full grid place-items-center px-2`
+      }
+    >
+      <ModeToggle />
+    </div>
+  )
+}
+
+export function NavMenuButton() {
+  const pathname = usePathname()
+  return (
+    <MdMenu
+      className={`mr-2 self-center scale-150 lg:hidden hover:cursor-pointer ${
+        pathname === '/' ? `text-white` : ``
+      }`}
+    />
   )
 }

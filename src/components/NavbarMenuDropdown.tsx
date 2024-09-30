@@ -8,6 +8,7 @@ import {
 import Link from 'next/link'
 import { Session } from '@supabase/supabase-js'
 import { logout } from '@/app/logout/actions'
+import { NavMenuButton } from './NavButton'
 
 export default function NavbarMenuDropdown({
   session,
@@ -17,7 +18,9 @@ export default function NavbarMenuDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <MdMenu className="mr-2 self-center scale-150 lg:hidden hover:cursor-pointer" />
+        <div>
+          <NavMenuButton />
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
@@ -41,9 +44,9 @@ export default function NavbarMenuDropdown({
             </DropdownMenuItem>
           </>
         ) : (
-          <>
+          <DropdownMenuItem>
             <Link href="/login">Login/Register</Link>
-          </>
+          </DropdownMenuItem>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

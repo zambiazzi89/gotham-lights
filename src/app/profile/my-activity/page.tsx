@@ -24,32 +24,28 @@ export default async function MyActivity() {
     : []
 
   return (
-    <div className="min-h-svh">
-      <div className="grid grid-rows-layout min-h-svh">
-        <Navbar />
-        <div className="grid place-items-center">
-          <Card className="p-4 flex flex-col gap-2">
-            <div className="font-bold">My Signals</div>
-            {mySignals.map((signal) => (
-              <GridSignalCard key={signal.id} signalCardProps={signal} />
-            ))}
-            <div className="py-3">
-              <hr />
+    <>
+      <div className="grid place-items-center">
+        <Card className="p-4 flex flex-col gap-2">
+          <div className="font-bold">My Signals</div>
+          {mySignals.map((signal) => (
+            <GridSignalCard key={signal.id} signalCardProps={signal} />
+          ))}
+          <div className="py-3">
+            <hr />
+          </div>
+          <div className="font-bold">My Comments</div>
+          {myComments.map((comment) => (
+            <div key={comment.id}>
+              {comment.content}
+              <br />
+              <span className="text-sm text-muted-foreground">
+                {comment.created_at.toLocaleDateString()}
+              </span>
             </div>
-            <div className="font-bold">My Comments</div>
-            {myComments.map((comment) => (
-              <div key={comment.id}>
-                {comment.content}
-                <br />
-                <span className="text-sm text-muted-foreground">
-                  {comment.created_at.toLocaleDateString()}
-                </span>
-              </div>
-            ))}
-          </Card>
-        </div>
-        <Footer />
+          ))}
+        </Card>
       </div>
-    </div>
+    </>
   )
 }

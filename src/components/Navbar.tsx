@@ -1,43 +1,27 @@
-import { NavButton, NavLogoutButton } from './NavButton'
+import { NavButton, NavLogoutButton, NavThemeButton } from './NavButton'
 import Link from 'next/link'
 import { Croissant_One } from 'next/font/google'
-import { ModeToggle } from './ui/modeToggle'
 import { logout } from '@/app/logout/actions'
 import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
 import NavbarMenuDropdown from './NavbarMenuDropdown'
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
-type fontColor = 'text-white' | 'text-black' | ''
-
-export default async function Navbar({
-  fontColor = '',
-  withToggle = true,
-}: {
-  fontColor?: fontColor
-  homeButtonHoverColor?: fontColor
-  withToggle?: boolean
-}) {
+export default async function Navbar() {
   const session = await getServerSession()
 
   return (
-    <div className="flex px-2 items-center justify-between">
+    <div className="flex p-2 items-center justify-between">
       <Link
-        className={`mt-2 bg-black grid text-white place-items-center rounded p-2 font-semibold text-lg hover:cursor-pointer ${croissantOne.className}`}
+        className={`bg-black grid text-white place-items-center rounded p-2 font-semibold text-lg hover:cursor-pointer ${croissantOne.className}`}
         href="/"
       >
         gotham lights
       </Link>
       <div className="flex justify-end items-center">
-        {withToggle && (
-          <div className="justify-self-end h-full grid place-items-center px-2">
-            <ModeToggle />
-          </div>
-        )}
+        <NavThemeButton />
         <NavbarMenuDropdown session={session} />
-        <div
-          className={`hidden lg:flex justify-end items-center  ${fontColor}`}
-        >
+        <div className="hidden lg:flex justify-end items-center">
           <NavButton title="About" href="/about" />
           <NavButton title="Signals" href="/signals" />
           <NavButton title="Messages" href="/messages" />

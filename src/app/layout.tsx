@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import GoogleAPIContextProvider from '@/context/GoogleAPIContext'
 import { cormorant } from './fonts'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'gotham lights',
@@ -29,7 +31,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GoogleAPIContextProvider>{children}</GoogleAPIContextProvider>
+          <GoogleAPIContextProvider>
+            <div className="grid grid-rows-layout h-svh">
+              <Navbar />
+              <div className="grid place-items-center overflow-auto">
+                {children}
+              </div>
+              <Footer />
+            </div>
+          </GoogleAPIContextProvider>
         </ThemeProvider>
       </body>
     </html>
