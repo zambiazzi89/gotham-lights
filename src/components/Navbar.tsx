@@ -1,15 +1,10 @@
-import NavButton from './NavButton'
+import { NavButton, NavLogoutButton } from './NavButton'
 import Link from 'next/link'
 import { Croissant_One } from 'next/font/google'
 import { ModeToggle } from './ui/modeToggle'
 import { logout } from '@/app/logout/actions'
 import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
 import NavbarMenuDropdown from './NavbarMenuDropdown'
-
-const navButtonStyle = `pt-2 w-32 h-12 grid place-items-center backdrop-blur
-                        border border-solid border-t-0
-                        [border-image:radial-gradient(circle_at_bottom,rgb(120,113,108,1),55%,rgba(0,0,0,0))1]
-                        hover:cursor-pointer hover:bg-stone-500  hover:bg-opacity-20`
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
@@ -20,6 +15,7 @@ export default async function Navbar({
   withToggle = true,
 }: {
   fontColor?: fontColor
+  homeButtonHoverColor?: fontColor
   withToggle?: boolean
 }) {
   const session = await getServerSession()
@@ -49,17 +45,11 @@ export default async function Navbar({
             <>
               <NavButton title="Profile" href="/profile" />
               <form action={logout}>
-                <button className={navButtonStyle} type="submit">
-                  Logout
-                </button>
+                <NavLogoutButton title="Logout" />
               </form>
             </>
           ) : (
-            <>
-              <Link href="/login" className={navButtonStyle}>
-                Login/Register
-              </Link>
-            </>
+            <NavButton title="Login" href="/login" />
           )}
         </div>
       </div>

@@ -1,7 +1,6 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import LandingPage from './_components/LandingPage'
-import getServerSession from '@/utils/supabase/customFunctions/getServerSession'
 
 export default async function Home() {
   return (
