@@ -7,17 +7,18 @@ import { Message } from '@/lib/types'
 
 export default async function ChatContent({
   firstConversationMessages,
+  searchParams,
 }: {
-  firstConversationMessages: Message[]
+  firstConversationMessages?: Message[]
+  searchParams?: { [key: string]: string | string[] | undefined }
 }) {
   const profile = await getDbProfileFromServer()
 
+  const messages = firstConversationMessages || []
+
   return (
     <Card className="bg-primary-20 flex flex-col flex-grow p-4">
-      <ChatMessages
-        username={profile.username}
-        messages={firstConversationMessages}
-      />
+      <ChatMessages username={profile.username} messages={messages} />
       <div className="flex gap-4">
         <Textarea />
         <Button variant={'outline'} className="h-full">

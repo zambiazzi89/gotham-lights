@@ -11,9 +11,9 @@ export default async function Navbar() {
   const session = await getServerSession()
 
   return (
-    <div className="flex p-2 items-center justify-between">
+    <div className="flex px-2 items-center justify-between">
       <Link
-        className={`bg-black grid text-white place-items-center rounded p-2 font-semibold text-lg hover:cursor-pointer ${croissantOne.className}`}
+        className={`bg-black grid text-white place-items-center rounded my-2 p-2 font-semibold text-lg hover:cursor-pointer ${croissantOne.className}`}
         href="/"
       >
         gotham lights

@@ -22,14 +22,15 @@ model profile {
   email_address String?
   username      String? @unique
 
-  signals          signal[]
-  comments         comment[]
-  conversations    conversation_participant[]
-  messages_sent    message[]
-  reports_created  reported_profile[]         @relation("reports_created")
-  reports_received reported_profile[]         @relation("reports_received")
-  blocks_created   blocked_profile[]          @relation("blocks_created")
-  blocks_received  blocked_profile[]          @relation("blocks_received")
+  signals                 signal[]
+  comments                comment[]
+  last_sent_conversations conversation[]             @relation("last_sent_by_username")
+  conversations           conversation_participant[]
+  messages_sent           message[]
+  reports_created         reported_profile[]         @relation("reports_created")
+  reports_received        reported_profile[]         @relation("reports_received")
+  blocks_created          blocked_profile[]          @relation("blocks_created")
+  blocks_received         blocked_profile[]          @relation("blocks_received")
 }
 
 model signal {
@@ -71,6 +72,11 @@ model conversation {
 
   status String @default("Pending")
 
+  last_message          String
+  read                  Boolean
+  last_sent_by          String
+  last_sent_by_username profile @relation("last_sent_by_username", fields: [last_sent_by], references: [username], onDelete: Cascade)
+
   messages                  message[]
   conversation_participants conversation_participant[]
 }
@@ -83,7 +89,7 @@ model conversation_participant {
   conversation_id           String
   conversation_participants conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
-  participant_username String
+  participant_username String  @unique
   profile              profile @relation(fields: [participant_username], references: [username], onDelete: Cascade)
 }
 

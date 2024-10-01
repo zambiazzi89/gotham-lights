@@ -51,6 +51,9 @@ export async function sendMessageRequest(
   const conversation = await db.conversation.create({
     data: {
       status: 'Pending',
+      last_message: data.content,
+      last_sent_by: profile.username,
+      read: false,
     },
   })
 

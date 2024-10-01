@@ -2,9 +2,6 @@ TO-DOs
 
 Notification when someone comments on the user's Signal
 
-Navbar:
-Different style to current page button
-
 Report:
 - Users should be able to Report Signal and/or Comment
 

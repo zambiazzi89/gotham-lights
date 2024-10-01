@@ -6,7 +6,7 @@ import { ModeToggle } from './ui/modeToggle'
 import { MdMenu } from 'react-icons/md'
 
 function NavButtonStyle(pathname: string, href?: string) {
-  return `pt-2 w-32 h-12 grid place-items-center
+  return `pt-2 w-32 h-14 grid place-items-center
     backdrop-blur
     border border-solid
     border-t-0
