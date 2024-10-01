@@ -54,7 +54,10 @@ export type Conversation = {
   created_at: Date
   updated_at: Date | null
   status: string
-  messages: Message[]
+  last_message: string
+  last_sent_by: string
+  read: boolean
+  messages?: Message[]
   conversation_participants: ConversationParticipant[]
 }
 

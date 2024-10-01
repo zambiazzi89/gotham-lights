@@ -1,18 +1,30 @@
+import { MdLockClock } from 'react-icons/md'
+
 type ConversationSnippet = {
   selected?: boolean
-  newMessage?: boolean
-  username: string
+  lastByUser: boolean
+  read: boolean
+  to_username: string
   lastMessage: string
   timestamp: Date
+  status: string
 }
 
 export default function ConversationSnippetCard({
   selected,
-  newMessage,
-  username,
+  lastByUser,
+  read,
+  to_username,
   lastMessage,
   timestamp,
+  status,
 }: ConversationSnippet) {
+  const displayMessage = lastByUser ? 'You: ' + lastMessage : lastMessage
+  const sizedMessage =
+    displayMessage.length > 24
+      ? displayMessage.substring(0, 24) + '...'
+      : displayMessage
+
   return (
     <div
       className={`w-60 my-1 flex justify-between ${
@@ -20,12 +32,11 @@ export default function ConversationSnippetCard({
       }`}
     >
       <div className="p-4 ">
-        <div className="font-bold">{username}</div>
-        {lastMessage.length > 27 ? (
-          <div>{lastMessage.substring(0, 27)}...</div>
-        ) : (
-          <div>{lastMessage}</div>
-        )}
+        <div className="flex justify-between">
+          <div className="font-bold">{to_username}</div>
+          {status === 'Pending' && <MdLockClock />}
+        </div>
+        <div className="py-1 italic">{sizedMessage}</div>
         <div className="font-sans text-xs text-muted-foreground">
           {timestamp.toLocaleString([], {
             day: '2-digit',
@@ -36,7 +47,7 @@ export default function ConversationSnippetCard({
           })}
         </div>
       </div>
-      {newMessage && <div className="w-1 bg-primary"></div>}
+      {read && <div className="w-1 bg-primary"></div>}
     </div>
   )
 }

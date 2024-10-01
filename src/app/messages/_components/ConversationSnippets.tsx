@@ -5,57 +5,12 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import ConversationSnippetCard from './ConversationSnippetCard'
 import { Conversation } from '@/lib/types'
 
-const dummySnippets = [
-  {
-    id: 1,
-    username: 'johndoe',
-    lastMessage: 'Hello, how are you?',
-    timestamp: new Date(),
-    selected: true,
-  },
-  {
-    id: 2,
-    username: 'janedoe',
-    lastMessage: 'Sure why not!',
-    timestamp: new Date(),
-  },
-  {
-    id: 3,
-    username: 'ashton',
-    lastMessage: 'Hi!',
-    timestamp: new Date(),
-    newMessage: true,
-  },
-  {
-    id: 4,
-    username: 'user1234',
-    lastMessage: 'I think so.',
-    timestamp: new Date(),
-  },
-  {
-    id: 5,
-    username: 'user1234',
-    lastMessage: 'I think so.',
-    timestamp: new Date(),
-  },
-  {
-    id: 6,
-    username: 'user1234',
-    lastMessage: 'I think so.',
-    timestamp: new Date(),
-  },
-  {
-    id: 7,
-    username: 'user1234',
-    lastMessage: 'I think so.',
-    timestamp: new Date(),
-  },
-]
-
 export default function ConversationSnippets({
   conversations,
+  username,
 }: {
   conversations: Conversation[]
+  username: string
 }) {
   return (
     <Card className="h-[75svh] overflow-y-auto py-4 self-center">
@@ -64,23 +19,15 @@ export default function ConversationSnippets({
           {conversations.map((conversation) => (
             <ConversationSnippetCard
               key={conversation.id}
-              username={
+              to_username={
                 conversation.conversation_participants[0].participant_username
               }
-              lastMessage={conversation.messages[0].content}
-              timestamp={conversation.messages[0].created_at}
+              lastMessage={conversation.last_message}
+              timestamp={conversation.updated_at || conversation.created_at}
               selected={false}
-              newMessage={true}
-            />
-          ))}
-          {dummySnippets.map((snippet) => (
-            <ConversationSnippetCard
-              key={snippet.id}
-              username={snippet.username}
-              lastMessage={snippet.lastMessage}
-              timestamp={snippet.timestamp}
-              selected={snippet.selected}
-              newMessage={snippet.newMessage}
+              lastByUser={username === conversation.last_sent_by}
+              read={conversation.read}
+              status={conversation.status}
             />
           ))}
         </div>

@@ -4,39 +4,35 @@ import db from '@/db/db'
 import { Conversation } from '@/lib/types'
 
 export default async function MessageBox({ username }: { username: string }) {
-  const conversations: Conversation[] = await db.conversation
-    .findMany({
-      where: {
-        conversation_participants: { some: { participant_username: username } },
-      },
-      include: {
-        messages: {
-          orderBy: {
-            created_at: 'desc', // Order messages by creation date in descending order
-          },
+  const conversations: Conversation[] = await db.conversation.findMany({
+    where: {
+      conversation_participants: { some: { participant_username: username } },
+    },
+    include: {
+      conversation_participants: {
+        select: {
+          participant_username: true,
         },
-        conversation_participants: {
-          select: {
-            participant_username: true,
-          },
-          where: { participant_username: { not: username } },
-        },
+        where: { participant_username: { not: username } },
       },
-    })
-    .then((conversations) =>
-      conversations.sort(
-        (a, b) =>
-          b.messages[0].created_at.getTime() -
-          a.messages[0].created_at.getTime()
-      )
-    )
+    },
+    orderBy: {
+      updated_at: 'desc',
+    },
+  })
 
   return (
     <div className="h-full flex p-4 gap-4">
       {conversations.length > 0 ? (
         <>
-          <ConversationSnippets conversations={conversations} />
-          <ChatContent firstConversationMessages={conversations[0].messages} />
+          <ConversationSnippets
+            conversations={conversations}
+            username={username}
+          />
+          <ChatContent
+            conversationId={conversations[0].id}
+            status={conversations[0].status}
+          />
         </>
       ) : (
         <div className="grid w-full place-content-center">
