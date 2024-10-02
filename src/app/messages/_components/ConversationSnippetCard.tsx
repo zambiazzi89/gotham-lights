@@ -47,7 +47,7 @@ export default function ConversationSnippetCard({
           })}
         </div>
       </div>
-      {read && <div className="w-1 bg-primary"></div>}
+      {!read && <div className="w-1 bg-primary"></div>}
     </div>
   )
 }

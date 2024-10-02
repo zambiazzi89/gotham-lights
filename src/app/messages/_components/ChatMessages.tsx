@@ -21,7 +21,7 @@ export default function ChatMessages({
   }, [messages.length])
 
   return (
-    <div className="bg-background flex-grow mb-4 border-2 h-[60svh] overflow-y-auto">
+    <div className="bg-background flex-grow mb-4 border-2 overflow-y-auto">
       <ScrollArea className="h-full  px-2">
         {messages.map((message, i) => {
           return username === message.from_username ? (

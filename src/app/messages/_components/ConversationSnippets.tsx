@@ -26,7 +26,11 @@ export default function ConversationSnippets({
               timestamp={conversation.updated_at || conversation.created_at}
               selected={false}
               lastByUser={username === conversation.last_sent_by}
-              read={conversation.read}
+              read={
+                username === conversation.last_sent_by
+                  ? true
+                  : conversation.read
+              }
               status={conversation.status}
             />
           ))}
