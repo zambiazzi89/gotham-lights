@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import ChatContent from '../../_components/ChatContent'
+import ChatContent from '../../[id]/_components/ChatContent'
 
 export default async function Conversation() {
   return (

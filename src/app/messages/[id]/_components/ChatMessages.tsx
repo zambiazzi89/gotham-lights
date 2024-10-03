@@ -21,14 +21,14 @@ export default function ChatMessages({
   }, [messages.length])
 
   return (
-    <div className="bg-background flex-grow mb-4 border-2 overflow-y-auto">
+    <div className="h-[60svh] bg-background flex-grow mb-4 border-2 overflow-y-auto">
       <ScrollArea className="h-full  px-2">
         {messages.map((message, i) => {
           return username === message.from_username ? (
             <Card
               ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
-              className="w-fit p-4 my-2 bg-primary-20 ml-auto grid"
+              className="w-fit p-4 my-2 bg-primary-20 ml-auto mr-2 grid"
             >
               <div>{message.content}</div>
               <div className="font-sans text-xs text-muted-foreground place-self-end">

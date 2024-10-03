@@ -22,11 +22,9 @@ export default function CommentForm({ signalId }: { signalId: string }) {
       <Input type="hidden" name="signalId" value={`${signalId}`} />
       <Textarea
         name="content"
-        // className="min-h-28"
         placeholder="Enter a comment"
         minLength={1}
         maxLength={100}
-        // className="border-primary"
       />
       {error?.content && (
         <div className="text-destructive text-sm">{error.content}</div>

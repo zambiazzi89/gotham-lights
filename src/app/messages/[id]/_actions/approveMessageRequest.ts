@@ -26,4 +26,6 @@ export async function approveMessageRequest(
       id: conversationId,
     },
   })
+
+  redirect(`/messages/${conversation.id}`)
 }

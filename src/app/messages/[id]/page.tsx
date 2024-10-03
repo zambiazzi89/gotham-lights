@@ -5,8 +5,8 @@ import {
 } from '@/lib/types'
 import db from '@/db/db'
 import { redirect } from 'next/navigation'
-import ConversationSnippets from '../_components/ConversationSnippets'
-import ChatContent from '../_components/ChatContent'
+import ConversationSnippets from './_components/ConversationSnippets'
+import ChatContent from './_components/ChatContent'
 
 export default async function MessagesById({
   params: id,

@@ -1,10 +1,9 @@
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
 import ChatMessages from './ChatMessages'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import db from '@/db/db'
 import MessageRequestApproval from './MessageRequestApproval'
+import ChatTextarea from './ChatTextarea'
 
 export default async function ChatContent({
   conversationId,
@@ -42,12 +41,7 @@ export default async function ChatContent({
           )}
         </div>
       ) : (
-        <div className="flex gap-4">
-          <Textarea />
-          <Button variant={'outline'} className="h-full">
-            Send
-          </Button>
-        </div>
+        <ChatTextarea conversationId={conversationId} />
       )}
     </Card>
   )
