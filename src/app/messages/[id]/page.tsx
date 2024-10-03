@@ -7,6 +7,7 @@ import db from '@/db/db'
 import { redirect } from 'next/navigation'
 import ConversationSnippets from './_components/ConversationSnippets'
 import ChatContent from './_components/ChatContent'
+import { DialogConversations } from './_components/DialogConversations'
 
 export default async function MessagesById({
   params: id,
@@ -65,15 +66,25 @@ export default async function MessagesById({
 
   return (
     <div className="w-full">
-      <div className="h-full flex p-4 gap-4">
-        <ConversationSnippets
-          conversations={conversations}
-          username={profile.username}
-        />
-        <ChatContent
-          conversationId={selectedConversation.id}
-          status={selectedConversation.status}
-        />
+      <div className="h-full flex flex-col items-center lg:flex-row lg:p-4 gap-4">
+        <div className="hidden lg:block">
+          <ConversationSnippets
+            conversations={conversations}
+            username={profile.username}
+          />
+        </div>
+        <div className="lg:hidden">
+          <DialogConversations
+            conversations={conversations}
+            username={profile.username}
+          />
+        </div>
+        <div className="w-full">
+          <ChatContent
+            conversationId={selectedConversation.id}
+            status={selectedConversation.status}
+          />
+        </div>
       </div>
     </div>
   )

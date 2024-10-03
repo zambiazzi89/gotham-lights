@@ -28,7 +28,7 @@ export default function ChatMessages({
             <Card
               ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
-              className="w-fit p-4 my-2 bg-primary-20 ml-auto mr-2 grid"
+              className="w-fit max-w-[75%] p-4 my-2 bg-primary-20 ml-auto mr-2 grid"
             >
               <div>{message.content}</div>
               <div className="font-sans text-xs text-muted-foreground place-self-end">
@@ -45,7 +45,7 @@ export default function ChatMessages({
             <Card
               ref={i + 1 === messages.length ? cardRef : null}
               key={message.id}
-              className="w-fit p-4 my-2 bg-secondary"
+              className="w-fit max-w-[75%] p-4 my-2 bg-secondary"
             >
               <div>{message.content}</div>
               <div className="font-sans text-xs text-muted-foreground">
