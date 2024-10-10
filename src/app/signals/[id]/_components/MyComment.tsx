@@ -97,21 +97,9 @@ export default function MyComment({ comment }: { comment: SignalComment }) {
             })}
           </p>
         </div>
-        {comment.updated_at &&
-          comment.updated_at.toLocaleString([], {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-          }) >
-            comment.created_at.toLocaleString([], {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            }) && <p>{'[Edited]'}</p>}
+        {comment.updated_at && comment.updated_at > comment.created_at && (
+          <p>{'[Edited]'}</p>
+        )}
       </div>
     </div>
   )
