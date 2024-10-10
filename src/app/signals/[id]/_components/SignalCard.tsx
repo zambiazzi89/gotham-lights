@@ -9,6 +9,7 @@ import {
 import UsernameDropdown from '@/components/UsernameDropdown'
 import { Signal } from '@/lib/types'
 import { RiHeart3Line, RiHeart3Fill } from 'react-icons/ri'
+import GoBackButton from './GoBackButton'
 
 export default function SignalCard({
   signalCardProps,
@@ -27,26 +28,18 @@ export default function SignalCard({
       <CardContent>
         <p>{signalCardProps.content}</p>
       </CardContent>
-      <CardFooter className="flex justify-between pt-4">
-        <div className="flex self-center">
-          <button className="grid place-items-center">
-            <RiHeart3Line className="text-2xl absolute" />
-            <RiHeart3Fill className="text-2xl fill-primary" />
-          </button>
-          <div className="pl-2">10</div>
-        </div>
-        <div>
-          <div className="flex text-right text-muted-foreground">
-            <div className="self-center p-2">
-              {signalCardProps.created_at.toLocaleString([], {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </div>
-            <UsernameDropdown username={signalCardProps.created_by_username} />
+      <CardFooter className="self-end pt-4 flex justify-between w-full">
+        <GoBackButton />
+        <div className="flex flex-col items-end  text-muted-foreground">
+          <UsernameDropdown username={signalCardProps.created_by_username} />
+          <div className="font-sans text-sm">
+            {signalCardProps.created_at.toLocaleString([], {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
           </div>
         </div>
       </CardFooter>

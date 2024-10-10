@@ -20,6 +20,7 @@ import { Signal } from '@/lib/types'
 import { useState } from 'react'
 import { MdMoreVert } from 'react-icons/md'
 import { deleteSignal } from '@/app/profile/my-activity/_actions/deleteActions'
+import GoBackButton from './GoBackButton'
 
 export default function SignalCard({
   signalCardProps,
@@ -64,18 +65,22 @@ export default function SignalCard({
       <CardContent>
         <p>{signalCardProps.content}</p>
       </CardContent>
-      <CardFooter className="self-end">
-        <p className="text-right text-muted-foreground mt-4">
-          Signal sent on{' '}
-          {signalCardProps.created_at.toLocaleString([], {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-          })}{' '}
-          by {signalCardProps.created_by_username}
-        </p>
+      <CardFooter className="self-end pt-4 flex justify-between w-full">
+        <GoBackButton />
+        <div className="flex flex-col items-end  text-muted-foreground">
+          <div className="font-semibold">
+            {signalCardProps.created_by_username}
+          </div>
+          <div className="font-sans text-sm">
+            {signalCardProps.created_at.toLocaleString([], {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </div>
+        </div>
       </CardFooter>
     </Card>
   )

@@ -86,20 +86,22 @@ export default function MyComment({ comment }: { comment: SignalComment }) {
       </div>
       <div className="w-full flex gap-4 items-end text-muted-foreground">
         <div className="flex flex-col flex-grow">
-          <p>{comment.created_by_username}</p>
-          <p>
-            {comment.created_at.toLocaleString([], {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </p>
+          <div className="font-semibold">{comment.created_by_username}</div>
+          <div className="font-sans text-sm flex gap-2">
+            <div>
+              {comment.created_at.toLocaleString([], {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </div>
+            {comment.updated_at && comment.updated_at > comment.created_at && (
+              <div className="italic font-semibold">{'[Edited]'}</div>
+            )}
+          </div>
         </div>
-        {comment.updated_at && comment.updated_at > comment.created_at && (
-          <p>{'[Edited]'}</p>
-        )}
       </div>
     </div>
   )

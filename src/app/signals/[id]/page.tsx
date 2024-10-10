@@ -26,27 +26,23 @@ export default async function UniqueSignal({
   })
 
   return (
-    <>
+    <div className="h-full w-full py-4 grid place-items-center">
       {signal ? (
-        <div className="h-full w-full pt-12 px-3 overflow-y-auto grid place-items-center">
-          <div className="w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
-            {profile.username === signal.created_by_username ? (
-              <MySignalCard signalCardProps={signal} />
-            ) : (
-              <SignalCard signalCardProps={signal} />
-            )}
-            <CommentSection
-              comments={signal.comments}
-              signalId={signal.id}
-              username={profile.username}
-            />
-          </div>
+        <div className="flex flex-col w-[95%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+          {profile.username === signal.created_by_username ? (
+            <MySignalCard signalCardProps={signal} />
+          ) : (
+            <SignalCard signalCardProps={signal} />
+          )}
+          <CommentSection
+            comments={signal.comments}
+            signalId={signal.id}
+            username={profile.username}
+          />
         </div>
       ) : (
-        <div className="grid place-items-center">
-          <h1>Signal not found</h1>
-        </div>
+        <div>Signal not found</div>
       )}
-    </>
+    </div>
   )
 }
