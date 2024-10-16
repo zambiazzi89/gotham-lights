@@ -26,9 +26,24 @@ function NavButtonStyle(pathname: string, href?: string) {
     `
 }
 
-export function NavButton({ title, href }: { title: string; href: string }) {
+export function NavButton({
+  title,
+  notification = false,
+  href,
+}: {
+  title: string
+  notification?: boolean
+  href: string
+}) {
   const pathname = usePathname()
-  return (
+  return notification ? (
+    <Link href={`${href}`} className={NavButtonStyle(pathname, href)}>
+      <div className="flex relative">
+        <div>{title}</div>
+        <div className="absolute -ml-4 w-2 h-2 self-center rounded-full bg-primary"></div>
+      </div>
+    </Link>
+  ) : (
     <Link href={`${href}`} className={NavButtonStyle(pathname, href)}>
       {title}
     </Link>

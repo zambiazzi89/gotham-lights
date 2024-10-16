@@ -49,6 +49,17 @@ export type Profile = {
   username: string | null
 }
 
+export type ProfileWithConversations = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  first_name: string | null
+  last_name: string | null
+  email_address: string | null
+  username: string | null
+  conversations: ConversationParticipant[]
+}
+
 export type Conversation = {
   id: string
   created_at: Date

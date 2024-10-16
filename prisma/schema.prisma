@@ -89,7 +89,7 @@ model conversation_participant {
   conversation_id           String
   conversation_participants conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
-  participant_username String  @unique
+  participant_username String
   profile              profile @relation(fields: [participant_username], references: [username], onDelete: Cascade)
 }
 

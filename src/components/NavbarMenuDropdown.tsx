@@ -6,15 +6,10 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import Link from 'next/link'
-import { Session } from '@supabase/supabase-js'
 import { logout } from '@/app/logout/actions'
 import { NavMenuButton } from './NavButton'
 
-export default function NavbarMenuDropdown({
-  session,
-}: {
-  session: Session | null
-}) {
+export default function NavbarMenuDropdown({ session }: { session: boolean }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
