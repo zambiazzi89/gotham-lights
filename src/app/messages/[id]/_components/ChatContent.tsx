@@ -1,37 +1,27 @@
 import { Card } from '@/components/ui/card'
 import ChatMessages from './ChatMessages'
-import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
-import db from '@/db/db'
 import MessageRequestApproval from './MessageRequestApproval'
 import ChatTextarea from './ChatTextarea'
+import { ConversationWithMessages } from '@/lib/types'
 
 export default async function ChatContent({
-  conversationId,
+  username,
+  conversation,
   status,
 }: {
-  conversationId: string
+  username: string
+  conversation: ConversationWithMessages
   status: string
 }) {
-  const profile = await getDbProfileFromServer()
-
-  const messages = await db.message.findMany({
-    where: {
-      conversation_id: conversationId,
-    },
-    orderBy: {
-      created_at: 'asc',
-    },
-  })
-
   return (
     <Card className="bg-secondary flex flex-col flex-grow p-4">
-      <ChatMessages username={profile.username} messages={messages} />
+      <ChatMessages username={username} messages={conversation.messages} />
       {status === 'Pending' ? (
         <div className="h-[50%] flex flex-col items-center justify-center">
-          {messages[0].from_username !== profile.username ? (
+          {conversation.messages[0].from_username !== username ? (
             <MessageRequestApproval
-              from_username={messages[0].from_username}
-              conversationId={conversationId}
+              from_username={conversation.messages[0].from_username}
+              conversationId={conversation.id}
             />
           ) : (
             <>
@@ -41,7 +31,7 @@ export default async function ChatContent({
           )}
         </div>
       ) : (
-        <ChatTextarea conversationId={conversationId} />
+        <ChatTextarea conversationId={conversation.id} />
       )}
     </Card>
   )

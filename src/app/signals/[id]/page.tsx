@@ -1,6 +1,5 @@
 import db from '@/db/db'
 import SignalCard from './_components/SignalCard'
-import GoBackButton from './_components/GoBackButton'
 import CommentSection from './_components/CommentSection'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MySignalCard from './_components/MySignalCard'

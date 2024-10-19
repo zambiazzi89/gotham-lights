@@ -16,7 +16,7 @@ export default function ChatMessages({
 
   useEffect(() => {
     if (messages.length > 0) {
-      cardRef.current?.scrollIntoView({ behavior: 'smooth' }) //Use scrollIntoView to automatically scroll to my ref
+      cardRef.current?.scrollIntoView({ behavior: 'instant' }) //Use scrollIntoView to automatically scroll to my ref
     }
   }, [messages.length])
 

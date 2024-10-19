@@ -64,6 +64,18 @@ export default async function MessagesById({
     redirect('/messages')
   }
 
+  // If unread, mark it as read
+  if (
+    !selectedConversation.read &&
+    selectedConversation?.last_sent_by !== profile.username
+  ) {
+    await db.conversation.update({
+      where: { id: conversationId },
+      data: { read: true },
+    })
+    redirect(`/messages/${conversationId}`)
+  }
+
   return (
     <div className="w-full">
       <div className="h-full flex flex-col items-center lg:flex-row lg:p-4 gap-4">
@@ -81,7 +93,8 @@ export default async function MessagesById({
         </div>
         <div className="w-full">
           <ChatContent
-            conversationId={selectedConversation.id}
+            username={profile.username}
+            conversation={selectedConversation}
             status={selectedConversation.status}
           />
         </div>

@@ -7,12 +7,17 @@ import { createClient } from '@/utils/supabase/server'
 import db from '@/db/db'
 import getConversations from '@/app/messages/_actions/getConversations'
 import { ProfileWithConversations } from '@/lib/types'
+import { revalidatePath } from 'next/cache'
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
 export default async function Navbar() {
   const supabase = createClient()
   const { data, error } = await supabase.auth.getUser()
+
+  if (error) {
+    console.error('Error fetching user data: ', error)
+  }
 
   const profile = data.user
     ? ((await db.profile.findUnique({
@@ -21,11 +26,10 @@ export default async function Navbar() {
       })) as ProfileWithConversations)
     : null
 
-  const conversations_1 = await getConversations(profile)
-  console.log(conversations_1, 'c1')
+  const conversations = await getConversations(profile)
 
-  const hasNewMessages = conversations_1
-    ? conversations_1
+  const hasNewMessages = conversations
+    ? conversations
         .map((conversation) => {
           if (conversation.last_sent_by !== profile?.username) {
             return conversation.read
@@ -33,7 +37,6 @@ export default async function Navbar() {
         })
         .includes(false)
     : false
-  console.log(hasNewMessages)
 
   if (profile?.username && profile?.conversations) {
     const conversations = await db.conversation_participant.findMany({
@@ -46,9 +49,8 @@ export default async function Navbar() {
     const conversationIdsArray = conversations.map(
       (conversation) => conversation.conversation_id
     )
-    console.log(conversationIdsArray)
+
     const conversationIdsString = conversationIdsArray.join(',')
-    console.log(conversationIdsString)
 
     const channels = supabase
       .channel('custom-update-channel')
@@ -62,11 +64,10 @@ export default async function Navbar() {
         },
         (payload) => {
           console.log('Change received!', profile.username, payload)
+          revalidatePath('/')
         }
       )
       .subscribe()
-
-    console.log(conversations[0], profile.username)
   }
   return (
     <div className="flex px-2 items-center justify-between">
