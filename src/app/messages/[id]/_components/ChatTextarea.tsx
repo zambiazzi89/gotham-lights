@@ -6,7 +6,6 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { sendMessage } from '../_actions/sendMessage'
 import { useRef } from 'react'
 import { Input } from '@/components/ui/input'
-import SubmitButton from '@/components/SubmitButton'
 
 export default function ChatTextarea({
   conversationId,

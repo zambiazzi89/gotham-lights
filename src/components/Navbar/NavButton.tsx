@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ModeToggle } from './ui/modeToggle'
+import { ModeToggle } from '../ui/modeToggle'
 import { MdMenu } from 'react-icons/md'
 
 function NavButtonStyle(pathname: string, href?: string) {

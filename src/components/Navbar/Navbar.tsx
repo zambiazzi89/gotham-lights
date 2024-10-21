@@ -7,7 +7,7 @@ import { createClient } from '@/utils/supabase/server'
 import db from '@/db/db'
 import getConversations from '@/app/messages/_actions/getConversations'
 import { ProfileWithConversations } from '@/lib/types'
-import { revalidatePath } from 'next/cache'
+import NavMessageButton from './NavMessageButton'
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
@@ -28,16 +28,6 @@ export default async function Navbar() {
 
   const conversations = await getConversations(profile)
 
-  const hasNewMessages = conversations
-    ? conversations
-        .map((conversation) => {
-          if (conversation.last_sent_by !== profile?.username) {
-            return conversation.read
-          }
-        })
-        .includes(false)
-    : false
-
   if (profile?.username && profile?.conversations) {
     const conversations = await db.conversation_participant.findMany({
       select: {
@@ -45,30 +35,8 @@ export default async function Navbar() {
       },
       where: { participant_username: profile.username },
     })
-
-    const conversationIdsArray = conversations.map(
-      (conversation) => conversation.conversation_id
-    )
-
-    const conversationIdsString = conversationIdsArray.join(',')
-
-    const channels = supabase
-      .channel('custom-update-channel')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'conversation',
-          filter: `id=in.${conversationIdsString}`,
-        },
-        (payload) => {
-          console.log('Change received!', profile.username, payload)
-          revalidatePath('/')
-        }
-      )
-      .subscribe()
   }
+
   return (
     <div className="flex px-2 items-center justify-between">
       <Link
@@ -83,10 +51,11 @@ export default async function Navbar() {
         <div className="hidden lg:flex justify-end items-center">
           <NavButton title="About" href="/about" />
           <NavButton title="Signals" href="/signals" />
-          {hasNewMessages ? (
-            <NavButton title="Messages" notification={true} href="/messages" />
-          ) : (
-            <NavButton title="Messages" href="/messages" />
+          {!!profile && profile.username && (
+            <NavMessageButton
+              username={profile.username}
+              conversations={conversations}
+            />
           )}
           {!!profile ? (
             <>

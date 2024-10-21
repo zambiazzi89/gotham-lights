@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import GoogleAPIContextProvider from '@/context/GoogleAPIContext'
 import { cormorant } from './fonts'
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {

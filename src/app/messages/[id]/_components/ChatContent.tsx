@@ -4,7 +4,7 @@ import MessageRequestApproval from './MessageRequestApproval'
 import ChatTextarea from './ChatTextarea'
 import { ConversationWithMessages } from '@/lib/types'
 
-export default async function ChatContent({
+export default function ChatContent({
   username,
   conversation,
   status,

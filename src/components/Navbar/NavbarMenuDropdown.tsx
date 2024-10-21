@@ -1,10 +1,9 @@
-import { MdMenu } from 'react-icons/md'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+} from '../ui/dropdown-menu'
 import Link from 'next/link'
 import { logout } from '@/app/logout/actions'
 import { NavMenuButton } from './NavButton'
