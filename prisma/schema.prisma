@@ -26,7 +26,8 @@ model profile {
   comments                comment[]
   last_sent_conversations conversation[]             @relation("last_sent_by_username")
   conversations           conversation_participant[]
-  messages_sent           message[]
+  messages_sent           message[]                  @relation("messages_sent")
+  messages_received       message[]                  @relation("messages_received")
   reports_created         reported_profile[]         @relation("reports_created")
   reports_received        reported_profile[]         @relation("reports_received")
   blocks_created          blocked_profile[]          @relation("blocks_created")
@@ -104,7 +105,10 @@ model message {
   conversation_messages conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
   from_username String
-  profile       profile @relation(fields: [from_username], references: [username], onDelete: Cascade)
+  messages_sent profile @relation("messages_sent", fields: [from_username], references: [username], onDelete: Cascade)
+
+  to_username       String
+  messages_received profile @relation("messages_received", fields: [to_username], references: [username], onDelete: Cascade)
 }
 
 model reported_profile {

@@ -75,6 +75,7 @@ export async function sendMessageRequest(
     data: {
       conversation_id: conversation.id,
       from_username: profile.username,
+      to_username: data.username,
       content: data.content,
     },
   })

@@ -31,7 +31,9 @@ export default function NavMessageButton({
     (conversation) => conversation.id
   )
 
-  const conversationIdsString = conversationIdsArray.join(',')
+  const [conversationIdsString, setConversationIdsString] = useState(
+    conversationIdsArray.join(',')
+  )
 
   const supabase = createClient()
 
@@ -40,8 +42,38 @@ export default function NavMessageButton({
   // TO-DO: add channel for new conversations
 
   useEffect(() => {
-    const message_button_channel = supabase
-      .channel('message-button-channel')
+    const message_channel = supabase
+      .channel('message-channel')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'message',
+          filter: `to_username=eq.${username}`,
+        },
+        (payload) => {
+          console.log('Change received!', payload, username)
+          if (!conversationIdsArray.includes(payload.new.conversation_id)) {
+            setHasNewMessages(true)
+            console.log('New Conversation!')
+            setConversationIdsString((conversationIdsString) =>
+              conversationIdsString.concat(',', payload.new.conversation_id)
+            )
+            console.log('Revalidate pathname')
+          }
+        }
+      )
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          console.log('Message Subscription is active')
+        } else {
+          console.log('Message Subscription status', status)
+        }
+      })
+
+    const conversation_channel = supabase
+      .channel('conversation-channel')
       .on(
         'postgres_changes',
         {
@@ -51,29 +83,30 @@ export default function NavMessageButton({
           filter: `id=in.(${conversationIdsString})`,
         },
         (payload) => {
-          console.debug('Change received!', payload, username)
+          console.log('Change received!', payload, username)
           if (payload.new.last_sent_by !== username) {
             setHasNewMessages(!payload.new.read)
-            console.debug('has new messages? ', !payload.new.read)
+            console.log('Has new messages? ', !payload.new.read)
             revalidatePathAction(pathname)
-            console.debug('revalidate pathname')
+            console.log('Revalidate pathname')
           }
         }
       )
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
-          console.debug('Message Button Subscription is active')
+          console.log('Conversation Subscription is active')
         } else {
-          console.debug('Message Button Subscription status', status)
+          console.log('Conversation Subscription status', status)
         }
       })
     return () => {
-      console.debug('Unsubscribing from channel')
-      supabase.removeChannel(message_button_channel)
+      console.log('Unsubscribing from channel')
+      supabase.removeChannel(message_channel)
+      supabase.removeChannel(conversation_channel)
     }
-  }, [])
+  }, [conversationIdsString])
 
-  console.debug(username, 'hasNewMessages', hasNewMessages)
+  console.log(username, 'hasNewMessages', hasNewMessages)
 
   return (
     <NavButton

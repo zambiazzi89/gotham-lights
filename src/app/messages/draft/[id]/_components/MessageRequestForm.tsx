@@ -16,7 +16,7 @@ export default function MessageRequestForm({
   const [error, action] = useFormState(sendMessageRequest, {})
   return (
     <div className="grid place-items-center">
-      <Card className="w-[80svw] p-4 bg-secondary">
+      <Card className="w-[80svw] lg:w-[50svw] p-4 bg-secondary">
         <CardHeader>
           <div className="font-bold text-lg self-center">
             Send a message request to {toUsername}
@@ -25,7 +25,7 @@ export default function MessageRequestForm({
         <CardContent>
           <form action={action}>
             <Input type="hidden" name="username" value={toUsername} />
-            <Textarea name="content" className="h-60" />
+            <Input name="content" />
             {error?.content && (
               <div className="text-destructive text-sm">{error.content}</div>
             )}

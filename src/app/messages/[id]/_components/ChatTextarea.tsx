@@ -25,7 +25,7 @@ export default function ChatTextarea({
       className="flex gap-4"
     >
       <Input type="hidden" name="conversationId" value={`${conversationId}`} />
-      <Textarea
+      <Input
         name="content"
         placeholder="Type your message"
         minLength={1}
@@ -34,7 +34,7 @@ export default function ChatTextarea({
       {error?.content && (
         <div className="text-destructive text-sm">{error.content}</div>
       )}
-      <div className="grid place-items-end pt-3">
+      <div className="grid place-items-end">
         <Button
           type="submit"
           disabled={pending}

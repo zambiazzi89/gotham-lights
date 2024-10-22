@@ -38,10 +38,34 @@ export async function sendMessage(prevState: unknown, formData: FormData) {
 
   const data = result.data
 
+  const otherUser = await db.conversation_participant.findMany({
+    where: {
+      conversation_id: data.conversationId,
+      NOT: {
+        participant_username: profile.username,
+      },
+    },
+  })
+
+  if (otherUser.length > 1) {
+    console.error(
+      `More than one participant found for conversation ID ${data.conversationId} other than ${profile.username}`
+    )
+    redirect('/error')
+  }
+
+  if (!otherUser.length) {
+    console.error(
+      `No other participant found for conversation ID ${data.conversationId} other than ${profile.username}`
+    )
+    redirect('/error')
+  }
+
   const message = await db.message.create({
     data: {
       conversation_id: data.conversationId,
       from_username: profile.username,
+      to_username: otherUser[0].participant_username,
       content: data.content,
     },
   })
