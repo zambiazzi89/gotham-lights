@@ -116,8 +116,10 @@ model reported_profile {
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
-  created_by_username String
-  created_by          profile @relation("reports_created", fields: [created_by_username], references: [username], onDelete: Cascade)
+  reason String
+
+  reported_by_username String
+  reported_by          profile @relation("reports_created", fields: [reported_by_username], references: [username], onDelete: Cascade)
 
   reported_username String
   reports_received  profile @relation("reports_received", fields: [reported_username], references: [username], onDelete: Cascade)
