@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/card'
 import UsernameDropdown from '@/components/UsernameDropdown'
 import { Signal } from '@/lib/types'
-import { RiHeart3Line, RiHeart3Fill } from 'react-icons/ri'
 import GoBackButton from './GoBackButton'
 
 export default function SignalCard({

@@ -22,8 +22,8 @@ export default function UsernameDropdown({ username }: { username: string }) {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`/report/${username}`} className="text-destructive">
-            Report
+          <Link href={`/block-report/${username}`} className="text-destructive">
+            Block | Report
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
