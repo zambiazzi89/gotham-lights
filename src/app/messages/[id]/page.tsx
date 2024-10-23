@@ -9,7 +9,7 @@ import {
   getConversationWithMessages,
   getConversationWithParticipants,
 } from './_actions/getConversationsAndMessages'
-import updateConversationAsRead from './_actions/setConversationAsRead'
+import updateConversationAsRead from './_actions/updateConversationAsRead'
 
 export default async function MessagesById({
   params: id,
