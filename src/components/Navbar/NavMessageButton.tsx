@@ -39,8 +39,6 @@ export default function NavMessageButton({
 
   const [hasNewMessages, setHasNewMessages] = useState(initialHasNewMessages)
 
-  // TO-DO: add channel for new conversations
-
   useEffect(() => {
     const message_channel = supabase
       .channel('message-channel')
