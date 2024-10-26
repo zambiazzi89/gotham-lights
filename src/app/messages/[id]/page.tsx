@@ -1,17 +1,17 @@
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import { redirect } from 'next/navigation'
-import RealtimeChat from './_components/RealtimeChat'
 import {
-  ConversationWithMessages,
   ConversationWithMessagesAndParticipants,
   ConversationWithParticipants,
 } from '@/lib/types'
 import {
-  getConversationWithMessages,
   getConversationWithMessagesAndParticipants,
   getConversationWithParticipants,
 } from './_actions/getConversationsAndMessages'
 import updateConversationAsRead from './_actions/updateConversationAsRead'
+import ConversationSnippets from './_components/ConversationSnippets'
+import { DialogConversations } from './_components/DialogConversations'
+import ChatContent from './_components/ChatContent'
 
 export default async function MessagesById({
   params: id,
@@ -50,11 +50,27 @@ export default async function MessagesById({
 
   return (
     <div className="w-full">
-      <RealtimeChat
-        username={profile.username}
-        conversations={conversations}
-        selectedConversation={selectedConversation}
-      />
+      <div className="h-full flex flex-col items-center lg:flex-row lg:p-4 gap-4">
+        <div className="hidden lg:block">
+          <ConversationSnippets
+            conversations={conversations}
+            username={profile.username}
+          />
+        </div>
+        <div className="lg:hidden">
+          <DialogConversations
+            conversations={conversations}
+            username={profile.username}
+          />
+        </div>
+        <div className="w-full">
+          <ChatContent
+            username={profile.username}
+            conversation={selectedConversation}
+            status={selectedConversation.status}
+          />
+        </div>
+      </div>
     </div>
   )
 }
