@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
-import { Textarea } from '@/components/ui/textarea'
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import { redirect } from 'next/navigation'
+import BlockUserForm from './_components/BlockUserForm'
+import ReportUserForm from './_components/ReportUserForm'
 
 export default async function BlockReport({
   params: id,
@@ -77,13 +77,11 @@ export default async function BlockReport({
               You have already blocked this user
             </div>
           )}
-          <Button
-            disabled={!!alreadyBlocked}
-            className="w-32"
-            variant={'destructive'}
-          >
-            Block
-          </Button>
+          <BlockUserForm
+            alreadyBlocked={!!alreadyBlocked}
+            currentUsername={profile.username}
+            usernameToBlock={username}
+          />
         </CardContent>
       </div>
       <DropdownMenuSeparator className="my-4" />
@@ -96,21 +94,12 @@ export default async function BlockReport({
               You have already reported this user
             </div>
           )}
-          <Textarea
-            disabled={!!alreadyReported}
-            className="w-full min-h-36"
-            placeholder="Reason for reporting"
-          />
         </CardContent>
-        <CardContent className="my-4">
-          <Button
-            disabled={!!alreadyReported}
-            className="w-32"
-            variant={'destructive'}
-          >
-            Report
-          </Button>
-        </CardContent>
+        <ReportUserForm
+          alreadyReported={!!alreadyReported}
+          currentUsername={profile.username}
+          usernameToReport={username}
+        />
       </div>
     </Card>
   )

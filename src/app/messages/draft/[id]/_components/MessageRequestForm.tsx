@@ -3,7 +3,6 @@
 import { CancelButtonWithDialog } from '@/components/AlertDialog'
 import SubmitButton from '@/components/SubmitButton'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Textarea } from '@/components/ui/textarea'
 import { useFormState } from 'react-dom'
 import { sendMessageRequest } from '../_actions/sendMessageRequestAction'
 import { Input } from '@/components/ui/input'
