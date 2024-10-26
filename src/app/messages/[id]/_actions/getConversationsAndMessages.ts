@@ -3,6 +3,7 @@
 import db from '@/db/db'
 import {
   ConversationWithMessages,
+  ConversationWithMessagesAndParticipants,
   ConversationWithParticipants,
 } from '@/lib/types'
 
@@ -51,5 +52,34 @@ export async function getConversationWithMessages(
       },
     })
 
+  return selectedConversation
+}
+
+export async function getConversationWithMessagesAndParticipants(
+  username: string,
+  conversationId: string
+) {
+  const selectedConversation: ConversationWithMessagesAndParticipants | null =
+    await db.conversation.findUnique({
+      where: {
+        conversation_participants: {
+          some: { participant_username: username },
+        },
+        id: conversationId,
+      },
+      include: {
+        messages: {
+          orderBy: {
+            created_at: 'asc',
+          },
+        },
+        conversation_participants: {
+          select: {
+            participant_username: true,
+          },
+          where: { participant_username: { not: username } },
+        },
+      },
+    })
   return selectedConversation
 }

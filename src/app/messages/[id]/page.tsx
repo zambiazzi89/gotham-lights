@@ -3,10 +3,12 @@ import { redirect } from 'next/navigation'
 import RealtimeChat from './_components/RealtimeChat'
 import {
   ConversationWithMessages,
+  ConversationWithMessagesAndParticipants,
   ConversationWithParticipants,
 } from '@/lib/types'
 import {
   getConversationWithMessages,
+  getConversationWithMessagesAndParticipants,
   getConversationWithParticipants,
 } from './_actions/getConversationsAndMessages'
 import updateConversationAsRead from './_actions/updateConversationAsRead'
@@ -27,8 +29,11 @@ export default async function MessagesById({
   const conversations: ConversationWithParticipants[] =
     await getConversationWithParticipants(profile.username)
 
-  const selectedConversation: ConversationWithMessages | null =
-    await getConversationWithMessages(profile.username, conversationId)
+  const selectedConversation: ConversationWithMessagesAndParticipants | null =
+    await getConversationWithMessagesAndParticipants(
+      profile.username,
+      conversationId
+    )
 
   if (!selectedConversation) {
     console.error('No conversation found for id', conversationId)

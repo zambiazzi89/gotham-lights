@@ -96,6 +96,18 @@ export type ConversationWithMessages = {
   conversation_participants?: ConversationParticipant[]
 }
 
+export type ConversationWithMessagesAndParticipants = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  status: string
+  last_message: string
+  last_sent_by: string
+  read: boolean
+  messages: Message[]
+  conversation_participants: ConversationParticipant[]
+}
+
 export type ConversationParticipant = {
   participant_username: string
 }

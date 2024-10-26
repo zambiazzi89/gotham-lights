@@ -3,6 +3,7 @@ import ChatContent from './ChatContent'
 import { DialogConversations } from './DialogConversations'
 import {
   ConversationWithMessages,
+  ConversationWithMessagesAndParticipants,
   ConversationWithParticipants,
 } from '@/lib/types'
 
@@ -13,7 +14,7 @@ export default function RealtimeChat({
 }: {
   username: string
   conversations: ConversationWithParticipants[]
-  selectedConversation: ConversationWithMessages
+  selectedConversation: ConversationWithMessagesAndParticipants
 }) {
   return (
     <div className="h-full flex flex-col items-center lg:flex-row lg:p-4 gap-4">

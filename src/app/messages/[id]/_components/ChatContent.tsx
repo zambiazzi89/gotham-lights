@@ -2,7 +2,15 @@ import { Card } from '@/components/ui/card'
 import ChatMessages from './ChatMessages'
 import MessageRequestApproval from './MessageRequestApproval'
 import ChatTextarea from './ChatTextarea'
-import { ConversationWithMessages } from '@/lib/types'
+import { ConversationWithMessagesAndParticipants } from '@/lib/types'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { MdMoreVert } from 'react-icons/md'
+import Link from 'next/link'
 
 export default function ChatContent({
   username,
@@ -10,11 +18,33 @@ export default function ChatContent({
   status,
 }: {
   username: string
-  conversation: ConversationWithMessages
+  conversation: ConversationWithMessagesAndParticipants
   status: string
 }) {
+  const recipientUsername =
+    conversation.conversation_participants[0].participant_username
+
   return (
     <Card className="bg-secondary flex flex-col flex-grow p-4">
+      <div className="flex p-4 justify-end">
+        <div>{recipientUsername}</div>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <MdMoreVert className="text-xl" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>
+              <Link
+                href={`/block-report/${recipientUsername}`}
+                className="text-destructive"
+              >
+                Block | Report
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <ChatMessages username={username} messages={conversation.messages} />
       {status === 'Pending' ? (
         <div className="h-[50%] flex flex-col items-center justify-center">
