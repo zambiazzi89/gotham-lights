@@ -2,10 +2,19 @@ import db from '@/db/db'
 import { Conversation } from '@/lib/types'
 import { redirect } from 'next/navigation'
 
-export default async function MessageBox({ username }: { username: string }) {
+export default async function MessageBox({
+  username,
+  allBlocks,
+}: {
+  username: string
+  allBlocks: string[]
+}) {
   const conversations: Conversation[] = await db.conversation.findMany({
     where: {
-      conversation_participants: { some: { participant_username: username } },
+      conversation_participants: {
+        some: { participant_username: username },
+        every: { participant_username: { notIn: allBlocks } },
+      },
     },
     orderBy: {
       updated_at: 'desc',

@@ -19,7 +19,7 @@ export default async function MessagesById({
   params: { id: string }
 }) {
   const { id: conversationId } = id
-  const profile = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
 
   if (!profile.username) {
     console.error('No username found for profile')
@@ -27,12 +27,13 @@ export default async function MessagesById({
   }
 
   const conversations: ConversationWithParticipants[] =
-    await getConversationWithParticipants(profile.username)
+    await getConversationWithParticipants(profile.username, allBlocks)
 
   const selectedConversation: ConversationWithMessagesAndParticipants | null =
     await getConversationWithMessagesAndParticipants(
       profile.username,
-      conversationId
+      conversationId,
+      allBlocks
     )
 
   if (!selectedConversation) {

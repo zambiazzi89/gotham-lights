@@ -11,7 +11,7 @@ export default async function MessageDraft({
   params: { id: string }
 }) {
   const { id: toUsername } = id
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
 
   if (profile.username) {
     const conversationExists = await db.conversation.findMany({

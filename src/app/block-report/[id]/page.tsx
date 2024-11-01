@@ -13,7 +13,7 @@ export default async function BlockReport({
 }) {
   const { id: username } = id
 
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
 
   // If no profile
   if (!profile) {

@@ -6,7 +6,7 @@ import MySignalsCard from './_components/MySignalsCard'
 import MyCommentsCard from './_components/MyCommentsCard'
 
 export default async function MyActivity() {
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
   const mySignals = profile.username
     ? await db.signal.findMany({
         where: {

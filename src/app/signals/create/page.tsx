@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default async function CreateSignal() {
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
   return (
     <>
       <div className="flex flex-col justify-center items-center">

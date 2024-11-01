@@ -32,7 +32,7 @@ const formSchema = z.object({
 
 export async function addSignal(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
 
   if (!profile.username) {
     console.error('No username found for profile')

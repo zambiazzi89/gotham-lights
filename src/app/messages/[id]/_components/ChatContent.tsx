@@ -26,14 +26,14 @@ export default function ChatContent({
 
   return (
     <Card className="bg-secondary flex flex-col flex-grow p-4">
-      <div className="flex p-4 justify-end">
+      <div className="flex pt-2 pb-4 justify-end">
         <div>{recipientUsername}</div>
 
         <DropdownMenu>
           <DropdownMenuTrigger>
             <MdMoreVert className="text-xl" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className=" bg-secondary">
             <DropdownMenuItem>
               <Link
                 href={`/block-report/${recipientUsername}`}

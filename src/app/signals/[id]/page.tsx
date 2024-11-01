@@ -9,7 +9,7 @@ export default async function UniqueSignal({
 }: {
   params: { id: string }
 }) {
-  const profile = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
   const { id: signalId } = id
 
   const signal = await db.signal.findUnique({

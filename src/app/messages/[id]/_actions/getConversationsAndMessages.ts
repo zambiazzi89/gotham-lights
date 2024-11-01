@@ -7,12 +7,16 @@ import {
   ConversationWithParticipants,
 } from '@/lib/types'
 
-export async function getConversationWithParticipants(username: string) {
+export async function getConversationWithParticipants(
+  username: string,
+  allBlocks: string[]
+) {
   const conversations: ConversationWithParticipants[] =
     await db.conversation.findMany({
       where: {
         conversation_participants: {
           some: { participant_username: username },
+          every: { participant_username: { notIn: allBlocks } },
         },
       },
       include: {
@@ -57,13 +61,15 @@ export async function getConversationWithMessages(
 
 export async function getConversationWithMessagesAndParticipants(
   username: string,
-  conversationId: string
+  conversationId: string,
+  allBlocks: string[]
 ) {
   const selectedConversation: ConversationWithMessagesAndParticipants | null =
     await db.conversation.findUnique({
       where: {
         conversation_participants: {
           some: { participant_username: username },
+          every: { participant_username: { notIn: allBlocks } },
         },
         id: conversationId,
       },

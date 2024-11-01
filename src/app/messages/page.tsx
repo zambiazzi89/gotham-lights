@@ -4,12 +4,12 @@ import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfil
 import MessageBox from './_components/MessageBox'
 
 export default async function Messages() {
-  const profile = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
 
   return (
     <div className="w-full">
       {profile.username ? (
-        <MessageBox username={profile.username} />
+        <MessageBox username={profile.username} allBlocks={allBlocks} />
       ) : (
         <div className="grid place-items-center">
           <div className="flex flex-col items-center">
