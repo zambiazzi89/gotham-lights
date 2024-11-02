@@ -19,7 +19,7 @@ const formSchema = z.object({
 
 export async function addComment(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in and has username
-  const { profile } = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
 
   if (!profile.username) {
     console.error('No username found for profile')
@@ -33,6 +33,19 @@ export async function addComment(prevState: unknown, formData: FormData) {
   }
 
   const resultData = result.data
+
+  // Check if ID exists and if it wasn't created by a blocked username
+  const isSignalValid = await db.signal.count({
+    where: {
+      id: resultData.signalId,
+      created_by_username: { notIn: allBlocks },
+    },
+  })
+
+  if (!isSignalValid) {
+    console.error('Signal is not valid')
+    redirect('/error')
+  }
 
   await db.comment.create({
     data: {

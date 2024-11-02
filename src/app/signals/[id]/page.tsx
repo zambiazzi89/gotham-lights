@@ -3,24 +3,29 @@ import SignalCard from './_components/SignalCard'
 import CommentSection from './_components/CommentSection'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MySignalCard from './_components/MySignalCard'
+import GoBackButton from './_components/GoBackButton'
 
 export default async function UniqueSignal({
   params: id,
 }: {
   params: { id: string }
 }) {
-  const { profile } = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
   const { id: signalId } = id
 
   const signal = await db.signal.findUnique({
     include: {
-      comments: { include: { profile: { select: { username: true } } } },
+      comments: {
+        where: { created_by_username: { notIn: allBlocks } },
+        include: { profile: { select: { username: true } } },
+      },
       profile: {
         select: { username: true },
       },
     },
     where: {
       id: signalId,
+      created_by_username: { notIn: allBlocks },
     },
   })
 
@@ -40,7 +45,10 @@ export default async function UniqueSignal({
           />
         </div>
       ) : (
-        <div>Signal not found</div>
+        <div className="flex flex-col items-center gap-4">
+          <div>Signal not found</div>
+          <GoBackButton />
+        </div>
       )}
     </div>
   )

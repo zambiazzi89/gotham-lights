@@ -2,6 +2,7 @@
 
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const formSchema = z.object({
@@ -20,6 +21,11 @@ export async function editComment(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
   const { profile } = await getDbProfileFromServer()
 
+  if (!profile || !profile.username) {
+    console.error('Profile or username not found')
+    redirect('/error')
+  }
+
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
 
   if (!result.success) {
@@ -29,7 +35,7 @@ export async function editComment(prevState: unknown, formData: FormData) {
   const resultData = result.data
 
   await db.comment.update({
-    where: { id: resultData.commentId },
+    where: { id: resultData.commentId, created_by_username: profile.username },
     data: { content: resultData.content },
   })
 }

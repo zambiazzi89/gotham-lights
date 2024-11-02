@@ -2,6 +2,7 @@
 
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const formSchema = z.object({
@@ -34,6 +35,11 @@ export async function editSignal(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
   const { profile } = await getDbProfileFromServer()
 
+  if (!profile || !profile.username) {
+    console.error('Profile or username not found')
+    redirect('/error')
+  }
+
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
 
   if (!result.success) {
@@ -43,7 +49,7 @@ export async function editSignal(prevState: unknown, formData: FormData) {
   const resultData = result.data
 
   await db.signal.update({
-    where: { id: resultData.signalId },
+    where: { id: resultData.signalId, created_by_username: profile.username },
     data: {
       title: resultData.title,
       location_name: resultData.location_name,

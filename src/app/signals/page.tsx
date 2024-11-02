@@ -3,9 +3,17 @@ import db from '@/db/db'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import MyLocationButton from './_components/MyLocationButton'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 
 export default async function Signals() {
-  const signals = await db.signal.findMany({})
+  // Only perform the action if user is logged in
+  const { allBlocks } = await getDbProfileFromServer()
+
+  const signals = await db.signal.findMany({
+    where: {
+      created_by_username: { notIn: allBlocks },
+    },
+  })
 
   return (
     <div className="h-full w-full grid grid-rows-layout-signals">
