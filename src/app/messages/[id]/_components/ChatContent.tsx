@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { MdMoreVert } from 'react-icons/md'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export default function ChatContent({
   username,
@@ -21,6 +22,14 @@ export default function ChatContent({
   conversation: ConversationWithMessagesAndParticipants
   status: string
 }) {
+  if (!conversation.conversation_participants[0]) {
+    console.error(
+      'Invalid scenario, conversation_participants[0] is undefined',
+      conversation
+    )
+    redirect('/error')
+  }
+
   const recipientUsername =
     conversation.conversation_participants[0].participant_username
 

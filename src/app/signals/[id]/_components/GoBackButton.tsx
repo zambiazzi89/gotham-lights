@@ -4,10 +4,10 @@ import { IoIosArrowBack } from 'react-icons/io'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
-export default function GoBackButton() {
+export default function GoBackButton({ route }: { route: string }) {
   const router = useRouter()
   return (
-    <Button onClick={() => router.push('/signals')}>
+    <Button onClick={() => router.push(route)}>
       <IoIosArrowBack />
     </Button>
   )

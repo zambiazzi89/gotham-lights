@@ -115,6 +115,20 @@ function ReactGoogleMap({
   const zoomParam = Number(searchParams.get('zoom'))
   const viewAll = Boolean(searchParams.get('viewAll'))
 
+  const paramsCenter: LatLong = {
+    lat: Number(searchParams.get('lat')),
+    lng: Number(searchParams.get('lng')),
+  }
+  const defaultCenter: LatLong = {
+    lat: 40.7394225,
+    lng: -73.990602,
+  }
+
+  const firstSignalCenter: LatLong = {
+    lat: signals[0]?.latitude || defaultCenter.lat,
+    lng: signals[0]?.longitude || defaultCenter.lng,
+  }
+
   // Update zoom if it's coming from Params
   useEffect(() => {
     if (zoomParam && zoomParam !== map?.getZoom()) {
@@ -126,7 +140,10 @@ function ReactGoogleMap({
   useEffect(() => {
     if (viewAll) {
       map?.moveCamera({
-        center: { lat: signals[0].latitude, lng: signals[0].longitude },
+        center: {
+          lat: signals[0]?.latitude || defaultCenter.lat,
+          lng: signals[0]?.longitude || defaultCenter.lng,
+        },
         zoom: 15,
       })
       const bounds = map?.getBounds()
@@ -141,20 +158,6 @@ function ReactGoogleMap({
       }
     }
   }, [viewAll])
-
-  const paramsCenter: LatLong = {
-    lat: Number(searchParams.get('lat')),
-    lng: Number(searchParams.get('lng')),
-  }
-  const defaultCenter: LatLong = {
-    lat: 40.7394225,
-    lng: -73.990602,
-  }
-
-  const firstSignalCenter: LatLong = {
-    lat: signals[0].latitude,
-    lng: signals[0].longitude,
-  }
 
   const center = paramsExist
     ? paramsCenter

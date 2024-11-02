@@ -47,7 +47,7 @@ export default async function UniqueSignal({
       ) : (
         <div className="flex flex-col items-center gap-4">
           <div>Signal not found</div>
-          <GoBackButton />
+          <GoBackButton route={'/signals'} />
         </div>
       )}
     </div>

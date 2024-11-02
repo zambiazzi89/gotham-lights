@@ -1,10 +1,9 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import UnblockButton from './_components/UnblockButton'
 
 export default async function BlockedContacts() {
-  const { profile, blockedUsernames } = await getDbProfileFromServer()
+  const { blockedUsernames } = await getDbProfileFromServer()
 
   return (
     <Card className="bg-secondary p-4 w-[80svw] lg:w-[50svw] grid place-items-center">

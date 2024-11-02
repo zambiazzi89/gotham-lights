@@ -10,6 +10,7 @@ export default async function getDbProfileFromServer() {
     include: {
       blocks_created: true,
       blocks_received: true,
+      reports_created: true,
     },
   })
 
@@ -28,5 +29,13 @@ export default async function getDbProfileFromServer() {
 
   const allBlocks = [...blockedUsernames, ...blockedByUsernames]
 
-  return { profile, blockedUsernames, blockedByUsernames, allBlocks }
+  const reportedUsernames = profile.reports_created
+
+  return {
+    profile,
+    blockedUsernames,
+    blockedByUsernames,
+    allBlocks,
+    reportedUsernames,
+  }
 }
