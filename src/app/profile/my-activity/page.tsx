@@ -3,6 +3,7 @@ import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MySignalsCard from './_components/MySignalsCard'
 import MyCommentsCard from './_components/MyCommentsCard'
+import GoBackButton from '@/app/signals/[id]/_components/GoBackButton'
 
 export default async function MyActivity() {
   const { profile, allBlocks } = await getDbProfileFromServer()
@@ -37,8 +38,9 @@ export default async function MyActivity() {
     : []
 
   return (
-    <div className="grid place-items-center">
-      <Card className="p-4 flex flex-col gap-2 lg:px-12 max-w-[90svw]">
+    <div className="flex gap-4">
+      <GoBackButton route={'/profile'} styles={'h-auto'} variant="secondary" />
+      <Card className="py-8 flex flex-col gap-2 lg:px-12 max-w-[90svw]">
         <div className="font-bold">My Signals</div>
         {!mySignals.length && (
           <div className="text-muted-foreground">No signals to display</div>
