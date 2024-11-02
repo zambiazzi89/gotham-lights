@@ -8,7 +8,7 @@ export default function LandingPage() {
           <h2 className="text-center text-2xl">
             Crushed on a stranger in NYC?
           </h2>
-          <h2 className="font-medium text-2xl text-primary">
+          <h2 className="py-4 font-medium text-2xl text-primary">
             Send them a signal!
           </h2>
         </div>

@@ -59,6 +59,7 @@ export default function NavMessageButton({
               conversationIdsString.concat(',', payload.new.conversation_id)
             )
             console.log('Revalidate pathname')
+            document.title = 'gotham lights (new message!)'
           }
         }
       )
@@ -69,7 +70,13 @@ export default function NavMessageButton({
           console.log('Message Subscription status', status)
         }
       })
+    return () => {
+      console.log('Unsubscribing from message_channel')
+      supabase.removeChannel(message_channel)
+    }
+  }, [])
 
+  useEffect(() => {
     const conversation_channel = supabase
       .channel('conversation-channel')
       .on(
@@ -84,6 +91,9 @@ export default function NavMessageButton({
           console.log('Change received!', payload, username)
           if (payload.new.last_sent_by !== username) {
             setHasNewMessages(!payload.new.read)
+            payload.new.read
+              ? (document.title = 'gotham lights')
+              : (document.title = 'gotham lights (new message!)')
             console.log('Has new messages? ', !payload.new.read)
             revalidatePathAction(pathname)
             console.log('Revalidate pathname')
@@ -97,14 +107,12 @@ export default function NavMessageButton({
           console.log('Conversation Subscription status', status)
         }
       })
+
     return () => {
-      console.log('Unsubscribing from channel')
-      supabase.removeChannel(message_channel)
+      console.log('Unsubscribing from conversation_channel')
       supabase.removeChannel(conversation_channel)
     }
   }, [conversationIdsString])
-
-  console.log(username, 'hasNewMessages', hasNewMessages)
 
   return (
     <NavButton

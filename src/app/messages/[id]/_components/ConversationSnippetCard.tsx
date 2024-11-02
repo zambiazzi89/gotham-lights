@@ -31,7 +31,7 @@ export default function ConversationSnippetCard({
         selected ? 'bg-primary-20' : 'bg-muted'
       }`}
     >
-      <div className="p-4 ">
+      <div className="p-4 flex-grow">
         <div className="flex justify-between">
           <div className="font-bold">{to_username}</div>
           {status === 'Pending' && <MdLockClock />}
