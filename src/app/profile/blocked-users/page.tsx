@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import UnblockButton from './_components/UnblockButton'
 
 export default async function BlockedContacts() {
   const { profile, blockedUsernames } = await getDbProfileFromServer()
@@ -16,7 +17,7 @@ export default async function BlockedContacts() {
             {blockedUsernames.map((blockedUser, i) => (
               <div key={i} className="flex items-center gap-4 py-2">
                 <div className="flex-grow">{blockedUser}</div>
-                <Button variant={'default'}>Unblock</Button>
+                <UnblockButton username={blockedUser} />
               </div>
             ))}
           </div>
