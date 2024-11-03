@@ -16,7 +16,7 @@ export default async function Navbar() {
   const { data, error } = await supabase.auth.getUser()
 
   if (error) {
-    console.error('Error fetching user data: ', error)
+    console.error('Error fetching user data:', error.message)
   }
 
   const profile = data.user
@@ -26,16 +26,10 @@ export default async function Navbar() {
       })) as ProfileWithConversations)
     : null
 
-  const conversations = await getConversations(profile)
-
-  if (profile?.username && profile?.conversations) {
-    const conversations = await db.conversation_participant.findMany({
-      select: {
-        conversation_id: true,
-      },
-      where: { participant_username: profile.username },
-    })
-  }
+  const conversations =
+    profile?.username && profile?.conversations
+      ? await getConversations(profile)
+      : []
 
   return (
     <div className="flex px-2 items-center justify-between">

@@ -6,11 +6,17 @@ import { Profile } from '@/lib/types'
 import { useFormState, useFormStatus } from 'react-dom'
 import { updateUserProfile } from '../_actions/profileActions'
 import { Label } from '@/components/ui/label'
+import { MdOutlineInfo } from 'react-icons/md'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
   const [error, action] = useFormState(updateUserProfile, {})
   return (
-    <div className="w-[32rem] max-w-[80dvw] bg-secondary p-4 rounded shadow-md font-medium">
+    <div className="w-[32rem] max-w-[80dvw] bg-secondary p-8 rounded shadow-md font-medium">
       <div className="font-semibold text-lg my-3">Hi {profile.first_name}!</div>
       <div className="text-md mb-4">Here's your profile information:</div>
       <div>
@@ -44,7 +50,19 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               pattern="[a-zA-Z]+"
             />
 
-            <Label className="leading-8">Username</Label>
+            <div className="flex items-center">
+              <Label className="leading-8">Username</Label>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <MdOutlineInfo className="mx-2" />
+                </HoverCardTrigger>
+                <HoverCardContent className="text-sm">
+                  <p className="font-light text-sm my-2">
+                    Username must be alphanumeric and 4 to 12 characters long
+                  </p>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
             <Input
               defaultValue={`${profile.username || ''}`}
               placeholder="Pick a username"
@@ -58,10 +76,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               className={`${!profile.first_name && 'border-red-500'}`}
             />
           </div>
-          <p className="font-light text-sm my-2">
-            Username must be alphanumeric and 4 to 12 characters long
-          </p>
-          <div className="pt-5 p-4">
+
+          <div className="pt-5 place-self-end">
             <SubmitButton />
           </div>
         </form>
@@ -82,7 +98,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
 function SubmitButton() {
   const { pending } = useFormStatus()
   return (
-    <Button className="text-sm w-full" type="submit" disabled={pending}>
+    <Button className="text-sm" type="submit" disabled={pending}>
       {pending ? 'Saving' : 'Update'}
     </Button>
   )

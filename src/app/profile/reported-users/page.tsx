@@ -14,7 +14,7 @@ export default async function ReportedUsers() {
         <CardTitle className="py-4 text-center">Reported Users</CardTitle>
         <CardContent>
           {!reportedUsernames.length ? (
-            <div>You have not blocked any users.</div>
+            <div>You have not reported any users.</div>
           ) : (
             <div>
               {reportedUsernames.map((reportedUser, i) => (
