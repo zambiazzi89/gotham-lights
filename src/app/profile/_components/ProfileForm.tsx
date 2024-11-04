@@ -39,8 +39,10 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               required
               className={`${!profile.first_name && 'border-red-500'}`}
             />
-
-            <Label className="leading-8">Last name</Label>
+            <div className="flex items-center">
+              <Label className="leading-8">Last name</Label>
+              <div className="pl-2 font-thin text-xs">(Optional)</div>
+            </div>
             <Input
               defaultValue={`${profile.last_name || ''}`}
               placeholder="Enter your last name"
