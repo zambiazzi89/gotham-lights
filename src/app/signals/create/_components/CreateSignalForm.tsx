@@ -10,23 +10,16 @@ import { useFormState } from 'react-dom'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
 import SubmitButton from '@/components/SubmitButton'
 import { Card, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { MdOutlineInfo } from 'react-icons/md'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import SubwayLineButton, {
-  SubwayLineLogo,
-} from '@/components/Subway/SubwayLineButton'
-import { SUBWAY_LINES, subwayLine } from '@/data/SubwayLines'
+import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
+import { subwayLine } from '@/data/SubwayLines'
 import SubwayPopover from '@/components/Subway/SubwayPopover'
+import { Button } from '@/components/ui/button'
 
 export default function CreateSignalForm() {
   const [selectedLocation, setSelectedLocation] =
@@ -72,6 +65,12 @@ export default function CreateSignalForm() {
             />
             {selectedSubwayLine && (
               <div className="ml-auto px-2">
+                <Button
+                  variant={'ghost'}
+                  onClick={() => setSelectedSubwayLine(null)}
+                >
+                  Clear
+                </Button>
                 <SubwayLineLogo subwayLine={selectedSubwayLine} />
               </div>
             )}

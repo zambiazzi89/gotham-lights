@@ -1,4 +1,5 @@
 import { subwayLine } from '@/data/SubwayLines'
+import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
 
 export default function SubwayLineButton({
@@ -33,5 +34,19 @@ export function SubwayLineLogo({ subwayLine }: { subwayLine: subwayLine }) {
         {subwayLine.line}
       </div>
     </div>
+  )
+}
+
+export function SubwayLineLink({ subwayLine }: { subwayLine: subwayLine }) {
+  return (
+    <Link href={`/signals/subway-line/${subwayLine.line}`}>
+      <div
+        className={`rounded-full ${subwayLine.bgColor} w-6 h-6 grid place-items-center`}
+      >
+        <div className={` ${subwayLine.textColor} font-sans font-semibold`}>
+          {subwayLine.line}
+        </div>
+      </div>
+    </Link>
   )
 }

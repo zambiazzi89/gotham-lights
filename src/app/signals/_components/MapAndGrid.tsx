@@ -5,8 +5,15 @@ import { LatLong, Signal } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import ReactGoogleMap from '@/components/ReactGoogleMap'
 import GoogleAutocompleteInput from '@/components/googleAutocomplete'
+import { subwayLine } from '@/data/SubwayLines'
 
-export default function MapAndGrid({ signals }: { signals: Signal[] }) {
+export default function MapAndGrid({
+  signals,
+  selectedSubwayLine,
+}: {
+  signals: Signal[]
+  selectedSubwayLine?: subwayLine
+}) {
   const [boundsNE, setBoundsNE] = useState<LatLong>()
   const [boundsSW, setBoundsSW] = useState<LatLong>()
   const [signalsInBound, setSignalsInBound] = useState<Signal[]>([])
@@ -41,7 +48,10 @@ export default function MapAndGrid({ signals }: { signals: Signal[] }) {
           />
         </div>
       </div>
-      <SignalCardGrid signalsInBound={signalsInBound} />
+      <SignalCardGrid
+        signalsInBound={signalsInBound}
+        selectedSubwayLine={selectedSubwayLine}
+      />
     </div>
   )
 }

@@ -23,7 +23,7 @@ export default function GoBackButton({
   return (
     <Button
       className={`${styles}`}
-      onClick={() => router.push(route)}
+      onClick={() => router.back()}
       variant={variant}
     >
       <IoIosArrowBack />
