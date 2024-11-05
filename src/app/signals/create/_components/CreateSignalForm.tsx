@@ -53,7 +53,12 @@ export default function CreateSignalForm() {
           <div className="flex items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant={'link'}>Subway Lines</Button>
+                <Button
+                  variant={'ghost'}
+                  className="bg-background hover:bg-primary-20"
+                >
+                  Subway Lines
+                </Button>
               </PopoverTrigger>
               <PopoverContent className="max-w-80 bg-secondary flex flex-wrap">
                 {SUBWAY_LINES.map((lineGroup, i) => (
@@ -69,14 +74,13 @@ export default function CreateSignalForm() {
                 ))}
               </PopoverContent>
             </Popover>
-            <div className="text-xs px-2">(Optional)</div>
             <HoverCard>
               <HoverCardTrigger>
                 <MdOutlineInfo className="mx-2" />
               </HoverCardTrigger>
               <HoverCardContent className="text-sm">
                 <p className="font-light text-sm my-2">
-                  You can select a subway line if it happened on the subway
+                  Optional - Did it happen on the subway?
                 </p>
               </HoverCardContent>
             </HoverCard>

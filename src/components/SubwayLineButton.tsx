@@ -16,7 +16,7 @@ export default function SubwayLineButton({
       }}
     >
       <div
-        className={`leading-4  ${subwayLine.textColor} font-sans font-semibold`}
+        className={`leading-4 h-4 ${subwayLine.textColor} font-sans font-semibold text-center`}
       >
         {subwayLine.line}
       </div>
@@ -29,9 +29,7 @@ export function SubwayLineLogo({ subwayLine }: { subwayLine: subwayLine }) {
     <div
       className={`rounded-full ${subwayLine.bgColor} w-6 h-6 grid place-items-center`}
     >
-      <div
-        className={`leading-4  ${subwayLine.textColor} font-sans font-semibold`}
-      >
+      <div className={` ${subwayLine.textColor} font-sans font-semibold`}>
         {subwayLine.line}
       </div>
     </div>

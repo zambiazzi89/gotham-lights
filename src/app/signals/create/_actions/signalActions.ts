@@ -14,6 +14,10 @@ const formSchema = z.object({
     .max(70, {
       message: 'Your signal title length must be between 5 and 70 characters.',
     }),
+
+  subway_line: z
+    .string()
+    .max(1, { message: 'Error processing the subway line' }),
   location_name: z.string(),
   location_lat: z.coerce.number(),
   location_lng: z.coerce.number(),
@@ -49,9 +53,12 @@ export async function addSignal(prevState: unknown, formData: FormData) {
 
   const data = result.data
 
+  const subwayLine = data.subway_line === '' ? null : data.subway_line
+
   await db.signal.create({
     data: {
       title: data.title,
+      subway_line: subwayLine,
       location_name: data.location_name,
       latitude: data.location_lat,
       longitude: data.location_lng,

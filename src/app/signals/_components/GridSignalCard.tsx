@@ -1,3 +1,4 @@
+import { SubwayLineLogo } from '@/components/SubwayLineButton'
 import {
   Card,
   CardContent,
@@ -6,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { SUBWAY_LINES, SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
 import { Signal } from '@/lib/types'
 
 export default function GridSignalCard({
@@ -17,10 +19,19 @@ export default function GridSignalCard({
     <Card className="shadow-md flex flex-col justify-between grow bg-secondary hover:bg-primary-20">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
-        <CardDescription>
-          {signalCardProps.location_name}
-          {' on '}
-          {signalCardProps.date_encounter.toLocaleDateString('en-US')}
+        <CardDescription className="flex py-1 items-center">
+          {signalCardProps.subway_line && (
+            <div className="pr-2">
+              <SubwayLineLogo
+                subwayLine={SUBWAY_LINES_JSON[signalCardProps.subway_line]}
+              />
+            </div>
+          )}
+          <div>
+            {signalCardProps.location_name}
+            {' on '}
+            {signalCardProps.date_encounter.toLocaleDateString('en-US')}
+          </div>
         </CardDescription>
       </CardHeader>
       <CardContent>

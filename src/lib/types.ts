@@ -7,6 +7,7 @@ export type Signal = {
   id: string
   created_at: Date
   updated_at: Date | null
+  subway_line: string | null
   location_name: string
   latitude: number
   longitude: number
@@ -29,6 +30,7 @@ export type SignalWithComment = {
   id: string
   created_at: Date
   updated_at: Date | null
+  subway_line: string | null
   location_name: string
   latitude: number
   longitude: number
