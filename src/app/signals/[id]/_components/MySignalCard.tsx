@@ -21,6 +21,8 @@ import { useState } from 'react'
 import { MdMoreVert } from 'react-icons/md'
 import { deleteSignal } from '@/app/profile/my-activity/_actions/deleteActions'
 import GoBackButton from './GoBackButton'
+import { SubwayLineLogo } from '@/components/SubwayLineButton'
+import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
 
 export default function SignalCard({
   signalCardProps,
@@ -56,7 +58,14 @@ export default function SignalCard({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <CardDescription>
+        <CardDescription className="flex py-1 items-center">
+          {signalCardProps.subway_line && (
+            <div className="pr-2">
+              <SubwayLineLogo
+                subwayLine={SUBWAY_LINES_JSON[signalCardProps.subway_line]}
+              />
+            </div>
+          )}
           {signalCardProps.location_name}
           {' on '}
           {signalCardProps.date_encounter.toLocaleDateString('en-US')}

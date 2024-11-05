@@ -9,6 +9,8 @@ import {
 import UsernameDropdown from '@/components/UsernameDropdown'
 import { Signal } from '@/lib/types'
 import GoBackButton from './GoBackButton'
+import { SubwayLineLogo } from '@/components/SubwayLineButton'
+import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
 
 export default function SignalCard({
   signalCardProps,
@@ -19,7 +21,14 @@ export default function SignalCard({
     <Card className="shadow-md flex flex-col justify-between">
       <CardHeader>
         <CardTitle>{signalCardProps.title}</CardTitle>
-        <CardDescription>
+        <CardDescription className="flex py-1 items-center">
+          {signalCardProps.subway_line && (
+            <div className="pr-2">
+              <SubwayLineLogo
+                subwayLine={SUBWAY_LINES_JSON[signalCardProps.subway_line]}
+              />
+            </div>
+          )}
           {signalCardProps.location_name} @{' '}
           {signalCardProps.date_encounter.toLocaleDateString('en-US')}
         </CardDescription>

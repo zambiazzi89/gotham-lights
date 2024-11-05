@@ -11,6 +11,11 @@ import { DatePicker } from './ui/DatePicker'
 import { Textarea } from './ui/textarea'
 import { Signal } from '@/lib/types'
 import SubmitButton from './SubmitButton'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { SUBWAY_LINES, SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
+import SubwayLineButton, { SubwayLineLogo } from './SubwayLineButton'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
+import { MdOutlineInfo } from 'react-icons/md'
 
 export default function EditSignalForm({
   signal,
@@ -26,6 +31,10 @@ export default function EditSignalForm({
     useState<google.maps.places.PlaceResult | null>(null)
   const [error, action] = useFormState(editSignal, {})
   const [date, setDate] = useState<Date | undefined>(signal.date_encounter)
+  const [selectedSubwayLine, setSelectedSubwayLine] =
+    useState<subwayLine | null>(
+      signal.subway_line ? SUBWAY_LINES_JSON[signal.subway_line] : null
+    )
 
   return (
     <form
@@ -47,6 +56,57 @@ export default function EditSignalForm({
         />
         {error?.title && (
           <div className="text-destructive text-sm">{error.title}</div>
+        )}
+      </div>
+      <div className="flex items-center">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'ghost'}
+              className="bg-background hover:bg-primary-20"
+            >
+              Subway Lines
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="max-w-80 bg-secondary flex flex-wrap">
+            {SUBWAY_LINES.map((lineGroup, i) => (
+              <div key={i} className="flex p-3 gap-2">
+                {lineGroup.map((line, i) => (
+                  <SubwayLineButton
+                    key={i}
+                    subwayLine={line}
+                    setSelectedSubwayLine={setSelectedSubwayLine}
+                  />
+                ))}
+              </div>
+            ))}
+          </PopoverContent>
+        </Popover>
+        <HoverCard>
+          <HoverCardTrigger>
+            <MdOutlineInfo className="mx-2" />
+          </HoverCardTrigger>
+          <HoverCardContent className="text-sm">
+            <p className="font-light text-sm my-2">
+              Optional - Did it happen on the subway?
+            </p>
+          </HoverCardContent>
+        </HoverCard>
+        <Input
+          name="subway_line"
+          value={selectedSubwayLine?.line || ''}
+          type="hidden"
+        />
+        {selectedSubwayLine && (
+          <div className="ml-auto px-2 flex items-center gap-2">
+            <Button
+              variant={'ghost'}
+              onClick={() => setSelectedSubwayLine(null)}
+            >
+              Clear
+            </Button>
+            <SubwayLineLogo subwayLine={selectedSubwayLine} />
+          </div>
         )}
       </div>
       <div className="my-2">
