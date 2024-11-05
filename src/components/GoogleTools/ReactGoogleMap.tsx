@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
 import { GoogleMap, Marker } from '@react-google-maps/api'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { darkMapStyles } from './darkMapStyles'
 
@@ -18,6 +18,7 @@ function ReactGoogleMap({
   const { theme } = useTheme()
 
   const router = useRouter()
+  const pathname = usePathname()
 
   const isLoaded = useGoogleAPIContext()
 
@@ -123,7 +124,7 @@ function ReactGoogleMap({
     const zoom = map?.getZoom()
     if (selectedLocation) {
       router.push(
-        `/signals?lat=${selectedLocation.lat()}&lng=${selectedLocation.lng()}&zoom=${zoom}`
+        `${pathname}?lat=${selectedLocation.lat()}&lng=${selectedLocation.lng()}&zoom=${zoom}`
       )
     }
   }
@@ -134,7 +135,7 @@ function ReactGoogleMap({
     const zoom = map?.getZoom()
     if (selectedLocation) {
       router.push(
-        `/signals?lat=${selectedLocation.lat()}&lng=${selectedLocation.lng()}&zoom=${zoom}`
+        `${pathname}?lat=${selectedLocation.lat()}&lng=${selectedLocation.lng()}&zoom=${zoom}`
       )
     }
   }

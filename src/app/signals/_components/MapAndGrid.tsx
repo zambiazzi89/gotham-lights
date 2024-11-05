@@ -1,7 +1,7 @@
 'use client'
 
 import SignalCardGrid from './SignalCardGrid'
-import { LatLong, Signal, SignalWithComment } from '@/lib/types'
+import { LatLong, SignalWithComment } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import ReactGoogleMap from '@/components/GoogleTools/ReactGoogleMap'
 import GoogleAutocompleteInput from '@/components/GoogleTools/googleAutocomplete'

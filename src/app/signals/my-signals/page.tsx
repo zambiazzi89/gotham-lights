@@ -1,25 +1,23 @@
-import MapAndGrid from '../../_components/MapAndGrid'
 import db from '@/db/db'
+import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { redirect } from 'next/navigation'
+import MapAndGrid from '../_components/MapAndGrid'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import MyLocationButton from '../../_components/MyLocationButton'
-import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
-import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
+import MyLocationButton from '../_components/MyLocationButton'
 
-export default async function Signals({
-  params: id,
-}: {
-  params: { id: string }
-}) {
+export default async function MySignals() {
   // Only perform the action if user is logged in
-  const { allBlocks } = await getDbProfileFromServer()
+  const { profile } = await getDbProfileFromServer()
 
-  const subwayLine = id.id
+  if (!profile.username) {
+    console.error('User does not have a username')
+    redirect('/error/missing-username')
+  }
 
   const signals = await db.signal.findMany({
     where: {
-      created_by_username: { notIn: allBlocks },
-      subway_line: subwayLine,
+      created_by_username: profile.username,
     },
     include: {
       comments: true,
@@ -31,10 +29,7 @@ export default async function Signals({
 
   return (
     <div className="h-full w-full grid grid-rows-layout-signals">
-      <MapAndGrid
-        signals={signals}
-        selectedSubwayLine={SUBWAY_LINES_JSON[subwayLine]}
-      />
+      <MapAndGrid signals={signals} />
       <div className="h-14 px-4 flex justify-between items-center gap-4">
         <div className="flex gap-4">
           <Link href="/signals?viewAll=true">

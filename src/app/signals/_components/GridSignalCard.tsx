@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
-import { Signal, SignalWithComment } from '@/lib/types'
+import { SignalWithComment } from '@/lib/types'
 import { BiCommentDetail } from 'react-icons/bi'
 
 export default function GridSignalCard({
