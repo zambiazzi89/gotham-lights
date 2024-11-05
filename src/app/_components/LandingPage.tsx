@@ -1,4 +1,4 @@
-import GoogleAutocompleteInput from '@/components/googleAutocomplete'
+import GoogleAutocompleteInput from '@/components/GoogleTools/googleAutocomplete'
 
 export default function LandingPage() {
   return (

@@ -13,6 +13,9 @@ export default async function Signals() {
     where: {
       created_by_username: { notIn: allBlocks },
     },
+    include: {
+      comments: true,
+    },
     orderBy: {
       created_at: 'desc',
     },

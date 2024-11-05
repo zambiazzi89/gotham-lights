@@ -37,9 +37,7 @@ export function SubwayPopoverLinks() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant={'ghost'} className="bg-background hover:bg-primary-20">
-          Subway Lines
-        </Button>
+        <Button variant={'outline'}>Subway Lines</Button>
       </PopoverTrigger>
       <PopoverContent className="max-w-80 bg-secondary flex flex-wrap">
         {SUBWAY_LINES.map((lineGroup, i) => (

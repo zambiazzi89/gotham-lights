@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Input } from './ui/input'
+import { Input } from '../ui/input'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { useRouter } from 'next/navigation'
 

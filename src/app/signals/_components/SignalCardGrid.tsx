@@ -1,6 +1,6 @@
 import GridSignalCard from './GridSignalCard'
 import Link from 'next/link'
-import { Signal } from '@/lib/types'
+import { Signal, SignalWithComment } from '@/lib/types'
 import { SubwayPopoverLinks } from '@/components/Subway/SubwayPopover'
 import { subwayLine } from '@/data/SubwayLines'
 import {
@@ -16,7 +16,7 @@ export default function SignalCardGrid({
   signalsInBound,
   selectedSubwayLine,
 }: {
-  signalsInBound: Signal[]
+  signalsInBound: SignalWithComment[]
   selectedSubwayLine?: subwayLine
 }) {
   return (
@@ -31,6 +31,9 @@ export default function SignalCardGrid({
             </div>
           )}
         </div>
+        <Link href={'/signals/my-signals'}>
+          <Button variant={'outline'}>My Signals</Button>
+        </Link>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant={'outline'}>Order</Button>
@@ -38,6 +41,7 @@ export default function SignalCardGrid({
           <DropdownMenuContent>
             <DropdownMenuItem>Published Date</DropdownMenuItem>
             <DropdownMenuItem>Encounter Date</DropdownMenuItem>
+            <DropdownMenuItem>Most Commented</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

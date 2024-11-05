@@ -7,13 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { SUBWAY_LINES, SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
-import { Signal } from '@/lib/types'
+import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
+import { Signal, SignalWithComment } from '@/lib/types'
+import { BiCommentDetail } from 'react-icons/bi'
 
 export default function GridSignalCard({
   signalCardProps,
 }: {
-  signalCardProps: Signal
+  signalCardProps: SignalWithComment
 }) {
   return (
     <Card className="shadow-md flex flex-col justify-between grow bg-secondary hover:bg-primary-20">
@@ -39,8 +40,12 @@ export default function GridSignalCard({
           {signalCardProps.content.substring(0, 100)}...
         </p>
       </CardContent>
-      <CardFooter className="self-end">
-        <div className="flex text-sm text-right text-muted-foreground mt-4">
+      <CardFooter className="flex justify-between items-center pt-4">
+        <div className="flex items-center gap-2 font-sans text-muted-foreground">
+          <BiCommentDetail />
+          <div>{signalCardProps.comments.length}</div>
+        </div>
+        <div className="flex text-sm text-right text-muted-foreground">
           <div className="font-sans">
             {signalCardProps.created_at.toLocaleDateString('en-US')}
           </div>

@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { addSignal } from '../_actions/signalActions'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
-import GoogleAutocompleteInput from '@/components/googleAutocomplete'
+import GoogleAutocompleteInput from '@/components/GoogleTools/googleAutocomplete'
 import SubmitButton from '@/components/SubmitButton'
 import { Card, CardTitle } from '@/components/ui/card'
 import {
