@@ -12,7 +12,7 @@ datasource db {
 }
 
 model profile {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
@@ -35,10 +35,11 @@ model profile {
 }
 
 model signal {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
+  subway_line    String?
   location_name  String
   latitude       Float
   longitude      Float
@@ -53,7 +54,7 @@ model signal {
 }
 
 model comment {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
@@ -62,12 +63,12 @@ model comment {
   created_by_username String
   profile             profile @relation(fields: [created_by_username], references: [username], onDelete: Cascade)
 
-  signal_id String
+  signal_id String @db.Uuid
   signal    signal @relation(fields: [signal_id], references: [id], onDelete: Cascade)
 }
 
 model conversation {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
@@ -83,11 +84,11 @@ model conversation {
 }
 
 model conversation_participant {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
-  conversation_id           String
+  conversation_id           String       @db.Uuid
   conversation_participants conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
   participant_username String
@@ -95,13 +96,13 @@ model conversation_participant {
 }
 
 model message {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
   content String
 
-  conversation_id       String
+  conversation_id       String       @db.Uuid
   conversation_messages conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
   from_username String
@@ -112,7 +113,7 @@ model message {
 }
 
 model reported_profile {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
@@ -126,7 +127,7 @@ model reported_profile {
 }
 
 model blocked_profile {
-  id         String    @id @default(uuid())
+  id         String    @id @default(uuid()) @db.Uuid
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
 
