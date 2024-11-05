@@ -39,7 +39,7 @@ export default async function MyActivity() {
 
   return (
     <div className="flex gap-4">
-      <GoBackButton route={'/profile'} styles={'h-auto'} variant="secondary" />
+      <GoBackButton styles={'h-auto'} variant="secondary" />
       <Card className="py-8 flex flex-col gap-2 lg:px-12 max-w-[90svw]">
         <div className="font-bold">My Signals</div>
         {!mySignals.length && (

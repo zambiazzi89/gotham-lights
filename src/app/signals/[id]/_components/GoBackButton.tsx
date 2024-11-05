@@ -5,11 +5,9 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 
 export default function GoBackButton({
-  route,
   styles,
   variant = 'default',
 }: {
-  route: string
   styles?: string
   variant?:
     | 'link'

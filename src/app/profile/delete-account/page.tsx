@@ -5,7 +5,7 @@ import DeleteButton from './_components/DeleteButton'
 export default function MyActivity() {
   return (
     <div className="flex gap-4">
-      <GoBackButton route={'/profile'} styles={'h-auto'} variant="secondary" />
+      <GoBackButton styles={'h-auto'} variant="secondary" />
       <Card className="bg-secondary p-4 w-[80svw] lg:w-[50svw] grid place-items-center">
         <CardTitle className="py-4 text-center">Delete Account</CardTitle>
         <CardContent className="py-8 place-items-center font-bold text-lg">

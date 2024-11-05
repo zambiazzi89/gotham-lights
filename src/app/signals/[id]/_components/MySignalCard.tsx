@@ -75,7 +75,7 @@ export default function SignalCard({
         <p>{signalCardProps.content}</p>
       </CardContent>
       <CardFooter className="self-end pt-4 flex justify-between w-full">
-        <GoBackButton route={'/signals'} />
+        <GoBackButton />
         <div className="flex flex-col items-end  text-muted-foreground">
           <div className="font-semibold">
             {signalCardProps.created_by_username}
