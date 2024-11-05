@@ -9,7 +9,7 @@ import {
 import UsernameDropdown from '@/components/UsernameDropdown'
 import { Signal } from '@/lib/types'
 import GoBackButton from './GoBackButton'
-import { SubwayLineLogo } from '@/components/SubwayLineButton'
+import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
 
 export default function SignalCard({

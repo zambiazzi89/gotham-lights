@@ -22,8 +22,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import SubwayLineButton, { SubwayLineLogo } from '@/components/SubwayLineButton'
+import SubwayLineButton, {
+  SubwayLineLogo,
+} from '@/components/Subway/SubwayLineButton'
 import { SUBWAY_LINES, subwayLine } from '@/data/SubwayLines'
+import SubwayPopover from '@/components/Subway/SubwayPopover'
 
 export default function CreateSignalForm() {
   const [selectedLocation, setSelectedLocation] =
@@ -51,29 +54,7 @@ export default function CreateSignalForm() {
             )}
           </div>
           <div className="flex items-center">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={'ghost'}
-                  className="bg-background hover:bg-primary-20"
-                >
-                  Subway Lines
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="max-w-80 bg-secondary flex flex-wrap">
-                {SUBWAY_LINES.map((lineGroup, i) => (
-                  <div key={i} className="flex p-3 gap-2">
-                    {lineGroup.map((line, i) => (
-                      <SubwayLineButton
-                        key={i}
-                        subwayLine={line}
-                        setSelectedSubwayLine={setSelectedSubwayLine}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </PopoverContent>
-            </Popover>
+            <SubwayPopover setSelectedSubwayLine={setSelectedSubwayLine} />
             <HoverCard>
               <HoverCardTrigger>
                 <MdOutlineInfo className="mx-2" />

@@ -1,4 +1,4 @@
-import { SubwayLineLogo } from '@/components/SubwayLineButton'
+import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
 import {
   Card,
   CardContent,

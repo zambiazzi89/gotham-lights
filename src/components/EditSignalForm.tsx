@@ -13,9 +13,10 @@ import { Signal } from '@/lib/types'
 import SubmitButton from './SubmitButton'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { SUBWAY_LINES, SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
-import SubwayLineButton, { SubwayLineLogo } from './SubwayLineButton'
+import SubwayLineButton, { SubwayLineLogo } from './Subway/SubwayLineButton'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
 import { MdOutlineInfo } from 'react-icons/md'
+import SubwayPopover from './Subway/SubwayPopover'
 
 export default function EditSignalForm({
   signal,
@@ -59,29 +60,7 @@ export default function EditSignalForm({
         )}
       </div>
       <div className="flex items-center">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={'ghost'}
-              className="bg-background hover:bg-primary-20"
-            >
-              Subway Lines
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="max-w-80 bg-secondary flex flex-wrap">
-            {SUBWAY_LINES.map((lineGroup, i) => (
-              <div key={i} className="flex p-3 gap-2">
-                {lineGroup.map((line, i) => (
-                  <SubwayLineButton
-                    key={i}
-                    subwayLine={line}
-                    setSelectedSubwayLine={setSelectedSubwayLine}
-                  />
-                ))}
-              </div>
-            ))}
-          </PopoverContent>
-        </Popover>
+        <SubwayPopover setSelectedSubwayLine={setSelectedSubwayLine} />
         <HoverCard>
           <HoverCardTrigger>
             <MdOutlineInfo className="mx-2" />

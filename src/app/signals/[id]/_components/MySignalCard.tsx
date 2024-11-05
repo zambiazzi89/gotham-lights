@@ -21,7 +21,7 @@ import { useState } from 'react'
 import { MdMoreVert } from 'react-icons/md'
 import { deleteSignal } from '@/app/profile/my-activity/_actions/deleteActions'
 import GoBackButton from './GoBackButton'
-import { SubwayLineLogo } from '@/components/SubwayLineButton'
+import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
 
 export default function SignalCard({
