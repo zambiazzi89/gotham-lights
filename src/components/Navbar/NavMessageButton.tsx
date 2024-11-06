@@ -15,7 +15,6 @@ export default function NavMessageButton({
   conversations: Conversation[]
 }) {
   const pathname = usePathname()
-  console.debug(pathname)
 
   const initialHasNewMessages = conversations
     ? conversations
@@ -55,10 +54,17 @@ export default function NavMessageButton({
           if (!conversationIdsArray.includes(payload.new.conversation_id)) {
             setHasNewMessages(true)
             console.log('New Conversation!')
-            setConversationIdsString((conversationIdsString) =>
-              conversationIdsString.concat(',', payload.new.conversation_id)
+            console.log('conversationIdsString', conversationIdsString)
+            console.log(
+              'payload.new.conversation_id',
+              payload.new.conversation_id
             )
-            console.log('Revalidate pathname')
+            setConversationIdsString((conversationIdsString) =>
+              conversationIdsString.length === 0
+                ? payload.new.conversation_id
+                : conversationIdsString.concat(',', payload.new.conversation_id)
+            )
+            console.log('Revalidate pathname', pathname)
             document.title = 'gotham lights (new message!)'
           }
         }
@@ -96,6 +102,7 @@ export default function NavMessageButton({
               : (document.title = 'gotham lights (new message!)')
             console.log('Has new messages? ', !payload.new.read)
             revalidatePathAction(pathname)
+            revalidatePathAction('/messages')
             console.log('Revalidate pathname')
           }
         }
@@ -107,7 +114,6 @@ export default function NavMessageButton({
           console.log('Conversation Subscription status', status)
         }
       })
-
     return () => {
       console.log('Unsubscribing from conversation_channel')
       supabase.removeChannel(conversation_channel)

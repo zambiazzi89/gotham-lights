@@ -16,13 +16,18 @@ export default function UsernameDropdown({ username }: { username: string }) {
           {username}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="">
+      <DropdownMenuContent>
         <DropdownMenuItem>
-          <Link href={`/messages/draft/${username}`}>Message</Link>
+          <Link href={`/messages/draft/${username}`} className="w-full">
+            Message
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href={`/block-report/${username}`} className="text-destructive">
+          <Link
+            href={`/block-report/${username}`}
+            className="text-destructive w-full"
+          >
             Block | Report
           </Link>
         </DropdownMenuItem>

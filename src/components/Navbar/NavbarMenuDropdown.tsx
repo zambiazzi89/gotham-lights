@@ -18,28 +18,40 @@ export default function NavbarMenuDropdown({ session }: { session: boolean }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>
-          <Link href="/about">About</Link>
+          <Link href="/about" className="w-full">
+            About
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/signals">Signals</Link>
+          <Link href="/signals" className="w-full">
+            Signals
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/messages">Messages</Link>
+          <Link href="/messages" className="w-full">
+            Messages
+          </Link>
         </DropdownMenuItem>
         {session ? (
           <>
             <DropdownMenuItem>
-              <Link href="/profile">Profile</Link>
+              <Link href="/profile" className="w-full">
+                Profile
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <form action={logout}>
-                <button type="submit">Logout</button>
+                <button type="submit" className="w-full">
+                  Logout
+                </button>
               </form>
             </DropdownMenuItem>
           </>
         ) : (
           <DropdownMenuItem>
-            <Link href="/login">Login/Register</Link>
+            <Link href="/login" className="w-full">
+              Login/Register
+            </Link>
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

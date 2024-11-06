@@ -46,7 +46,7 @@ export default function ChatContent({
             <DropdownMenuItem>
               <Link
                 href={`/block-report/${recipientUsername}`}
-                className="text-destructive"
+                className="text-destructive w-full"
               >
                 Block | Report
               </Link>
