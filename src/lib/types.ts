@@ -15,6 +15,7 @@ export type Signal = {
   title: string
   content: string
   created_by_username: string
+  connection_found: boolean
 }
 
 export type SignalComment = {
@@ -38,6 +39,7 @@ export type SignalWithComments = {
   title: string
   content: string
   created_by_username: string
+  connection_found: boolean
   comments: SignalComment[]
 }
 
@@ -53,6 +55,7 @@ export type SignalWithCommentsAndReads = {
   title: string
   content: string
   created_by_username: string
+  connection_found: boolean
   comments: SignalComment[]
   signal_read_by_usernames: SignalReadByUsername[]
 }
