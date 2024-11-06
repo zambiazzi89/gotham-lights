@@ -11,11 +11,7 @@ function NavButtonStyle(pathname: string, href?: string) {
     border border-solid
     border-t-0
     [border-image:radial-gradient(circle_at_bottom,rgb(120,113,108,1),55%,rgba(0,0,0,0))1]
-    ${
-      href && pathname.startsWith(`${href}`)
-        ? 'bg-primary-20 hover:cursor-default pointer-events-none'
-        : 'hover:cursor-pointer'
-    }
+    ${href && pathname.startsWith(`${href}`) && 'bg-primary-20'}
     ${
       pathname === '/'
         ? 'text-white hover:bg-secondary/15'

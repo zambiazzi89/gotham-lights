@@ -4,6 +4,7 @@ import CommentSection from './_components/CommentSection'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import MySignalCard from './_components/MySignalCard'
 import GoBackButton from './_components/GoBackButton'
+import markSignalAsRead from './_actions/markSignalAsRead'
 
 export default async function UniqueSignal({
   params: id,
@@ -28,6 +29,10 @@ export default async function UniqueSignal({
       created_by_username: { notIn: allBlocks },
     },
   })
+
+  if (signal?.id) {
+    markSignalAsRead(signal.id)
+  }
 
   return (
     <div className="h-full w-full py-4 grid place-items-center">

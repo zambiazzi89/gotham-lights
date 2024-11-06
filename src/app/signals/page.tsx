@@ -7,7 +7,7 @@ import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfil
 
 export default async function Signals() {
   // Only perform the action if user is logged in
-  const { allBlocks } = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
 
   const signals = await db.signal.findMany({
     where: {
@@ -15,6 +15,11 @@ export default async function Signals() {
     },
     include: {
       comments: true,
+      signal_read_by_username: {
+        where: {
+          username: profile.username || '',
+        },
+      },
     },
     orderBy: {
       created_at: 'desc',
