@@ -1,7 +1,7 @@
 'use client'
 
 import SignalCardGrid from './SignalCardGrid'
-import { LatLong, SignalWithComments } from '@/lib/types'
+import { LatLong, SignalWithCommentsAndReads } from '@/lib/types'
 import { useEffect, useState } from 'react'
 import ReactGoogleMap from '@/components/GoogleTools/ReactGoogleMap'
 import GoogleAutocompleteInput from '@/components/GoogleTools/googleAutocomplete'
@@ -10,13 +10,17 @@ import { subwayLine } from '@/data/SubwayLines'
 export default function MapAndGrid({
   signals,
   selectedSubwayLine,
+  hasUsername,
 }: {
-  signals: SignalWithComments[]
+  signals: SignalWithCommentsAndReads[]
   selectedSubwayLine?: subwayLine
+  hasUsername: boolean
 }) {
   const [boundsNE, setBoundsNE] = useState<LatLong>()
   const [boundsSW, setBoundsSW] = useState<LatLong>()
-  const [signalsInBound, setSignalsInBound] = useState<SignalWithComments[]>([])
+  const [signalsInBound, setSignalsInBound] = useState<
+    SignalWithCommentsAndReads[]
+  >([])
 
   useEffect(() => {
     if (boundsNE && boundsSW) {
@@ -51,6 +55,7 @@ export default function MapAndGrid({
       <SignalCardGrid
         signalsInBound={signalsInBound}
         selectedSubwayLine={selectedSubwayLine}
+        hasUsername={hasUsername}
       />
     </div>
   )

@@ -18,6 +18,7 @@ export default async function Signals() {
       signal_read_by_username: {
         where: {
           username: profile.username || '',
+          read: true,
         },
       },
     },
@@ -28,7 +29,7 @@ export default async function Signals() {
 
   return (
     <div className="h-full w-full grid grid-rows-layout-signals">
-      <MapAndGrid signals={signals} />
+      <MapAndGrid signals={signals} hasUsername={!!profile.username} />
       <div className="h-14 px-4 flex justify-between items-center gap-4">
         <div className="flex gap-4">
           <Link href="/signals?viewAll=true">

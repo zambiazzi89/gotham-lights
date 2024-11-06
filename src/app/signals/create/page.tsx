@@ -1,5 +1,3 @@
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar/Navbar'
 import CreateSignalForm from './_components/CreateSignalForm'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import Link from 'next/link'
@@ -14,7 +12,7 @@ export default async function CreateSignal() {
           <CreateSignalForm />
         ) : (
           <div className="flex flex-col items-center">
-            <p>You must create a username before creating a Signal.</p>
+            <div>You must create a username before creating a Signal.</div>
             <Link className="my-3" href="/profile">
               <Button>Update Profile</Button>
             </Link>

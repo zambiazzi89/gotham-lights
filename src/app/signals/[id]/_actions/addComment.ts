@@ -32,12 +32,12 @@ export async function addComment(prevState: unknown, formData: FormData) {
     return result.error.formErrors.fieldErrors
   }
 
-  const resultData = result.data
+  const data = result.data
 
   // Check if ID exists and if it wasn't created by a blocked username
   const isSignalValid = await db.signal.count({
     where: {
-      id: resultData.signalId,
+      id: data.signalId,
       created_by_username: { notIn: allBlocks },
     },
   })
@@ -49,11 +49,20 @@ export async function addComment(prevState: unknown, formData: FormData) {
 
   await db.comment.create({
     data: {
-      content: resultData.content,
+      content: data.content,
       created_by_username: profile.username,
-      signal_id: resultData.signalId,
+      signal_id: data.signalId,
     },
   })
 
-  redirect(`/signals/${resultData.signalId}`)
+  await db.signal_read_by_username.updateMany({
+    where: {
+      signal_id: data.signalId,
+    },
+    data: {
+      read: false,
+    },
+  })
+
+  redirect(`/signals/${data.signalId}`)
 }

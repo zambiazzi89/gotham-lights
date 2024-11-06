@@ -72,7 +72,7 @@ export default function SignalCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{signalCardProps.content}</p>
+        <div>{signalCardProps.content}</div>
       </CardContent>
       <CardFooter className="self-end pt-4 flex justify-between w-full">
         <GoBackButton />

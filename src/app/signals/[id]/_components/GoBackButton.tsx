@@ -2,7 +2,8 @@
 
 import { IoIosArrowBack } from 'react-icons/io'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
+import { usePreviousURLContext } from '@/context/PreviousURLContext'
+import redirectFormAction from '../_actions/redirectFormAction'
 
 export default function GoBackButton({
   styles,
@@ -17,14 +18,13 @@ export default function GoBackButton({
     | 'secondary'
     | 'ghost'
 }) {
-  const router = useRouter()
+  const previousURL = usePreviousURLContext()
   return (
-    <Button
-      className={`${styles}`}
-      onClick={() => router.back()}
-      variant={variant}
-    >
-      <IoIosArrowBack />
-    </Button>
+    <form action={redirectFormAction}>
+      <input type="hidden" name="formURL" value={previousURL || '/'} />
+      <Button className={`${styles}`} variant={variant}>
+        <IoIosArrowBack />
+      </Button>
+    </form>
   )
 }

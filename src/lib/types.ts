@@ -57,7 +57,7 @@ export type SignalWithCommentsAndReads = {
   created_by_username: string
   connection_found: boolean
   comments: SignalComment[]
-  signal_read_by_usernames: SignalReadByUsername[]
+  signal_read_by_username: SignalReadByUsername[]
 }
 
 export type Profile = {

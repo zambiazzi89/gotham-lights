@@ -41,7 +41,7 @@ export default function MyCommentsCard({
           className="grid w-full"
         >
           <Input type="hidden" name="commentId" value={`${comment.id}`} />
-          <Textarea
+          <Input
             name="content"
             defaultValue={comment.content}
             placeholder="Enter a comment"

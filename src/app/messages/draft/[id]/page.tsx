@@ -59,9 +59,9 @@ export default async function MessageDraft({
       ) : (
         <div className="grid place-items-center">
           <div className="flex flex-col items-center">
-            <p>
+            <div>
               You must create a username before using the Message functionality.
-            </p>
+            </div>
             <Link className="my-3" href="/profile">
               <Button>Update Profile</Button>
             </Link>

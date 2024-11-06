@@ -36,7 +36,7 @@ export default function CommentSection({
       </div>
       {!username ? (
         <div className="py-8 flex flex-col items-center">
-          <p>You must create a username before commenting</p>
+          <div>You must create a username before commenting</div>
           <Link className="my-3" href="/profile">
             <Button>Update Profile</Button>
           </Link>

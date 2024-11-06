@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
+import { PreviousUrlProvider } from '@/context/PreviousURLContext'
 import GoogleAPIContextProvider from '@/context/GoogleAPIContext'
 import { cormorant } from './fonts'
 import Navbar from '@/components/Navbar/Navbar'
@@ -31,15 +32,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GoogleAPIContextProvider>
-            <div className="grid grid-rows-layout h-svh">
-              <Navbar />
-              <div className="grid place-items-center overflow-auto">
-                {children}
+          <PreviousUrlProvider>
+            <GoogleAPIContextProvider>
+              <div className="grid grid-rows-layout h-svh">
+                <Navbar />
+                <div className="grid place-items-center overflow-auto">
+                  {children}
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-          </GoogleAPIContextProvider>
+            </GoogleAPIContextProvider>
+          </PreviousUrlProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 import GridSignalCard from './GridSignalCard'
 import Link from 'next/link'
-import { SignalWithComments } from '@/lib/types'
+import { SignalWithCommentsAndReads } from '@/lib/types'
 import { SubwayPopoverLinks } from '@/components/Subway/SubwayPopover'
 import { subwayLine } from '@/data/SubwayLines'
 import {
@@ -15,9 +15,11 @@ import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
 export default function SignalCardGrid({
   signalsInBound,
   selectedSubwayLine,
+  hasUsername,
 }: {
-  signalsInBound: SignalWithComments[]
+  signalsInBound: SignalWithCommentsAndReads[]
   selectedSubwayLine?: subwayLine
+  hasUsername: boolean
 }) {
   return (
     <div className="p-4 flex flex-col lg:overflow-y-auto">
@@ -25,15 +27,19 @@ export default function SignalCardGrid({
         <div className="flex gap-2 items-center">
           <SubwayPopoverLinks />
           {selectedSubwayLine && (
-            <div className="ml-auto px-2 flex items-center gap-2">
+            <div className="ml-auto px-2 flex items-center gap-3">
               <SubwayLineLogo subwayLine={selectedSubwayLine} />
-              <Link href={'/signals?viewAll=true'}>Clear</Link>
+              <Link href={'/signals?viewAll=true'} className="text-sm">
+                Clear
+              </Link>
             </div>
           )}
         </div>
-        <Link href={'/signals/my-signals'}>
-          <Button variant={'outline'}>My Signals</Button>
-        </Link>
+        {hasUsername && (
+          <Link href={'/signals/my-signals'}>
+            <Button variant={'outline'}>My Signals</Button>
+          </Link>
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant={'outline'}>Order</Button>
@@ -53,7 +59,10 @@ export default function SignalCardGrid({
               key={signal.id}
               href={`/signals/${signal.id}`}
             >
-              <GridSignalCard signalCardProps={signal} />
+              <GridSignalCard
+                signalCardProps={signal}
+                hasUsername={hasUsername}
+              />
             </Link>
           )
         })}

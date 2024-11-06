@@ -20,7 +20,7 @@ export default function CommentForm({ signalId }: { signalId: string }) {
       className="grid w-full"
     >
       <Input type="hidden" name="signalId" value={`${signalId}`} />
-      <Textarea
+      <Input
         name="content"
         placeholder="Enter a comment"
         minLength={1}

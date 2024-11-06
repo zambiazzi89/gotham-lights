@@ -1,5 +1,8 @@
+'use server'
+
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export default async function markSignalAsRead(signalId: string) {
@@ -38,4 +41,5 @@ export default async function markSignalAsRead(signalId: string) {
       },
     })
   }
+  revalidatePath('/signals*')
 }

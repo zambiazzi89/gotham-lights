@@ -8,14 +8,19 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
-import { SignalWithComments } from '@/lib/types'
+import { SignalWithCommentsAndReads } from '@/lib/types'
 import { BiCommentDetail } from 'react-icons/bi'
 
 export default function GridSignalCard({
   signalCardProps,
+  hasUsername,
 }: {
-  signalCardProps: SignalWithComments
+  signalCardProps: SignalWithCommentsAndReads
+  hasUsername: boolean
 }) {
+  const signalNotRead = !signalCardProps.signal_read_by_username.length
+  const commentsLength = signalCardProps.comments.length
+
   return (
     <Card className="shadow-md flex flex-col justify-between grow bg-secondary hover:bg-primary-20">
       <CardHeader>
@@ -42,8 +47,13 @@ export default function GridSignalCard({
       </CardContent>
       <CardFooter className="flex justify-between items-center pt-4">
         <div className="flex items-center gap-2 font-sans text-muted-foreground">
-          <BiCommentDetail />
-          <div>{signalCardProps.comments.length}</div>
+          <div className="relative">
+            {hasUsername && signalNotRead && !!commentsLength && (
+              <div className="absolute h-2 w-2 ml-2 mt-2 bg-primary rounded-full" />
+            )}
+            <BiCommentDetail />
+          </div>
+          <div>{!commentsLength ? '' : commentsLength}</div>
         </div>
         <div className="flex text-sm text-right text-muted-foreground">
           <div className="font-sans">

@@ -12,7 +12,7 @@ export default async function Signals({
   params: { id: string }
 }) {
   // Only perform the action if user is logged in
-  const { allBlocks } = await getDbProfileFromServer()
+  const { profile, allBlocks } = await getDbProfileFromServer()
 
   const subwayLine = id.id
 
@@ -23,6 +23,12 @@ export default async function Signals({
     },
     include: {
       comments: true,
+      signal_read_by_username: {
+        where: {
+          username: profile.username || '',
+          read: true,
+        },
+      },
     },
     orderBy: {
       created_at: 'desc',
@@ -33,6 +39,7 @@ export default async function Signals({
     <div className="h-full w-full grid grid-rows-layout-signals">
       <MapAndGrid
         signals={signals}
+        hasUsername={!!profile.username}
         selectedSubwayLine={SUBWAY_LINES_JSON[subwayLine]}
       />
       <div className="h-14 px-4 flex justify-between items-center gap-4">
