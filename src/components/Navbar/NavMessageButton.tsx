@@ -50,12 +50,12 @@ export default function NavMessageButton({
           filter: `to_username=eq.${username}`,
         },
         (payload) => {
-          console.log('Change received!', payload, username)
+          console.debug('Change received!', payload, username)
           if (!conversationIdsArray.includes(payload.new.conversation_id)) {
             setHasNewMessages(true)
-            console.log('New Conversation!')
-            console.log('conversationIdsString', conversationIdsString)
-            console.log(
+            console.debug('New Conversation!')
+            console.debug('conversationIdsString', conversationIdsString)
+            console.debug(
               'payload.new.conversation_id',
               payload.new.conversation_id
             )
@@ -64,20 +64,20 @@ export default function NavMessageButton({
                 ? payload.new.conversation_id
                 : conversationIdsString.concat(',', payload.new.conversation_id)
             )
-            console.log('Revalidate pathname', pathname)
+            console.debug('Revalidate pathname', pathname)
             document.title = 'gotham lights (new message!)'
           }
         }
       )
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
-          console.log('Message Subscription is active')
+          console.debug('Message Subscription is active')
         } else {
-          console.log('Message Subscription status', status)
+          console.debug('Message Subscription status', status)
         }
       })
     return () => {
-      console.log('Unsubscribing from message_channel')
+      console.debug('Unsubscribing from message_channel')
       supabase.removeChannel(message_channel)
     }
   }, [])
@@ -94,28 +94,28 @@ export default function NavMessageButton({
           filter: `id=in.(${conversationIdsString})`,
         },
         (payload) => {
-          console.log('Change received!', payload, username)
+          console.debug('Change received!', payload, username)
           if (payload.new.last_sent_by !== username) {
             setHasNewMessages(!payload.new.read)
             payload.new.read
               ? (document.title = 'gotham lights')
               : (document.title = 'gotham lights (new message!)')
-            console.log('Has new messages? ', !payload.new.read)
+            console.debug('Has new messages? ', !payload.new.read)
             revalidatePathAction(pathname)
             revalidatePathAction('/messages')
-            console.log('Revalidate pathname')
+            console.debug('Revalidate pathname')
           }
         }
       )
       .subscribe((status) => {
         if (status === 'SUBSCRIBED') {
-          console.log('Conversation Subscription is active')
+          console.debug('Conversation Subscription is active')
         } else {
-          console.log('Conversation Subscription status', status)
+          console.debug('Conversation Subscription status', status)
         }
       })
     return () => {
-      console.log('Unsubscribing from conversation_channel')
+      console.debug('Unsubscribing from conversation_channel')
       supabase.removeChannel(conversation_channel)
     }
   }, [conversationIdsString])
