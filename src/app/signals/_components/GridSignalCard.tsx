@@ -8,13 +8,13 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
-import { SignalWithComment } from '@/lib/types'
+import { SignalWithComments } from '@/lib/types'
 import { BiCommentDetail } from 'react-icons/bi'
 
 export default function GridSignalCard({
   signalCardProps,
 }: {
-  signalCardProps: SignalWithComment
+  signalCardProps: SignalWithComments
 }) {
   return (
     <Card className="shadow-md flex flex-col justify-between grow bg-secondary hover:bg-primary-20">

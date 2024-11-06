@@ -32,6 +32,7 @@ model profile {
   reports_received        reported_profile[]         @relation("reports_received")
   blocks_created          blocked_profile[]          @relation("blocks_created")
   blocks_received         blocked_profile[]          @relation("blocks_received")
+  signal_read_by_username signal_read_by_username[]
 }
 
 model signal {
@@ -50,7 +51,8 @@ model signal {
   created_by_username String
   profile             profile @relation(fields: [created_by_username], references: [username], onDelete: Cascade)
 
-  comments comment[]
+  comments                comment[]
+  signal_read_by_username signal_read_by_username[]
 }
 
 model comment {
@@ -136,4 +138,18 @@ model blocked_profile {
 
   blocked_username String
   blocks_received  profile @relation("blocks_received", fields: [blocked_username], references: [username], onDelete: Cascade)
+}
+
+model signal_read_by_username {
+  id         String    @id @default(uuid()) @db.Uuid
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  read Boolean @default(true)
+
+  signal_id String @db.Uuid
+  signal    signal @relation(fields: [signal_id], references: [id], onDelete: Cascade)
+
+  username String
+  profile  profile @relation(fields: [username], references: [username], onDelete: Cascade)
 }

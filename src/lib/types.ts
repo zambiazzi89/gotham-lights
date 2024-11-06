@@ -26,7 +26,7 @@ export type SignalComment = {
   signal_id: string
 }
 
-export type SignalWithComment = {
+export type SignalWithComments = {
   id: string
   created_at: Date
   updated_at: Date | null
@@ -39,6 +39,22 @@ export type SignalWithComment = {
   content: string
   created_by_username: string
   comments: SignalComment[]
+}
+
+export type SignalWithCommentsAndReads = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  subway_line: string | null
+  location_name: string
+  latitude: number
+  longitude: number
+  date_encounter: Date
+  title: string
+  content: string
+  created_by_username: string
+  comments: SignalComment[]
+  signal_read_by_usernames: SignalReadByUsername[]
 }
 
 export type Profile = {
@@ -121,4 +137,13 @@ export type Message = {
   content: string
   conversation_id: string
   from_username: string
+}
+
+export type SignalReadByUsername = {
+  id: string
+  created_at: Date
+  updated_at: Date | null
+  read: boolean
+  signal_id: string
+  username: string
 }

@@ -1,6 +1,6 @@
 import GridSignalCard from './GridSignalCard'
 import Link from 'next/link'
-import { Signal, SignalWithComment } from '@/lib/types'
+import { SignalWithComments } from '@/lib/types'
 import { SubwayPopoverLinks } from '@/components/Subway/SubwayPopover'
 import { subwayLine } from '@/data/SubwayLines'
 import {
@@ -16,7 +16,7 @@ export default function SignalCardGrid({
   signalsInBound,
   selectedSubwayLine,
 }: {
-  signalsInBound: SignalWithComment[]
+  signalsInBound: SignalWithComments[]
   selectedSubwayLine?: subwayLine
 }) {
   return (
