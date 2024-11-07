@@ -31,6 +31,17 @@ export default async function Navbar() {
       ? await getConversations(profile)
       : []
 
+  const signalsWithNewComments = profile?.username
+    ? await db.signal.count({
+        where: {
+          created_by_username: profile.username,
+          signal_read_by_username: {
+            none: { username: profile.username, read: true },
+          },
+        },
+      })
+    : null
+
   return (
     <div className="flex px-2 items-center justify-between">
       <Link
@@ -44,7 +55,11 @@ export default async function Navbar() {
         <NavbarMenuDropdown session={!!profile} />
         <div className="hidden lg:flex justify-end items-center">
           <NavButton title="About" href="/about" />
-          <NavButton title="Signals" href="/signals" />
+          <NavButton
+            title="Signals"
+            href="/signals"
+            notification={!!signalsWithNewComments}
+          />
           {!!profile && profile.username && (
             <NavMessageButton
               username={profile.username}

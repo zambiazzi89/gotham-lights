@@ -11,10 +11,12 @@ export default function MapAndGrid({
   signals,
   selectedSubwayLine,
   hasUsername,
+  hasSignalsWithNewComments,
 }: {
   signals: SignalWithCommentsAndReads[]
   selectedSubwayLine?: subwayLine
   hasUsername: boolean
+  hasSignalsWithNewComments: boolean
 }) {
   const [boundsNE, setBoundsNE] = useState<LatLong>()
   const [boundsSW, setBoundsSW] = useState<LatLong>()
@@ -56,6 +58,7 @@ export default function MapAndGrid({
         signalsInBound={signalsInBound}
         selectedSubwayLine={selectedSubwayLine}
         hasUsername={hasUsername}
+        hasSignalsWithNewComments={hasSignalsWithNewComments}
       />
     </div>
   )

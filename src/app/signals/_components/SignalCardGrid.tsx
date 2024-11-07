@@ -16,10 +16,12 @@ export default function SignalCardGrid({
   signalsInBound,
   selectedSubwayLine,
   hasUsername,
+  hasSignalsWithNewComments,
 }: {
   signalsInBound: SignalWithCommentsAndReads[]
   selectedSubwayLine?: subwayLine
   hasUsername: boolean
+  hasSignalsWithNewComments: boolean
 }) {
   return (
     <div className="p-4 flex flex-col lg:overflow-y-auto">
@@ -37,7 +39,12 @@ export default function SignalCardGrid({
         </div>
         {hasUsername && (
           <Link href={'/signals/my-signals'}>
-            <Button variant={'outline'}>My Signals</Button>
+            <Button variant={'outline'}>
+              {hasSignalsWithNewComments && (
+                <div className="w-2 h-2 mr-2 self-center rounded-full bg-primary" />
+              )}
+              <div>My Signals</div>
+            </Button>
           </Link>
         )}
         <DropdownMenu>

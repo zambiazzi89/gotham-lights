@@ -55,7 +55,7 @@ export async function addSignal(prevState: unknown, formData: FormData) {
 
   const subwayLine = data.subway_line === '' ? null : data.subway_line
 
-  await db.signal.create({
+  const signal = await db.signal.create({
     data: {
       title: data.title,
       subway_line: subwayLine,
@@ -65,6 +65,14 @@ export async function addSignal(prevState: unknown, formData: FormData) {
       date_encounter: data.date,
       content: data.content,
       created_by_username: profile.username,
+    },
+  })
+
+  await db.signal_read_by_username.create({
+    data: {
+      signal_id: signal.id,
+      username: profile.username,
+      read: true,
     },
   })
 
