@@ -10,6 +10,7 @@ import {
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
 import { SignalWithCommentsAndReads } from '@/lib/types'
 import { BiCommentDetail } from 'react-icons/bi'
+import { TbHeartCheck } from 'react-icons/tb'
 
 export default function GridSignalCard({
   signalCardProps,
@@ -55,6 +56,12 @@ export default function GridSignalCard({
           </div>
           <div>{!commentsLength ? '' : commentsLength}</div>
         </div>
+        {signalCardProps.connection_found && (
+          <div className="flex gap-2 items-center text-primary font-semibold hover:cursor-default">
+            <TbHeartCheck className="text-xl" />
+            <div className="text-sm ">Found!</div>
+          </div>
+        )}
         <div className="flex text-sm text-right text-muted-foreground">
           <div className="font-sans">
             {signalCardProps.created_at.toLocaleDateString('en-US')}

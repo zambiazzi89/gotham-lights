@@ -11,12 +11,12 @@ import { DatePicker } from './ui/DatePicker'
 import { Textarea } from './ui/textarea'
 import { Signal } from '@/lib/types'
 import SubmitButton from './SubmitButton'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { SUBWAY_LINES, SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
-import SubwayLineButton, { SubwayLineLogo } from './Subway/SubwayLineButton'
+import { SUBWAY_LINES_JSON, subwayLine } from '@/data/SubwayLines'
+import { SubwayLineLogo } from './Subway/SubwayLineButton'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
 import { MdOutlineInfo } from 'react-icons/md'
 import SubwayPopover from './Subway/SubwayPopover'
+import { TbHeartCheck } from 'react-icons/tb'
 
 export default function EditSignalForm({
   signal,
@@ -36,6 +36,7 @@ export default function EditSignalForm({
     useState<subwayLine | null>(
       signal.subway_line ? SUBWAY_LINES_JSON[signal.subway_line] : null
     )
+  const [found, setFound] = useState<boolean>(signal.connection_found)
 
   return (
     <form
@@ -134,6 +135,39 @@ export default function EditSignalForm({
         {error?.content && (
           <div className="text-destructive text-sm">{error.content}</div>
         )}
+      </div>
+      <Input
+        type="checkbox"
+        name="connection_found"
+        checked={found}
+        className="hidden"
+      />
+      <div className="flex gap-2 items-center">
+        <Button
+          variant={'outline'}
+          className={`flex gap-2 items-center ${
+            found
+              ? 'text-primary font-semibold hover:font-bold hover:text-primary'
+              : 'text-muted-foreground'
+          }`}
+          onClick={(e) => {
+            e.preventDefault()
+            setFound(!found)
+          }}
+        >
+          <TbHeartCheck className="text-xl" />
+          <div className="text-sm ">Found!</div>
+        </Button>
+        <HoverCard>
+          <HoverCardTrigger>
+            <MdOutlineInfo className="mx-2" />
+          </HoverCardTrigger>
+          <HoverCardContent className="text-sm">
+            <p className="font-light text-sm my-2">
+              Let others know if you found your person!
+            </p>
+          </HoverCardContent>
+        </HoverCard>
       </div>
       <div className="flex justify-end w-full pt-8 gap-4">
         <Button onClick={() => setEdit(false)} variant={'ghost'}>

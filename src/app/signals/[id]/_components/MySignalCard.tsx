@@ -23,6 +23,7 @@ import { deleteSignal } from '@/app/profile/my-activity/_actions/deleteActions'
 import GoBackButton from './GoBackButton'
 import { SubwayLineLogo } from '@/components/Subway/SubwayLineButton'
 import { SUBWAY_LINES_JSON } from '@/data/SubwayLines'
+import { TbHeartCheck } from 'react-icons/tb'
 
 export default function SignalCard({
   signalCardProps,
@@ -74,8 +75,14 @@ export default function SignalCard({
       <CardContent>
         <div>{signalCardProps.content}</div>
       </CardContent>
-      <CardFooter className="self-end pt-4 flex justify-between w-full">
+      <CardFooter className="self-end pt-4 flex justify-between w-full items-center">
         <GoBackButton />
+        {signalCardProps.connection_found && (
+          <div className="flex gap-2 items-center text-primary font-semibold hover:cursor-default">
+            <TbHeartCheck className="text-xl" />
+            <div className="text-sm ">Found!</div>
+          </div>
+        )}
         <div className="flex flex-col items-end  text-muted-foreground">
           <div className="font-semibold">
             {signalCardProps.created_by_username}

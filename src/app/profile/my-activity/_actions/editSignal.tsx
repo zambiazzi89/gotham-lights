@@ -32,6 +32,7 @@ const formSchema = z.object({
         'Your signal content length must be between 5 and 1000 characters.',
     }),
   signalId: z.string(),
+  connection_found: z.coerce.boolean(),
 })
 
 export async function editSignal(prevState: unknown, formData: FormData) {
@@ -44,6 +45,8 @@ export async function editSignal(prevState: unknown, formData: FormData) {
   }
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
+  console.log(formData)
+  console.log(result)
 
   if (!result.success) {
     return result.error.formErrors.fieldErrors
@@ -64,6 +67,8 @@ export async function editSignal(prevState: unknown, formData: FormData) {
       longitude: resultData.location_lng,
       date_encounter: resultData.date,
       content: resultData.content,
+      connection_found: resultData.connection_found,
+      updated_at: new Date(),
     },
   })
 }
