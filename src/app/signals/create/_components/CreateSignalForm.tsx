@@ -64,7 +64,7 @@ export default function CreateSignalForm() {
               type="hidden"
             />
             {selectedSubwayLine && (
-              <div className="ml-auto px-2">
+              <div className="ml-auto px-2 flex items-center">
                 <Button
                   variant={'ghost'}
                   onClick={() => setSelectedSubwayLine(null)}
