@@ -6,22 +6,9 @@ import { createClient } from '@/utils/supabase/server'
 import { z } from 'zod'
 import db from '@/db/db'
 
-const passwordRegEx =
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?!.*\s).{8,16}$/
-
 const formSchema = z.object({
   email: z.string().email(),
-  password: z
-    .string()
-    .min(8, {
-      message: 'Password length must be from 8 to 16 characters-long.',
-    })
-    .max(16, {
-      message: 'Password length must be from 8 to 16 characters-long.',
-    })
-    .regex(passwordRegEx, {
-      message: 'Password does not match complexity requirements.',
-    }),
+  password: z.string(),
 })
 
 export async function login(prevState: unknown, formData: FormData) {
@@ -53,6 +40,10 @@ export async function login(prevState: unknown, formData: FormData) {
     console.error(error)
     if (error.code === 'email_not_confirmed') {
       redirect('/signup/email-confirmation')
+    } else if (error.code === 'invalid_credentials') {
+      return {
+        password: ['Invalid email and/or password.'],
+      }
     }
     redirect(`/error?code=${error.code}`)
   }
