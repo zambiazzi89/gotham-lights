@@ -51,14 +51,14 @@ export async function sendMessage(prevState: unknown, formData: FormData) {
     console.error(
       `More than one participant found for conversation ID ${data.conversationId} other than ${profile.username}`
     )
-    redirect('/error')
+    redirect('/error?code=conversation_participants')
   }
 
   if (!otherUser.length) {
     console.error(
       `No other participant found for conversation ID ${data.conversationId} other than ${profile.username}`
     )
-    redirect('/error')
+    redirect('/error?code=conversation_participants')
   }
 
   const message = await db.message.create({

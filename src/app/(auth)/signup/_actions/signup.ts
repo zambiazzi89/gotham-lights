@@ -57,7 +57,7 @@ export async function signup(prevState: unknown, formData: FormData) {
 
   if (error) {
     console.log(error)
-    redirect('/error')
+    redirect('/error?code=sign_up')
   }
 
   revalidatePath('/', 'layout')

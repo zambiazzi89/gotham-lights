@@ -21,9 +21,14 @@ export async function editComment(prevState: unknown, formData: FormData) {
   // Only perform the action if user is logged in
   const { profile } = await getDbProfileFromServer()
 
-  if (!profile || !profile.username) {
-    console.error('Profile or username not found')
-    redirect('/error')
+  // If no profile
+  if (!profile) {
+    redirect('/error?code=no_profile_found')
+  }
+
+  // If no username
+  if (!profile.username) {
+    redirect('/error?code=missing_username')
   }
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))

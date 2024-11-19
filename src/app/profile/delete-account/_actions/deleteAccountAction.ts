@@ -18,7 +18,7 @@ export default async function deleteAccountAction(
 
   if (!profile) {
     console.error('Profile not found')
-    redirect('/error')
+    redirect('/error?code=no_profile_found')
   }
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
@@ -42,7 +42,7 @@ export default async function deleteAccountAction(
 
   if (error) {
     console.error('Error deleting account', error)
-    redirect('/error')
+    redirect('/error?code=delete_account')
   }
 
   console.debug('Deleting account: ', data)

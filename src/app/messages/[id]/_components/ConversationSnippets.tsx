@@ -22,7 +22,7 @@ export default function ConversationSnippets({
                 'Invalid scenario, conversation_participants[0] is undefined',
                 conversation
               )
-              redirect('/error')
+              redirect('/error?code=conversation_participants')
             }
             return (
               <Link key={conversation.id} href={`/messages/${conversation.id}`}>

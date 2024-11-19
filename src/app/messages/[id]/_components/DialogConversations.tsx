@@ -32,7 +32,7 @@ export function DialogConversations({
                   'Invalid scenario, conversation_participants[0] is undefined',
                   conversation
                 )
-                redirect('/error')
+                redirect('/error?code=conversation_participants')
               }
               return (
                 <DialogClose asChild key={conversation.id}>

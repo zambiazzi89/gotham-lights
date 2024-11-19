@@ -17,7 +17,7 @@ export async function signInWithGoogle() {
   })
 
   if (error) {
-    redirect('/error')
+    redirect('/error?code=signin_with_google')
   }
 
   redirect(data.url)

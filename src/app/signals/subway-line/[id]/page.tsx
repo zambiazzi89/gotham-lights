@@ -35,12 +35,24 @@ export default async function Signals({
     },
   })
 
+  const mySignalsWithNewComments = profile.username
+    ? await db.signal.count({
+        where: {
+          created_by_username: profile.username,
+          signal_read_by_username: {
+            none: { username: profile.username, read: true },
+          },
+        },
+      })
+    : null
+
   return (
     <div className="h-full w-full grid grid-rows-layout-signals">
       <MapAndGrid
         signals={signals}
         hasUsername={!!profile.username}
         selectedSubwayLine={SUBWAY_LINES_JSON[subwayLine]}
+        hasSignalsWithNewComments={!!mySignalsWithNewComments}
       />
       <div className="h-14 px-4 flex justify-between items-center gap-4">
         <div className="flex gap-4">

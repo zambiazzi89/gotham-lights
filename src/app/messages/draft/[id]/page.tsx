@@ -48,7 +48,7 @@ export default async function MessageDraft({
       redirect(`/messages/${conversationExists[0].id}`)
     } else if (conversationExists.length > 1) {
       console.error('Invalid scenario, multiple conversations found')
-      redirect('/error')
+      redirect('/error?code=conversation_participants')
     }
   }
 

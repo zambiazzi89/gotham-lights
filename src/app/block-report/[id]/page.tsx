@@ -17,12 +17,12 @@ export default async function BlockReport({
 
   // If no profile
   if (!profile) {
-    redirect('/error')
+    redirect('/error?code=no_profile_found')
   }
 
   // If no username
   if (!profile.username) {
-    redirect('/error')
+    redirect('/error?code=missing_username')
   }
 
   // Does the username exist?
@@ -39,7 +39,7 @@ export default async function BlockReport({
     console.error(
       `Username ${username} is not unique. This is an invalid scenario!`
     )
-    redirect('/error')
+    redirect('/error?code=unique_username')
   }
 
   // Did the current user already block this username?

@@ -41,6 +41,6 @@ export async function updatePassword(prevState: unknown, formData: FormData) {
 
   if (error) {
     console.log(error)
-    redirect('/error')
+    redirect('/error?code=update_password')
   }
 }

@@ -44,7 +44,7 @@ export async function addComment(prevState: unknown, formData: FormData) {
 
   if (!isSignalValid) {
     console.error('Signal is not valid')
-    redirect('/error')
+    redirect('/error?code=invalid_signal')
   }
 
   await db.comment.create({

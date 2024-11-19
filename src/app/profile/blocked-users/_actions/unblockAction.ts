@@ -9,7 +9,7 @@ export default async function unblockAction(username: string) {
 
   if (!profile || !profile.username) {
     console.error('No profile found')
-    redirect('/error')
+    redirect('/error?code=missing_username')
   }
 
   await db.blocked_profile.deleteMany({

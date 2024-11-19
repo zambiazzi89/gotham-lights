@@ -13,7 +13,7 @@ export default async function getServerSession() {
 
   if (error) {
     console.error('Error in getServerSession()')
-    redirect('/error')
+    redirect('/error?code=session')
   }
   return data.session
 }
