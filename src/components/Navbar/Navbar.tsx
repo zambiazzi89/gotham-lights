@@ -13,7 +13,13 @@ const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
 export default async function Navbar() {
   const supabase = createClient()
-  const { data, error } = await supabase.auth.getUser()
+  const { data: sessionData } = await supabase.auth.getSession()
+
+  const session = sessionData.session
+
+  const { data, error } = !!session
+    ? await supabase.auth.getUser()
+    : { data: { user: null }, error: null }
 
   if (error) {
     console.error('Error fetching user data:', error.message)
@@ -55,16 +61,18 @@ export default async function Navbar() {
         <NavbarMenuDropdown session={!!profile} />
         <div className="hidden lg:flex justify-end items-center">
           <NavButton title="About" href="/about" />
-          <NavButton
-            title="Signals"
-            href="/signals"
-            notification={!!signalsWithNewComments}
-          />
           {!!profile && profile.username && (
-            <NavMessageButton
-              username={profile.username}
-              conversations={conversations}
-            />
+            <>
+              <NavButton
+                title="Signals"
+                href="/signals"
+                notification={!!signalsWithNewComments}
+              />
+              <NavMessageButton
+                username={profile.username}
+                conversations={conversations}
+              />
+            </>
           )}
           {!!profile ? (
             <>
