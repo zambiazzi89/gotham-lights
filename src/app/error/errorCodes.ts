@@ -14,8 +14,9 @@ export const errorCodes: { [key: string]: string } = {
   logout: 'An unexpected error happened when trying to logout.',
   session: 'An unexpected error happened when trying to get your user session.',
   no_profile_found: 'No profile was found.',
-  unique_username:
-    'An issue was observed with your username. Please contact the support team.',
+  unique_username: 'An issue was observed with your username.',
   conversation_participants:
-    'An issue was observed when fetching your conversations. Please contact the support team.',
+    'An issue was observed when fetching your conversations.',
+  email_not_sent:
+    'An unexpected error happened when trying to submit the contact form.',
 }

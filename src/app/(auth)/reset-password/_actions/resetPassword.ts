@@ -22,7 +22,7 @@ export async function resetPassword(prevState: unknown, formData: FormData) {
   )
 
   if (error) {
-    console.log(error)
+    console.error(error)
     redirect('/error?code=reset_password')
   }
 }

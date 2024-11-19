@@ -6,7 +6,6 @@ import { UpdatePasswordForm } from './UpdatePasswordForm'
 import { ResetPasswordForm } from './ResetPasswordForm'
 
 export function ResetPasswordPage() {
-  console.log('load', new Date().getTime())
   const FIVE_MIN = 5 * 60 * 1000
   const NOW = new Date().getTime()
 
@@ -18,7 +17,6 @@ export function ResetPasswordPage() {
   useEffect(() => {
     const isValid = async () => {
       const session = await supabase.auth.getSession()
-      console.log(session)
 
       const recovery = session.data.session?.user.recovery_sent_at
         ? Date.parse(session.data.session?.user.recovery_sent_at)

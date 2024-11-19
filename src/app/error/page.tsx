@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { errorCodes } from './errorCodes'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default function ErrorPage({
   searchParams,
@@ -28,11 +30,16 @@ export default function ErrorPage({
           We're sorry, something went wrong!
         </CardDescription>
       </CardHeader>
-      <CardContent>{errorMessage}</CardContent>
-      <CardContent>
-        Please try again or contact our support team below
+      <CardContent className="flex flex-col gap-2">
+        <div></div>
+        {errorMessage}
+        <div>Please try again or contact our support team below</div>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter className="pt-8 grid place-items-center">
+        <Link href="/contact">
+          <Button variant={'outline'}>Contact Us</Button>
+        </Link>
+      </CardFooter>
     </Card>
   )
 }

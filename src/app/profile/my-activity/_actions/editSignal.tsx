@@ -50,8 +50,6 @@ export async function editSignal(prevState: unknown, formData: FormData) {
   }
 
   const result = formSchema.safeParse(Object.fromEntries(formData.entries()))
-  console.log(formData)
-  console.log(result)
 
   if (!result.success) {
     return result.error.formErrors.fieldErrors
