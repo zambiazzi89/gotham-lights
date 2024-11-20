@@ -17,29 +17,29 @@ export default function NavbarMenuDropdown({ session }: { session: boolean }) {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/about" className="w-full">
             About
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/signals" className="w-full">
             Signals
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/messages" className="w-full">
             Messages
           </Link>
         </DropdownMenuItem>
         {session ? (
           <>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/profile" className="w-full">
                 Profile
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <form action={logout}>
                 <button type="submit" className="w-full">
                   Logout
@@ -48,7 +48,7 @@ export default function NavbarMenuDropdown({ session }: { session: boolean }) {
             </DropdownMenuItem>
           </>
         ) : (
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Link href="/login" className="w-full">
               Login/Register
             </Link>

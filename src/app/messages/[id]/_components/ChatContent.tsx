@@ -43,7 +43,7 @@ export default function ChatContent({
             <MdMoreVert className="text-xl" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className=" bg-secondary">
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link
                 href={`/block-report/${recipientUsername}`}
                 className="text-destructive w-full"

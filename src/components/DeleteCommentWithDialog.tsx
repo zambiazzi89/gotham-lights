@@ -48,7 +48,7 @@ export default function DeleteCommentWithDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
           </DropdownMenuItem>
           <AlertDialogAction

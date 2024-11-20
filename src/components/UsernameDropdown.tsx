@@ -17,13 +17,13 @@ export default function UsernameDropdown({ username }: { username: string }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href={`/messages/draft/${username}`} className="w-full">
             Message
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link
             href={`/block-report/${username}`}
             className="text-destructive w-full"

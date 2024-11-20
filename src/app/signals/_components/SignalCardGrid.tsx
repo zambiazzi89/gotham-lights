@@ -52,9 +52,9 @@ export default function SignalCardGrid({
             <Button variant={'outline'}>Order</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>Published Date</DropdownMenuItem>
-            <DropdownMenuItem>Encounter Date</DropdownMenuItem>
-            <DropdownMenuItem>Most Commented</DropdownMenuItem>
+            <DropdownMenuItem asChild>Published Date</DropdownMenuItem>
+            <DropdownMenuItem asChild>Encounter Date</DropdownMenuItem>
+            <DropdownMenuItem asChild>Most Commented</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
