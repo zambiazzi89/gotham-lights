@@ -8,6 +8,8 @@ const publicPaths = [
   '/privacy-policy',
   '/error',
   '/contact',
+  '/signup',
+  '/reset-password',
 ]
 
 export async function middleware(request: NextRequest) {

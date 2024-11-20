@@ -122,9 +122,6 @@ export function SignUpForm() {
                 type="password"
                 placeholder="Confirm your password"
                 onChange={handlePassChange}
-                className={
-                  confirmPassMatch ? '' : 'border-destructive border-2'
-                }
                 required
               />
               {error?.confirmPassword && (
@@ -133,7 +130,7 @@ export function SignUpForm() {
                 </div>
               )}
             </div>
-            <div className="text-sm font-sans font-semibold flex gap-4 justify-between">
+            <div className="text-sm font-sans flex gap-4 justify-between">
               <div className="self-center">Password criteria:</div>
               <div className="pl-2">
                 <div
