@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from './ui/button'
-import { useState, useTransition } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from './ui/input'
 import { editSignal } from '@/app/profile/my-activity/_actions/editSignal'
@@ -25,7 +25,6 @@ export default function EditSignalForm({
   signal: Signal
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
   const [selectedLocation, setSelectedLocation] =
@@ -115,11 +114,7 @@ export default function EditSignalForm({
         />
       </div>
       <div className="my-2">
-        <Input
-          type="hidden"
-          name="date"
-          defaultValue={signal.date_encounter.toISOString()}
-        />
+        <Input type="hidden" name="date" value={date?.toISOString()} />
         <DatePicker date={date} setDate={setDate} />
         {error?.date && (
           <div className="text-destructive text-sm">{error.date}</div>
