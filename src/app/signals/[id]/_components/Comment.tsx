@@ -1,3 +1,5 @@
+'use client'
+
 import UsernameDropdown from '@/components/UsernameDropdown'
 import { SignalComment } from '@/lib/types'
 

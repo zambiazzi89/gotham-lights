@@ -1,3 +1,5 @@
+'use client'
+
 import { MdLockClock } from 'react-icons/md'
 
 type ConversationSnippet = {
