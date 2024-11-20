@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const PreviousUrlContext = createContext<string | null>(null)

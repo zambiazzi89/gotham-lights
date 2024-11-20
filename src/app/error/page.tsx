@@ -27,7 +27,7 @@ export default function ErrorPage({
       <CardHeader>
         <CardTitle className="text-xl">Error</CardTitle>
         <CardDescription className="text-base">
-          We're sorry, something went wrong!
+          {`We're sorry, something went wrong!`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">

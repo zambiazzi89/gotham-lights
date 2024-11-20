@@ -36,8 +36,8 @@ export default async function About() {
             more.
           </p>
           <p className={pStyle}>
-            At Gotham Lights, we believe that every chance encounter is a story
-            waiting to be told. We're here to help you write yours.
+            {`At Gotham Lights, we believe that every chance encounter is a story
+            waiting to be told. We're here to help you write yours.`}
           </p>
         </div>
         <div className="mt-4">

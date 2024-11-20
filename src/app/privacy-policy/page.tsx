@@ -16,11 +16,11 @@ export default function PrivacyPolicy() {
           Last Updated: {privacyPolicy.lastUpdated}
         </CardDescription>
         <CardDescription>
-          Welcome to Gotham Lights! These Terms and Conditions ("Terms") govern
+          {`Welcome to Gotham Lights! These Terms and Conditions ("Terms") govern
           your use of our website and services ("Services"). By accessing or
           using Gotham Lights, you agree to comply with and be bound by these
           Terms. If you do not agree with any part of these Terms, please do not
-          use our Services.
+          use our Services.`}
         </CardDescription>
         <CardContent className="py-4 flex flex-col gap-4 text-sm">
           {privacyPolicy.sections.map((section, i) => {

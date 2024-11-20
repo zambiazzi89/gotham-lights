@@ -26,7 +26,7 @@ export default function DeleteButton() {
         <form action={action} className="flex flex-col gap-4">
           <div>
             <div>To confirm you want to delete your account,</div>
-            <div>please enter "Delete my account" below</div>
+            <div>{`please enter "Delete my account" below`}</div>
           </div>
           <Input
             placeholder="Delete my account"

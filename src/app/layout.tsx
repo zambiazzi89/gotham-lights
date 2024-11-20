@@ -7,6 +7,7 @@ import GoogleAPIContextProvider from '@/context/GoogleAPIContext'
 import { cormorant } from './fonts'
 import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'gotham lights',
@@ -32,17 +33,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <PreviousUrlProvider>
-            <GoogleAPIContextProvider>
-              <div className="grid grid-rows-layout h-svh">
-                <Navbar />
-                <div className="grid place-items-center overflow-auto">
-                  {children}
+          <Suspense fallback={null}>
+            <PreviousUrlProvider>
+              <GoogleAPIContextProvider>
+                <div className="grid grid-rows-layout h-svh">
+                  <Navbar />
+                  <div className="grid place-items-center overflow-auto">
+                    {children}
+                  </div>
+                  <Footer />
                 </div>
-                <Footer />
-              </div>
-            </GoogleAPIContextProvider>
-          </PreviousUrlProvider>
+              </GoogleAPIContextProvider>
+            </PreviousUrlProvider>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

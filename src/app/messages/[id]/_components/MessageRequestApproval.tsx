@@ -14,7 +14,7 @@ export default function MessageRequestApproval({
     <>
       <div>Do you want to accept this message request?</div>
       <div>
-        {from_username} will not be able to send you more messages if you don't.
+        {`${from_username} will not be able to send you more messages if you don't.`}
       </div>
       <div className="pt-3 flex gap-6">
         <Button
