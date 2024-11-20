@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={cn(
           'bg-background min-h-screen font-cormorant antialiased',
-          cormorant.className
+          cormorant.variable
         )}
       >
         <ThemeProvider

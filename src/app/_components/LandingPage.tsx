@@ -24,7 +24,7 @@ export default async function LandingPage() {
           <GoogleAutocompleteInput />
         ) : (
           <Link href="/login">
-            <Button className="text-black">Login</Button>
+            <Button className="text-white">Login</Button>
           </Link>
         )}
       </div>
