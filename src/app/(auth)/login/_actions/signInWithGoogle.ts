@@ -12,7 +12,7 @@ export async function signInWithGoogle() {
         access_type: 'offline',
         prompt: 'consent',
       },
-      redirectTo: 'http://localhost:3000/auth/callback',
+      redirectTo: `${process.env.ENV_BASE_URL}/auth/callback`,
     },
   })
 

@@ -38,7 +38,7 @@ export default async function resendConfirmationEmail(
     type: 'signup',
     email: data.email,
     options: {
-      emailRedirectTo: 'https://localhost:3000/profile',
+      emailRedirectTo: `${process.env.ENV_BASE_URL}/profile`,
     },
   })
 }
