@@ -74,7 +74,7 @@ export function NavMenuButton() {
   const pathname = usePathname()
   return (
     <MdMenu
-      className={`mr-2 self-center scale-150 lg:hidden hover:cursor-pointer ${
+      className={`mr-2 self-center scale-150  ${
         pathname === '/' ? `text-white` : ``
       }`}
     />

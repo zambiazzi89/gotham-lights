@@ -8,6 +8,7 @@ import db from '@/db/db'
 import getConversations from '@/app/messages/_actions/getConversations'
 import { ProfileWithConversations } from '@/lib/types'
 import NavMessageButton from './NavMessageButton'
+import NavbarWithUsername from './NavbarWithUsername'
 
 const croissantOne = Croissant_One({ subsets: ['latin'], weight: ['400'] })
 
@@ -57,34 +58,36 @@ export default async function Navbar() {
         gotham lights
       </Link>
       <div className="flex justify-end items-center">
-        <NavThemeButton />
-        <NavbarMenuDropdown session={!!profile} />
-        <div className="hidden lg:flex justify-end items-center">
-          <NavButton title="About" href="/about" />
-          {!!profile && profile.username && (
-            <>
-              <NavButton
-                title="Signals"
-                href="/signals"
-                notification={!!signalsWithNewComments}
-              />
-              <NavMessageButton
-                username={profile.username}
-                conversations={conversations}
-              />
-            </>
-          )}
-          {!!profile ? (
-            <>
-              <NavButton title="Profile" href="/profile" />
-              <form action={logout}>
-                <NavLogoutButton title="Logout" />
-              </form>
-            </>
-          ) : (
-            <NavButton title="Login" href="/login" />
-          )}
-        </div>
+        {profile?.username ? (
+          <NavbarWithUsername
+            username={profile.username}
+            signalsWithNewComments={!!signalsWithNewComments}
+            conversations={conversations}
+          />
+        ) : (
+          <>
+            <NavThemeButton />
+            <NavbarMenuDropdown
+              session={!!profile}
+              signalsWithNewComments={false}
+              hasUsername={false}
+              newMessages={false}
+            />
+            <div className="hidden lg:flex justify-end items-center">
+              <NavButton title="About" href="/about" />
+              {!!profile ? (
+                <>
+                  <NavButton title="Profile" href="/profile" />
+                  <form action={logout}>
+                    <NavLogoutButton title="Logout" />
+                  </form>
+                </>
+              ) : (
+                <NavButton title="Login" href="/login" />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

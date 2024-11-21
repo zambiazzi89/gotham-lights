@@ -8,30 +8,53 @@ import Link from 'next/link'
 import { logout } from '@/app/logout/actions'
 import { NavMenuButton } from './NavButton'
 
-export default function NavbarMenuDropdown({ session }: { session: boolean }) {
+export default function NavbarMenuDropdown({
+  session,
+  hasUsername,
+  signalsWithNewComments,
+  newMessages,
+}: {
+  session: boolean
+  hasUsername: boolean
+  signalsWithNewComments: boolean
+  newMessages: boolean
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div>
+        <div className="lg:hidden relative hover:cursor-pointer">
           <NavMenuButton />
+          {(signalsWithNewComments || newMessages) && (
+            <div className="absolute -mt-1 -ml-1 w-2 h-2 self-center rounded-full bg-primary"></div>
+          )}
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="">
         <DropdownMenuItem asChild>
           <Link href="/about" className="w-full">
             About
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/signals" className="w-full">
-            Signals
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/messages" className="w-full">
-            Messages
-          </Link>
-        </DropdownMenuItem>
+        {hasUsername && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href="/signals" className="w-full">
+                <div>Signals</div>
+                {signalsWithNewComments && (
+                  <div className="ml-auto w-2 h-2 self-center rounded-full bg-primary"></div>
+                )}
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/messages" className="w-full">
+                <div>Messages</div>
+                {newMessages && (
+                  <div className="ml-auto w-2 h-2 self-center rounded-full bg-primary"></div>
+                )}
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
         {session ? (
           <>
             <DropdownMenuItem asChild>
@@ -41,7 +64,7 @@ export default function NavbarMenuDropdown({ session }: { session: boolean }) {
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <form action={logout}>
-                <button type="submit" className="w-full">
+                <button type="submit" className="w-full text-start">
                   Logout
                 </button>
               </form>
