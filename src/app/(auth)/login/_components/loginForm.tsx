@@ -28,9 +28,6 @@ export function LoginForm() {
     <Card className="mx-auto p-8 bg-secondary">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <form action={action} className="py-4">

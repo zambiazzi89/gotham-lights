@@ -2,18 +2,14 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 
 import { useRef, useState } from 'react'
 import { useFormState } from 'react-dom'
 import { signup } from '../_actions/signup'
+import { FaCheck } from 'react-icons/fa6'
+import { FaXmark } from 'react-icons/fa6'
 
 export function SignUpForm() {
   const passRef = useRef<HTMLInputElement>(null)
@@ -47,12 +43,9 @@ export function SignUpForm() {
   const [error, action] = useFormState(signup, {})
 
   return (
-    <Card className="mx-auto bg-secondary p-8">
+    <Card className="max-w-[95svw] mx-auto bg-secondary p-8">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
-        <CardDescription>
-          Enter your information to create an account
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <form action={action}>
@@ -133,42 +126,47 @@ export function SignUpForm() {
             <div className="text-sm font-sans flex gap-4 justify-between">
               <div className="self-center">Password criteria:</div>
               <div className="pl-2">
-                <div
-                  className={
-                    passLengthValidation ? 'text-green-600' : 'text-destructive'
-                  }
-                >
-                  8 to 16 characters
+                <div className="flex gap-2 items-center">
+                  {passLengthValidation ? (
+                    <FaCheck className="text-green-600" />
+                  ) : (
+                    <FaXmark className="text-destructive" />
+                  )}
+                  <div>8 to 16 characters</div>
                 </div>
-                <div
-                  className={
-                    uppercaseValidation ? 'text-green-600' : 'text-destructive'
-                  }
-                >
-                  Uppercase character(s)
+                <div className="flex gap-2 items-center">
+                  {uppercaseValidation ? (
+                    <FaCheck className="text-green-600" />
+                  ) : (
+                    <FaXmark className="text-destructive" />
+                  )}
+                  <div>Uppercase character(s)</div>
                 </div>
-                <div
-                  className={
-                    lowercaseValidation ? 'text-green-600' : 'text-destructive'
-                  }
-                >
-                  Lowercase character(s)
+                <div className="flex gap-2 items-center">
+                  {lowercaseValidation ? (
+                    <FaCheck className="text-green-600" />
+                  ) : (
+                    <FaXmark className="text-destructive" />
+                  )}
+                  <div>Lowercase character(s)</div>
                 </div>
-                <div
-                  className={
-                    numberValidation ? 'text-green-600' : 'text-destructive'
-                  }
-                >
-                  Number(s)
+                <div className="flex gap-2 items-center">
+                  {numberValidation ? (
+                    <FaCheck className="text-green-600" />
+                  ) : (
+                    <FaXmark className="text-destructive" />
+                  )}
+                  <div>Number(s)</div>
                 </div>
-                <div
-                  className={
-                    specialCharValidation
-                      ? 'text-green-600'
-                      : 'text-destructive'
-                  }
-                >
-                  Special character(s)
+                <div>
+                  <div className="flex gap-2 items-center">
+                    {specialCharValidation ? (
+                      <FaCheck className="text-green-600" />
+                    ) : (
+                      <FaXmark className="text-destructive" />
+                    )}
+                    Special character(s)
+                  </div>
                 </div>
               </div>
             </div>
