@@ -41,9 +41,7 @@ export default async function About() {
           </p>
         </div>
         <div className="mt-4">
-          <p className="font-bold text-muted-foreground">
-            Turn the ephemeral into lasting
-          </p>
+          <p className="text-primary">Turn the ephemeral into lasting</p>
         </div>
       </div>
     </div>

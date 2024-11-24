@@ -38,9 +38,9 @@ export default async function MyActivity() {
     : []
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-col sm:flex-row">
       <GoBackButton styles={'h-auto'} variant="secondary" />
-      <Card className="py-8 flex flex-col gap-2 lg:px-12 max-w-[90svw]">
+      <Card className="py-8 flex flex-col gap-2 lg:px-12 max-w-[90svw] p-8">
         <div className="font-bold">My Signals</div>
         {!mySignals.length && (
           <div className="text-muted-foreground">No signals to display</div>

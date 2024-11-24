@@ -7,7 +7,7 @@ export default async function BlockedContacts() {
   const { blockedUsernames } = await getDbProfileFromServer()
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-col sm:flex-row">
       <GoBackButton styles={'h-auto'} variant="secondary" />
       <Card className="bg-secondary p-4 w-[80svw] lg:w-[50svw] grid place-items-center">
         <CardTitle className="py-4 text-center">Blocked Users</CardTitle>

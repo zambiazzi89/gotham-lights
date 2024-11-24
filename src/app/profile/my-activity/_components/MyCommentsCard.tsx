@@ -16,7 +16,6 @@ import { useFormState } from 'react-dom'
 import { editComment } from '../_actions/editComment'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import SubmitButton from '@/components/SubmitButton'
 
