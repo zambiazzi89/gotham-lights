@@ -105,7 +105,7 @@ export default function SignalCardGrid({
 
   return (
     <div className="p-4 flex flex-col lg:overflow-y-auto">
-      <div className="py-4 flex items-center gap-4 justify-between">
+      <div className="py-4 flex items-center gap-4 justify-between flex-wrap">
         <div className="flex gap-2 items-center">
           <SubwayPopoverLinks />
           {selectedSubwayLine && (
