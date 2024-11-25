@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import SubmitButton from '@/components/SubmitButton'
+import { Textarea } from '@/components/ui/textarea'
 
 export default function MyCommentsCard({
   comment,
@@ -40,12 +41,14 @@ export default function MyCommentsCard({
           className="grid w-full"
         >
           <Input type="hidden" name="commentId" value={`${comment.id}`} />
-          <Input
+          <Textarea
             name="content"
             defaultValue={comment.content}
             placeholder="Enter a comment"
             minLength={1}
             maxLength={100}
+            className="min-h-16"
+            required
           />
           {error?.content && (
             <div className="text-destructive text-sm">{error.content}</div>

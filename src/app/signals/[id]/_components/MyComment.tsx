@@ -37,12 +37,14 @@ export default function MyComment({ comment }: { comment: SignalComment }) {
             className="grid w-full"
           >
             <Input type="hidden" name="commentId" value={`${comment.id}`} />
-            <Input
+            <Textarea
               name="content"
               defaultValue={comment.content}
               placeholder="Enter a comment"
               minLength={1}
               maxLength={100}
+              className="min-h-16"
+              required
             />
             {error?.content && (
               <div className="text-destructive text-sm">{error.content}</div>

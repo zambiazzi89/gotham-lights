@@ -20,11 +20,13 @@ export default function CommentForm({ signalId }: { signalId: string }) {
       className="grid w-full"
     >
       <Input type="hidden" name="signalId" value={`${signalId}`} />
-      <Input
+      <Textarea
         name="content"
         placeholder="Enter a comment"
+        className="min-h-16"
         minLength={1}
         maxLength={100}
+        required
       />
       {error?.content && (
         <div className="text-destructive text-sm">{error.content}</div>
