@@ -2,13 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import SignInWithGoogle from './signInWithGoogle'
@@ -20,17 +14,20 @@ import {
 } from '@/components/ui/hover-card'
 import { MdOutlineInfo } from 'react-icons/md'
 import { login } from '../_actions/login'
+import { useState } from 'react'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 export function LoginForm() {
   const [error, action] = useFormState(login, {})
+  const [viewPassword, setViewPassword] = useState(false)
 
   return (
-    <Card className="mx-auto p-8 bg-secondary">
+    <Card className="mx-auto p-4 bg-secondary">
       <CardHeader>
-        <CardTitle className="text-2xl">Login</CardTitle>
+        <CardTitle className="text-xl">Login</CardTitle>
       </CardHeader>
       <CardContent>
-        <form action={action} className="py-4">
+        <form action={action} className="pb-4">
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -71,17 +68,37 @@ export function LoginForm() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                min={8}
-                max={16}
-                required
-              />
-              {error?.password && (
-                <div className="text-destructive text-sm">{error.password}</div>
-              )}
+              <div className="flex gap-2">
+                <div className="grid gap-2 flex-grow">
+                  <Input
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    type={viewPassword ? 'text' : 'password'}
+                    min={8}
+                    max={16}
+                    required
+                  />
+                  {error?.password && (
+                    <div className="text-destructive text-sm">
+                      {error.password}
+                    </div>
+                  )}
+                </div>
+                <div className="self-center px-1 place-items-center text-muted-foreground grid gap-1">
+                  {viewPassword ? (
+                    <FaEye
+                      className="hover:cursor-pointer"
+                      onClick={() => setViewPassword(false)}
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      className="hover:cursor-pointer"
+                      onClick={() => setViewPassword(true)}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
             <Button type="submit" className="w-full">
               Login

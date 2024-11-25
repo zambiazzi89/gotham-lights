@@ -10,6 +10,7 @@ import { useFormState } from 'react-dom'
 import { signup } from '../_actions/signup'
 import { FaCheck } from 'react-icons/fa6'
 import { FaXmark } from 'react-icons/fa6'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 export function SignUpForm() {
   const passRef = useRef<HTMLInputElement>(null)
@@ -26,6 +27,7 @@ export function SignUpForm() {
   const [lowercaseValidation, setLowercaseValidation] = useState(false)
   const [numberValidation, setNumberValidation] = useState(false)
   const [specialCharValidation, setSpecialCharValidation] = useState(false)
+  const [viewPassword, setViewPassword] = useState(false)
 
   const handlePasswordValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value
@@ -43,7 +45,7 @@ export function SignUpForm() {
   const [error, action] = useFormState(signup, {})
 
   return (
-    <Card className="max-w-[95svw] mx-auto bg-secondary p-8">
+    <Card className="max-w-[95svw] mx-auto bg-secondary p-4">
       <CardHeader>
         <CardTitle className="text-xl">Sign Up</CardTitle>
       </CardHeader>
@@ -90,38 +92,60 @@ export function SignUpForm() {
                 <div className="text-destructive text-sm">{error.email}</div>
               )}
             </div>
-            <div className="grid gap-2">
-              <Input
-                ref={passRef}
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => {
-                  handlePasswordValidation(e)
-                  handlePassChange()
-                }}
-                required
-              />
-              {error?.password && (
-                <div className="text-destructive text-sm">{error.password}</div>
-              )}
-            </div>
-            <div className="grid gap-2">
-              <Input
-                ref={confirmpassRef}
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm your password"
-                onChange={handlePassChange}
-                required
-              />
-              {error?.confirmPassword && (
-                <div className="text-destructive text-sm">
-                  {error.confirmPassword}
+            <div className="flex gap-2">
+              <div className="flex-grow flex flex-col gap-4">
+                <div className="grid gap-2">
+                  <Input
+                    ref={passRef}
+                    id="password"
+                    name="password"
+                    type={viewPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    onChange={(e) => {
+                      handlePasswordValidation(e)
+                      handlePassChange()
+                    }}
+                    required
+                  />
+
+                  {error?.password && (
+                    <div className="text-destructive text-sm">
+                      {error.password}
+                    </div>
+                  )}
                 </div>
-              )}
+                <div className="grid gap-2">
+                  <Input
+                    ref={confirmpassRef}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={viewPassword ? 'text' : 'password'}
+                    placeholder="Confirm your password"
+                    onChange={handlePassChange}
+                    required
+                  />
+                  {error?.confirmPassword && (
+                    <div className="text-destructive text-sm">
+                      {error.confirmPassword}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="self-center px-1 place-items-center text-muted-foreground grid gap-1">
+                <div className="h-4 w-4 border-muted-foreground border-t border-r rounded-tr-md -ml-4" />
+                {viewPassword ? (
+                  <FaEye
+                    className="hover:cursor-pointer"
+                    onClick={() => setViewPassword(false)}
+                  />
+                ) : (
+                  <FaEyeSlash
+                    className="hover:cursor-pointer"
+                    onClick={() => setViewPassword(true)}
+                  />
+                )}
+                <div className="h-4 w-4 border-muted-foreground border-b border-r rounded-br-md -ml-4" />
+              </div>
             </div>
             <div className="text-sm font-sans flex gap-4 justify-between">
               <div className="self-center">Password criteria:</div>
