@@ -56,6 +56,7 @@ export default async function MessagesById({
           <ConversationSnippets
             conversations={conversations}
             username={profile.username}
+            selectedConversationId={selectedConversation.id}
           />
         </div>
         <div className="lg:hidden">

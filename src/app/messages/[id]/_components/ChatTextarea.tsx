@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { sendMessage } from '../_actions/sendMessage'
 import { useRef } from 'react'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 export default function ChatTextarea({
   conversationId,
@@ -24,11 +25,12 @@ export default function ChatTextarea({
       className="flex gap-4"
     >
       <Input type="hidden" name="conversationId" value={`${conversationId}`} />
-      <Input
+      <Textarea
         name="content"
         placeholder="Type your message"
         minLength={1}
         maxLength={1000}
+        className="min-h-24"
       />
       {error?.content && (
         <div className="text-destructive text-sm">{error.content}</div>

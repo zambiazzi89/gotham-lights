@@ -34,7 +34,7 @@ export default function ChatContent({
     conversation.conversation_participants[0].participant_username
 
   return (
-    <Card className="bg-secondary flex flex-col flex-grow p-4">
+    <Card className="flex flex-col flex-grow p-2">
       <div className="flex pt-2 pb-4 justify-end">
         <div>{recipientUsername}</div>
 
@@ -56,17 +56,17 @@ export default function ChatContent({
       </div>
       <ChatMessages username={username} messages={conversation.messages} />
       {status === 'Pending' ? (
-        <div className="h-[50%] flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           {conversation.messages[0].from_username !== username ? (
             <MessageRequestApproval
               from_username={conversation.messages[0].from_username}
               conversationId={conversation.id}
             />
           ) : (
-            <>
+            <div className="grid place-items-center text-center text-pretty">
               <div>Your message is pending approval from the recipient.</div>
               <div>If approved, the chat will be enabled.</div>
-            </>
+            </div>
           )}
         </div>
       ) : (

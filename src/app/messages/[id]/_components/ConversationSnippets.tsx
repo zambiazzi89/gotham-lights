@@ -8,14 +8,16 @@ import { redirect } from 'next/navigation'
 export default function ConversationSnippets({
   conversations,
   username,
+  selectedConversationId,
 }: {
   conversations: ConversationWithParticipants[]
   username: string
+  selectedConversationId: string
 }) {
   return (
-    <Card className="h-[75svh] overflow-y-auto py-4 self-center">
+    <Card className="h-[75svh] overflow-y-auto self-center">
       <ScrollArea className="h-full">
-        <div className="p-4">
+        <div className="p-2">
           {conversations.map((conversation) => {
             if (!conversation.conversation_participants[0]) {
               console.error(
@@ -33,7 +35,7 @@ export default function ConversationSnippets({
                   }
                   lastMessage={conversation.last_message}
                   timestamp={conversation.updated_at || conversation.created_at}
-                  selected={false}
+                  selected={conversation.id === selectedConversationId}
                   lastByUser={username === conversation.last_sent_by}
                   read={
                     username === conversation.last_sent_by
