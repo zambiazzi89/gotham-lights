@@ -27,8 +27,9 @@ export default async function MessageBox({
 
   return (
     <div className="h-full flex p-4 gap-4">
-      <div className="grid w-full place-content-center">
-        No messages to display yet. Message someone!
+      <div className="flex flex-col w-full items-center">
+        <div>No messages to display yet.</div>
+        <div>Message someone!</div>
       </div>
     </div>
   )

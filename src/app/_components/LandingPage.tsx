@@ -1,5 +1,4 @@
 import GoogleAutocompleteInput from '@/components/GoogleTools/googleAutocomplete'
-import { Button } from '@/components/ui/button'
 import { createClient } from '@/utils/supabase/server'
 import Link from 'next/link'
 
@@ -27,7 +26,7 @@ export default async function LandingPage() {
               <div className="italic text-sm">or</div>
               <div className="h-px flex-grow bg-primary opacity-50" />
             </div>
-            <div className="animate-fadeIn7s">Find out if you're in one!</div>
+            <div className="animate-fadeIn7s">{`Find out if you're in one!`}</div>
             <div className="w-full animate-fadeIn8s">
               <GoogleAutocompleteInput />
             </div>
