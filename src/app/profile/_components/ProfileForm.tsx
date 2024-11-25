@@ -26,7 +26,12 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
         </div>
         <form action={action}>
           <div className="grid grid-cols-1fr-2fr gap-2">
-            <Label className="leading-8">First name</Label>
+            <Label className="leading-8">
+              <div className="flex items-center gap-2">
+                <div className="pt-1 -ml-4">*</div>
+                <div>First name</div>
+              </div>
+            </Label>
             <Input
               defaultValue={`${profile.first_name || ''}`}
               placeholder="Enter your first name"
@@ -39,10 +44,7 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               required
               className={`${!profile.first_name && 'border-red-500'}`}
             />
-            <div className="flex items-center">
-              <Label className="leading-8">Last name</Label>
-              <div className="pl-2 font-thin text-xs">(Optional)</div>
-            </div>
+            <Label className="leading-8">Last name</Label>
             <Input
               defaultValue={`${profile.last_name || ''}`}
               placeholder="Enter your last name"
@@ -51,9 +53,13 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               name="last_name"
               pattern="[a-zA-Z]+"
             />
-
             <div className="flex items-center">
-              <Label className="leading-8">Username</Label>
+              <Label className="leading-8">
+                <div className="flex items-center gap-2">
+                  <div className="pt-1 -ml-4">*</div>
+                  <div>Username</div>
+                </div>
+              </Label>
               <HoverCard>
                 <HoverCardTrigger>
                   <MdOutlineInfo className="mx-2" />
