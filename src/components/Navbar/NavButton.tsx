@@ -14,7 +14,7 @@ function NavButtonStyle(pathname: string, href?: string) {
     ${href && pathname.startsWith(`${href}`) && 'bg-primary-20'}
     ${
       pathname === '/'
-        ? 'text-white hover:bg-secondary/15'
+        ? 'text-white hover:bg-primary/10'
         : !pathname.startsWith(`${href}`)
         ? 'hover:bg-secondary'
         : ''
