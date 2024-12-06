@@ -170,7 +170,7 @@ export default function SignalCardGrid({
           )}
         </div>
       </div>
-      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3 ">
+      <div className="flex flex-col lg:grid lg:grid-cols-auto-fit gap-3 flex-wrap">
         {sortedSignals.map((signal) => {
           return (
             <Link

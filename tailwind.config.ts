@@ -26,6 +26,7 @@ const config = {
       },
       gridTemplateColumns: {
         '1fr-2fr': '1fr 2fr',
+        'auto-fit': 'repeat(auto-fit, minmax(320px, 1fr))',
       },
       gridTemplateRows: {
         layout: 'auto 1fr auto',
