@@ -83,7 +83,7 @@ export async function addSignal(prevState: unknown, formData: FormData) {
   try {
     await resend.emails.send({
       from: 'Gotham Lights <noreply@gothamlights.com>',
-      to: ['zambiazzi89@gmail.com'],
+      to: [`${process.env.RESEND_TO_EMAIL}`],
       subject: 'Signal created!',
       text: `Signal created by user: ${profile.username}\nTitle: ${data.title}\nContent: ${data.content}`,
       react: SignalEmail({

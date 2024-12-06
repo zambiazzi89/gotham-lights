@@ -71,7 +71,7 @@ export async function addComment(prevState: unknown, formData: FormData) {
   try {
     await resend.emails.send({
       from: 'Gotham Lights <noreply@gothamlights.com>',
-      to: ['zambiazzi89@gmail.com'],
+      to: [`${process.env.RESEND_TO_EMAIL}`],
       subject: 'Comment created!',
       text: `Comment created by user: ${profile.username}\nContent: ${data.content}`,
       react: CommentEmail({

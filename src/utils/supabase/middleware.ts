@@ -61,5 +61,21 @@ export async function updateSession(request: NextRequest) {
   // If this is not done, you may be causing the browser and server to go out
   // of sync and terminate the user's session prematurely!
 
+  if (!!user && !request.nextUrl.pathname.startsWith('/profile')) {
+    const { data: profile } = await supabase
+      .from('profile')
+      .select('*')
+      .eq('id', user.id)
+      .single()
+
+    if (!!profile && !profile.username) {
+      console.log('here')
+      // no username, redirect to /profile
+      const url = request.nextUrl.clone()
+      url.pathname = '/profile'
+      return NextResponse.redirect(url)
+    }
+  }
+
   return supabaseResponse
 }

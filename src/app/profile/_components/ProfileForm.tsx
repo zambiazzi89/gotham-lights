@@ -19,6 +19,9 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     <div className="w-[32rem] max-w-[80dvw] bg-secondary p-8 rounded shadow-md font-medium">
       <div className="font-semibold text-lg my-3">Hi {profile.first_name}!</div>
       <div className="text-md mb-4">{`Here's your profile information:`}</div>
+      {!profile.username && (
+        <div className="text-destructive pb-4 font-light text-pretty">{`Please create a username to use the app's functionalities!`}</div>
+      )}
       <div>
         <div className="grid grid-cols-1fr-2fr gap-2 pb-2">
           <Label className="leading-8">Email</Label>
@@ -40,7 +43,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               name="first_name"
               minLength={1}
               maxLength={20}
-              pattern="[a-zA-Z]+"
               required
               className={`${!profile.first_name && 'border-red-500'}`}
             />
@@ -51,7 +53,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
               type="text"
               id="last_name"
               name="last_name"
-              pattern="[a-zA-Z]+"
             />
             <div className="flex items-center">
               <Label className="leading-8">

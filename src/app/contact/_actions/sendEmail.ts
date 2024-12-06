@@ -28,7 +28,7 @@ export default async function sendEmail(
   try {
     const data = await resend.emails.send({
       from: 'Gotham Lights <noreply@gothamlights.com>',
-      to: ['zambiazzi89@gmail.com'],
+      to: [`${process.env.RESEND_TO_EMAIL}`],
       subject: 'Contact form submission',
       text: `Name: ${name}\nEmail: ${email}\nContent: ${content}`,
       react: ContactFormEmail({ name, email, content }),

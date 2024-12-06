@@ -10,10 +10,10 @@ const publicPaths = [
   '/contact',
   '/signup',
   '/reset-password',
+  '/signup/email-confirmation',
 ]
 
 export async function middleware(request: NextRequest) {
-  // Get the current pathname
   const { pathname } = request.nextUrl
 
   // Allow access to public paths

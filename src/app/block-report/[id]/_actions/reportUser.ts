@@ -59,7 +59,7 @@ export async function reportUser(prevState: unknown, formData: FormData) {
   try {
     const data = await resend.emails.send({
       from: 'Gotham Lights <noreply@gothamlights.com>',
-      to: ['zambiazzi89@gmail.com'],
+      to: [`${process.env.RESEND_TO_EMAIL}`],
       subject: 'Report form submission',
       text: `Reported user: ${username_to_report}\nReported by: ${current_username}\nReason: ${reason}`,
       react: ReportFormEmail({
