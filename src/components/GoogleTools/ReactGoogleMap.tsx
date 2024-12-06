@@ -1,10 +1,12 @@
-import React, { Dispatch, SetStateAction, useCallback, useEffect } from 'react'
-import { GoogleMap, Marker } from '@react-google-maps/api'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api'
 import { useGoogleAPIContext } from '@/context/GoogleAPIContext'
 import { LatLong, Signal } from '@/lib/types'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { darkMapStyles } from './darkMapStyles'
+import { Button } from '../ui/button'
+import Link from 'next/link'
 
 function ReactGoogleMap({
   signals,
@@ -140,6 +142,16 @@ function ReactGoogleMap({
     }
   }
 
+  const [activeMarker, setActiveMarker] = useState<string | null>(null)
+
+  const handleMarkerClick = (id: string) => {
+    setActiveMarker(id)
+  }
+
+  const handleClose = () => {
+    setActiveMarker(null)
+  }
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -154,10 +166,30 @@ function ReactGoogleMap({
       {signals &&
         signals.map((signal) => {
           return (
-            <Marker
-              key={signal.id}
-              position={{ lat: signal.latitude, lng: signal.longitude }}
-            />
+            <div key={signal.id}>
+              <Marker
+                position={{ lat: signal.latitude, lng: signal.longitude }}
+                onClick={() => handleMarkerClick(signal.id)}
+              />
+              {activeMarker === signal.id && (
+                <InfoWindow
+                  position={{ lat: signal.latitude, lng: signal.longitude }}
+                  onCloseClick={handleClose}
+                >
+                  <div className="text-black flex flex-col gap-2 p-8 pt-0 font-cormorant">
+                    <div className="font-semibold">{signal.title}</div>
+                    <div>{`@${
+                      signal.location_name
+                    } on ${signal.date_encounter.toLocaleDateString(
+                      'en-US'
+                    )}`}</div>
+                    <Link className="pt-2" href={`/signals/${signal.id}`}>
+                      <Button className="w-full">Go to Signal</Button>
+                    </Link>
+                  </div>
+                </InfoWindow>
+              )}
+            </div>
           )
         })}
     </GoogleMap>
