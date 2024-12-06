@@ -3,7 +3,9 @@
 import db from '@/db/db'
 import getDbProfileFromServer from '@/utils/supabase/customFunctions/getDbProfileFromServer'
 import { redirect } from 'next/navigation'
+import { Resend } from 'resend'
 import { z } from 'zod'
+import SignalEmail from '../_components/SignalEmail'
 
 const formSchema = z.object({
   title: z
@@ -75,6 +77,25 @@ export async function addSignal(prevState: unknown, formData: FormData) {
       read: true,
     },
   })
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
+
+  try {
+    await resend.emails.send({
+      from: 'Gotham Lights <noreply@gothamlights.com>',
+      to: ['zambiazzi89@gmail.com'],
+      subject: 'Signal created!',
+      text: `Signal created by user: ${profile.username}\nTitle: ${data.title}\nContent: ${data.content}`,
+      react: SignalEmail({
+        username: profile.username,
+        title: data.title,
+        content: data.content,
+      }),
+    })
+  } catch (error) {
+    console.error(error)
+    redirect('/error?code=email_not_sent')
+  }
 
   redirect('/signals')
 }
