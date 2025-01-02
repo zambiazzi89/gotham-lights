@@ -9,7 +9,7 @@ export default function Footer() {
       </div>
       <div className="flex flex-col min-[390px]:flex-row min-[390px]:gap-2 items-end">
         <Link href="/contact">Contact</Link>
-        <div>Copyright © 2024</div>
+        <div>{`Copyright © ${new Date().getFullYear()}`}</div>
       </div>
     </div>
   )
